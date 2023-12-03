@@ -24,8 +24,39 @@ CREATE TABLE users (
 	CONSTRAINT PK_user PRIMARY KEY (user_id)
 )
 
+CREATE TABLE examples (
+	example_id int IDENTITY(1001,1) PRIMARY KEY NOT NULL,
+	example_title varchar(100) UNIQUE NOT NULL,
+	example_tag varchar(100) NOT NULL,
+	example_language varchar(50) NOT NULL,
+	example_code varchar(1000) NOT NULL
+);
+
+CREATE TABLE user_examples (
+	user_id int NOT NULL,
+	example_id int NOT NULL,
+	CONSTRAINT [PK_user_example] PRIMARY KEY(user_id, example_id)
+
+);
+
 --populate default data
 INSERT INTO users (username, password_hash, salt, user_role) VALUES ('user','Jg45HuwT7PZkfuKTz6IB90CtWY4=','LHxP4Xh7bN0=','user');
 INSERT INTO users (username, password_hash, salt, user_role) VALUES ('admin','YhyGVQ+Ch69n4JMBncM4lNF/i9s=', 'Ar/aB2thQTI=','admin');
+
+INSERT INTO examples(example_title, example_tag, example_language, example_code) VALUES ('string concatination', 'strings', 'C#', '"Welcome to " + "C# snippet"')
+
+INSERT INTO [user_examples] (user_id, example_id) VALUES (1, 1001), (2, 1001)
+
+
+ALTER TABLE [user_examples] WITH CHECK ADD CONSTRAINT [FK_user_examples_examples]
+FOREIGN KEY(example_id) REFERENCES [examples] (example_id)
+ALTER TABLE [user_examples] CHECK CONSTRAINT [FK_user_examples_examples]
+
+ALTER TABLE [user_examples] WITH CHECK ADD CONSTRAINT [FK_user_user_examples]
+FOREIGN KEY(user_id) REFERENCES [users] (user_id)
+ALTER TABLE [user_examples] CHECK CONSTRAINT [FK_user_user_examples]
+
+
+
 
 GO
