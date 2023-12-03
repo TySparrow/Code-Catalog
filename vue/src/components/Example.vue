@@ -13,7 +13,7 @@ export default {
 }
 </script>
 <style>
-section.example {
+/* .container {
   flex-wrap: wrap;
   display: inline-block;
   height: 12rem;
@@ -22,6 +22,7 @@ section.example {
   border-radius: 10px;
   margin: 20px;
 }
+
 .orange {
   background-color: orange;
 }
@@ -30,7 +31,7 @@ section.example {
 }
 .tan {
   background-color: tan;
-}
+} */
 </style>
 
 

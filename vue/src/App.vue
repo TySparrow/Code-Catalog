@@ -7,3 +7,11 @@
     <router-view />
   </div>
 </template>
+
+<script>
+export default {
+  created() {
+    this.$store.commit("LOAD_EXAMPLES");
+  }
+}
+</script>

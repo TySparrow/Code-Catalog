@@ -26,17 +26,13 @@ export function createStore(currentToken, currentUser) {
         state.user = {};
         axios.defaults.headers.common = {};
       },
-
-
-
-
       LOAD_EXAMPLES(state) {
         exampleService
           .getExamples()
           .then((response) => {
             console.log("Reached LOAD_EXAMPLES in Vuex");
             console.log(response);
-            state.examples = response.data;
+            state.examples = (response.data);
           })
           .catch((error) => {
             if (error.response) {

@@ -13,6 +13,7 @@
 import example from "../components/Example.vue";
 export default {
   components: { example },
+  name: "home",
   computed: {
     currentExamples() {
       return this.$store.state.examples;
@@ -31,4 +32,10 @@ export default {
   }
 }
 </script>
+
+<style>
+
+
+
+</style>
 
