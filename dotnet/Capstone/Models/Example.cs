@@ -2,15 +2,15 @@
 {
     public class Example
     {
-        public int ExampleId { get; set; }
+        public int Id { get; set; }
 
-        public string ExampleTitle { get; set; }
+        public string Title { get; set; }
 
-        public string ExampleTag { get; set; }
+        public string Tag { get; set; }
 
-        public string ExampleLanguage { get; set; }
+        public string Language { get; set; }
 
-        public string ExampleCode { get; set; }
+        public string Code { get; set; }
 
     }
 }

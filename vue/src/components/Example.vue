@@ -1,9 +1,9 @@
 <template>
     <div class="example">
-        <h2 class="example-title">{{ item.title }}</h2>
-        <h3 class="example-tag">{{ item.tag }}</h3>
-        <h4 class="example-language">{{ item.language }}</h4>
-        <h5 class="code">{{ item.code }}</h5>
+        <p class="example-title">Title: {{ item.title }}</p>
+        <p class="example-tag">Tag: {{ item.tag }}</p>
+        <p class="example-language">Language: {{ item.language }}</p>
+        <p class="code">Code Example:{{ item.code }}</p>
     </div>
 </template>
 <script>
@@ -13,7 +13,7 @@ export default {
 }
 </script>
 <style>
-/* .container {
+ .example {
   flex-wrap: wrap;
   display: inline-block;
   height: 12rem;
@@ -23,15 +23,6 @@ export default {
   margin: 20px;
 }
 
-.orange {
-  background-color: orange;
-}
-.yellow {
-  background-color: yellow;
-}
-.tan {
-  background-color: tan;
-} */
 </style>
 
 

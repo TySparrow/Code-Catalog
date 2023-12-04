@@ -62,11 +62,11 @@ namespace Capstone.DAO
         private Example MapRowToExample(SqlDataReader reader)
         {
             Example example = new Example();
-            example.ExampleId = Convert.ToInt32(reader["example_id"]);
-            example.ExampleTitle = Convert.ToString(reader["example_title"]);
-            example.ExampleTag = Convert.ToString(reader["example_tag"]);
-            example.ExampleLanguage = Convert.ToString(reader["example_language"]);
-            example.ExampleCode = Convert.ToString(reader["example_code"]);
+            example.Id = Convert.ToInt32(reader["example_id"]);
+            example.Title = Convert.ToString(reader["example_title"]);
+            example.Tag = Convert.ToString(reader["example_tag"]);
+            example.Language = Convert.ToString(reader["example_language"]);
+            example.Code = Convert.ToString(reader["example_code"]);
             return example;
         }
 
