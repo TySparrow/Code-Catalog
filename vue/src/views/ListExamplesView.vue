@@ -4,6 +4,7 @@
     <section class="container">
       <example v-for="example in currentExamples" v-bind:key="example.id" v-bind:item="example" />
     </section>
+    
   </div>
 
 </template>
@@ -61,6 +62,8 @@ export default {
 </script>
 
 
-<style scoped></style>
+<style scoped>
+
+</style>
 
 

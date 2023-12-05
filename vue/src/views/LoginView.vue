@@ -118,19 +118,6 @@ export default {
   margin-bottom: 1rem;
 }
 
-.form-label {
-  margin-right: 0.5rem;
-}
-
-.form-input {
-  width: 100%;
-  padding: 0.5rem;
-  border: 15px solid #ccc;
-  border-radius: 3px;
-  box-sizing: border-box;
-  height: 100%;
-}
-
 .form-button {
   width: 100%;
   padding: 0.5rem;
@@ -144,5 +131,6 @@ export default {
 .register-link {
   text-align: center;
   margin-top: 1rem;
+  color:#8CC36F;
 }
 </style>

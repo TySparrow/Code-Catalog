@@ -1,43 +1,52 @@
 <template>
-    <div>
-        <form v-on:submit.prevent="createNewExample">
-            <div>
-                <label for="title">Title: </label>
-                <input type="text" name="title" id="title" v-model="newExample.title" />
-            </div>
-            <div>
-                <label for="tag">Tag: </label>
-                <input type="text" name="tag" id="tag" v-model="newExample.tag" />
-            </div>
-            <div>
-                <label for="language">Language: </label>
-                <input type="text" name="language" id="language" v-model="newExample.language" />
-            </div>
-            <div>
-                <label for="code">Code: </label>
-                <input type="text" name="code" id="code" v-model="newExample.code" />
-            </div>
-            <div>
-                <label for="source">Source </label>
-                <input type="text" name="source" id="source" v-model="newExample.source" />
-            </div>
+  <div>
+    <form v-on:submit.prevent="createNewExample" class="">
+      <div>
+        <label for="title">Title: </label>
+        <input type="text" name="title" id="title" v-model="newExample.title" />
+      </div>
+      <div>
+        <label for="tag">Tag: </label>
+        <input type="text" name="tag" id="tag" v-model="newExample.tag" />
+      </div>
+      <div>
+        <label for="language">Language: </label>
+        <input type="text" name="language" id="language" v-model="newExample.language" />
+      </div>
+      <div>
+        <label for="code">Code: </label>
+        <textarea name="code" id="code" :class="{ 'code-input': true, 'dark-mode': darkMode }" v-model="newExample.code"
+          placeholder="Enter your code here"></textarea>
+      </div>
+      <div>
+        <label for="source">Source </label>
+        <input type="text" name="source" id="source" v-model="newExample.source" />
+      </div>
 
-            <button type="submit">Save Example</button>
-        </form>
-    </div>
+      <button type="submit">Save Example</button>
+      <button @click="toggleDarkMode">Dark Mode</button>
+      <button @click="formatCode">Format Code</button>
+    </form>
+  </div>
 </template>
 
 <script>
 import ExampleService from "../services/ExampleService";
+import prettier from 'prettier';
+import Prism from 'prismjs';
+import 'prismjs/themes/prism.css';
+
+
 export default {
   data() {
     return {
       newExample: {},
+      darkMode: false,
     };
   },
-  
+
   methods: {
-    createNewExample() {
+      createNewExample() {
       if (this.newExample.title) {
         ExampleService
           .addExample(this.newExample)
@@ -92,6 +101,10 @@ export default {
           }
         });
     },
+    toggleDarkMode() {
+      this.darkMode = !this.darkMode;
+    },
+
     nextExampleId() {
       let result = 0;
       this.$store.state.examples.forEach((item) => {
@@ -101,11 +114,33 @@ export default {
       });
       return result + 1;
     },
-  },
-  created() {
-    this.loadExamples();
+    formatCode() {
+      const formattedCode = prettier.format(this.newExample.code, {
+        parser: 'babel',
+      });
+      this.newExample.code = formattedCode;
+    },
+    created() {
+      this.loadExamples();
+    },
   },
 }
 </script>
 
-<style scoped></style>
+<style scoped>
+.code-input {
+  width: 100%;
+  height: 80vh;
+  padding: 10px;
+  font-family: monospace;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  resize: vertical;
+}
+
+.code-input.dark-mode {
+  background-color: #333;
+  color: #fff;
+}
+</style>
