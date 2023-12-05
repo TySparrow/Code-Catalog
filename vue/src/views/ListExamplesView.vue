@@ -1,10 +1,12 @@
 <template>
-    <div class="hello">
-        <h1>examples</h1>
-        <section class="container">
-            <example v-for="example in currentExamples" v-bind:key="example.id" v-bind:item="example" />
-        </section>
-        </div>
+  <div class="hello">
+        <div class="body">
+      <h1>Examples</h1>
+      <section class="container">
+        <example v-for="example in currentExamples" v-bind:key="example.id" v-bind:item="example" />
+      </section>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -19,11 +21,21 @@ export default {
       return this.$store.state.examples;
     },
   },
-
 }
-
 </script>
 
 <style scoped>
+.hello {
+  font-family: Arial, sans-serif;
+}
 
+.body {
+  margin-top: 20px;
+}
+
+.container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 20px;
+}
 </style>
