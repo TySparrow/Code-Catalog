@@ -7,6 +7,7 @@
 
                 <li><router-link id="tab" v-bind:to="{ name: 'newExample' }" v-show="$store.state.token != ''">Add New
                         Snippet</router-link> </li>
+                <li><router-link v-bind:to="{ name: 'listExamples' }" class="example">Show Examples</router-link></li>
                 <li><router-link id="tab" v-bind:to="{ name: 'logout' }"
                         v-if="$store.state.token != ''">Logout</router-link></li>
 
@@ -68,6 +69,7 @@ export default {
     margin-right: 1rem;
     cursor: pointer;
 
-}</style>
+}
+</style>
 
 
