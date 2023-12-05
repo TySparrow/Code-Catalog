@@ -54,6 +54,9 @@ export function createStore(currentToken, currentUser) {
       },
 
 
+      ADD_EXAMPLE(state, payload) {
+        state.examples.push(payload);
+      },
 
 
 
