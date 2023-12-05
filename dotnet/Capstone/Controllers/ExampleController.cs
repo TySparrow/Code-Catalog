@@ -12,7 +12,9 @@ namespace Capstone.Controllers
     public class ExampleController : ControllerBase
     {
         IExampleDao dao;
+
         string connectionString = "Server=.\\SQLEXPRESS;Database=final_capstone;Trusted_Connection=True;";
+
         public ExampleController()
         {
             dao = new ExampleSqlDao(connectionString);

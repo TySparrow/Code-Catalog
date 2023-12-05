@@ -5,6 +5,7 @@
       <example v-for="example in currentExamples" v-bind:key="example.id" v-bind:item="example" />
     </section>
   </div>
+
 </template>
 
 <script>
@@ -23,6 +24,7 @@ export default {
       return this.$store.state.examples;
     },
   },
+
   methods: {
     loadExamples() {
       ExampleService
@@ -54,7 +56,11 @@ export default {
   created() {
     this.loadExamples();
   },
+
 }
 </script>
 
+
 <style scoped></style>
+
+
