@@ -37,6 +37,7 @@ export default {
   padding: 16px;
   margin-top: 30px;
   height: 1500px;
+  padding-top: 6rem;
 }
 
 .topnav {
