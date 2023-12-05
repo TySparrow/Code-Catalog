@@ -12,5 +12,7 @@
 
         public string Code { get; set; }
 
+        public string Source { get; set; }
+
     }
 }

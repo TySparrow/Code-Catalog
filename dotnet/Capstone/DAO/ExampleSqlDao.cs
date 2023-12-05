@@ -14,10 +14,6 @@ namespace Capstone.DAO
         {
             connectionString = dbConnectionString;
         }
-        //string sql = "SELECT * FROM examples " +
-        //        "JOIN user_examples ON user_examples.example_id = examples.example_id " +
-        //        "JOIN users ON users.user_id = user_examples.user_id " +
-        //        "WHERE users.username = @userName";
         public IList<Example> GetExamples()
         {
             IList<Example> examples = new List<Example>();
@@ -84,9 +80,9 @@ namespace Capstone.DAO
         {
             newExample.Id = 0; //used as a marker to determine sucess
 
-            string sql = "INSERT INTO examples (example_title, example_tag, example_language, example_code) " +
+            string sql = "INSERT INTO examples (example_title, example_tag, example_language, example_code, example_source) " +
             "OUTPUT INSERTED.example_id " +
-            "VALUES (@title, @tag, @language, @code);";
+            "VALUES (@title, @tag, @language, @code, @source);";
 
             using (SqlConnection conn = new SqlConnection(connectionString))
             {
@@ -97,19 +93,13 @@ namespace Capstone.DAO
                     cmd.Parameters.AddWithValue("@tag", newExample.Tag);
                     cmd.Parameters.AddWithValue("@language", newExample.Language);
                     cmd.Parameters.AddWithValue("@code", newExample.Code);
-
+                    cmd.Parameters.AddWithValue("@source", newExample.Source);
                     newExample.Id = (int)cmd.ExecuteScalar();
                 }
             }
 
             return GetExample(newExample.Id);
         }
-
-        //Example CreateExample(string title, string tag, string language, string codeSnippet)
-        //{
-        //    Example example = new Example();
-        //    return example;
-        //}
 
         private Example MapRowToExample(SqlDataReader reader)
         {
@@ -119,6 +109,7 @@ namespace Capstone.DAO
             example.Tag = Convert.ToString(reader["example_tag"]);
             example.Language = Convert.ToString(reader["example_language"]);
             example.Code = Convert.ToString(reader["example_code"]);
+            example.Source = Convert.ToString(reader["example_source"]);
             return example;
         }
 

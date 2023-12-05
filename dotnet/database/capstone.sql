@@ -29,7 +29,8 @@ CREATE TABLE examples (
 	example_title varchar(100) UNIQUE NOT NULL,
 	example_tag varchar(100) NOT NULL,
 	example_language varchar(50) NOT NULL,
-	example_code varchar(1000) NOT NULL
+	example_code varchar(1000) NOT NULL,
+	example_source varchar(100) NOT NULL
 );
 
 CREATE TABLE user_examples (
@@ -43,9 +44,12 @@ CREATE TABLE user_examples (
 INSERT INTO users (username, password_hash, salt, user_role) VALUES ('user','Jg45HuwT7PZkfuKTz6IB90CtWY4=','LHxP4Xh7bN0=','user');
 INSERT INTO users (username, password_hash, salt, user_role) VALUES ('admin','YhyGVQ+Ch69n4JMBncM4lNF/i9s=', 'Ar/aB2thQTI=','admin');
 
-INSERT INTO examples(example_title, example_tag, example_language, example_code) VALUES ('string concatination', 'strings', 'C#', '"Welcome to " + "C# snippet"')
+INSERT INTO examples(example_title, example_tag, example_language, example_code, example_source) VALUES ('string concatination', 'strings', 'C#', '"Welcome to " + "C# snippet"', 'self-derived')
 
 INSERT INTO [user_examples] (user_id, example_id) VALUES (1, 1001), (2, 1001)
+
+
+
 
 
 ALTER TABLE [user_examples] WITH CHECK ADD CONSTRAINT [FK_user_examples_examples]

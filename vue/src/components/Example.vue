@@ -4,6 +4,7 @@
         <p class="example-tag">Tag:{{ item.tag }}</p>
         <p class="example-language">Language:{{ item.language }}</p>
         <p class="code">Code:{{ item.code }}</p>
+        <p class="source">Source: {{ item.source }}</p>
 </section>
 </template>
 <script>
