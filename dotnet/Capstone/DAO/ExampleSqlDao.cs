@@ -48,6 +48,41 @@ namespace Capstone.DAO
 
             return examples;
         }
+        public IList<Example> GetLanguages()
+        {
+            IList<Example> examples = new List<Example>();
+
+            string sql = "Select distinct example_language, * from examples";
+
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
+
+                    using (SqlCommand cmd = new SqlCommand(sql, conn))
+                    {
+                        using (SqlDataReader reader = cmd.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                Example example = MapRowToExample(reader);
+                                examples.Add(example);
+                            }
+                        }
+
+                    }
+
+                }
+            }
+            catch (SqlException ex)
+            {
+                throw new DaoException("SQL exception occurred", ex);
+            }
+
+            return examples;
+        }
+
 
         public Example GetExample(int exampleId)
         {
