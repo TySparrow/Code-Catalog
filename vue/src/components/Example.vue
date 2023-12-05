@@ -23,6 +23,7 @@ export default {
   margin: 20px;
   background-color: tan;
 }
+
 </style>
 
 
