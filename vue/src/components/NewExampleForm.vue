@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <form v-on:submit.prevent="createNewExample" class="">
+  <div class="body">
+    <form v-on:submit.prevent="createNewExample" class="example-form">
       <div>
         <label for="title">Title: </label>
         <input type="text" name="title" id="title" v-model="newExample.title" />
@@ -22,10 +22,13 @@
         <label for="source">Source </label>
         <input type="text" name="source" id="source" v-model="newExample.source" />
       </div>
+      <div>
+        <button @click="toggleDarkMode">Dark Mode</button> 
+        <button @click="formatCode">Format Code</button>
+        <button type="submit">Save Example</button>
 
-      <button type="submit">Save Example</button>
-      <button @click="toggleDarkMode">Dark Mode</button>
-      <button @click="formatCode">Format Code</button>
+      </div>
+
     </form>
   </div>
 </template>
@@ -128,6 +131,20 @@ export default {
 </script>
 
 <style scoped>
+
+.body{
+  padding-top: 25px;
+}
+.example-form{
+  display:flex;
+  flex-direction: column;
+  width: 50%;
+  margin: 0 auto;
+  height: auto;
+
+}
+
+
 .code-input {
   width: 100%;
   height: 80vh;

@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import example from "../components/Example.vue";
+import example from "@/components/Example.vue";
 import ExampleService from "../services/ExampleService";
 export default {
   components: { example },
