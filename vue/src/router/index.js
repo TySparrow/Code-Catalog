@@ -9,6 +9,7 @@ import RegisterView from '../views/RegisterView.vue';
 import ListExampleView from '../views/ListExamplesView.vue'
 
 
+
 /**
  * The Vue Router is used to "direct" the browser to render a specific view component
  * inside of App.vue depending on the URL.
@@ -51,10 +52,10 @@ const routes = [
     }
   },
   {
-    path: "/example",
+    path: "/examples",
     name: "listExamples",
     component: ListExampleView
-  },
+  }
 ];
 
 // Create the router

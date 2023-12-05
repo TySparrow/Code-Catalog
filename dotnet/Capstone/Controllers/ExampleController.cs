@@ -25,5 +25,19 @@ namespace Capstone.Controllers
         {
             return dao.GetExamples();
         }
+        [HttpPost()]
+        public ActionResult<Example> AddExample(Example example)
+        {
+            Example newExample =  dao.AddExample(example);
+
+            if (newExample == null || newExample.Id == 0)
+            {
+                return BadRequest();
+            }
+            else
+            {
+                return Ok(newExample);
+            }
+        }
     }
 }

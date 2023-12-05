@@ -1,10 +1,10 @@
 <template>
-    <div class="example">
-        <p class="example-title">Title: {{ item.title }}</p>
-        <p class="example-tag">Tag: {{ item.tag }}</p>
-        <p class="example-language">Language: {{ item.language }}</p>
-        <p class="code">Code Example:{{ item.code }}</p>
-    </div>
+  <section class = "example"> 
+        <p class="example-title">ID:{{ item.title }}</p>
+        <p class="example-tag">Tag:{{ item.tag }}</p>
+        <p class="example-language">Language:{{ item.language }}</p>
+        <p class="code">Code:{{ item.code }}</p>
+</section>
 </template>
 <script>
 export default {
@@ -12,7 +12,7 @@ export default {
     props: ["item"]
 }
 </script>
-<style>
+<style scoped>
  .example {
   flex-wrap: wrap;
   display: inline-block;
@@ -21,6 +21,7 @@ export default {
   border: 2px solid black;
   border-radius: 10px;
   margin: 20px;
+  background-color: tan;
 }
 
 </style>

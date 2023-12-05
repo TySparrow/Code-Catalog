@@ -53,6 +53,58 @@ namespace Capstone.DAO
             return examples;
         }
 
+        public Example GetExample(int exampleId)
+        {
+            string sql = "SELECT * FROM examples " +
+            "WHERE example_id = @id;";
+
+        Example example = null;
+
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                conn.Open();
+
+                using (SqlCommand cmd = new SqlCommand(sql, conn))
+                {
+                    cmd.Parameters.AddWithValue("@id", exampleId);
+
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            example = MapRowToExample(reader);
+                        }
+                    }
+                }
+            }
+            return example;
+        }
+
+        public Example AddExample(Example newExample)
+        {
+            newExample.Id = 0; //used as a marker to determine sucess
+
+            string sql = "INSERT INTO examples (example_title, example_tag, example_language, example_code) " +
+            "OUTPUT INSERTED.example_id " +
+            "VALUES (@title, @tag, @language, @code);";
+
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                conn.Open();
+                using (SqlCommand cmd = new SqlCommand(sql, conn))
+                {
+                    cmd.Parameters.AddWithValue("@title", newExample.Title);
+                    cmd.Parameters.AddWithValue("@tag", newExample.Tag);
+                    cmd.Parameters.AddWithValue("@language", newExample.Language);
+                    cmd.Parameters.AddWithValue("@code", newExample.Code);
+
+                    newExample.Id = (int)cmd.ExecuteScalar();
+                }
+            }
+
+            return GetExample(newExample.Id);
+        }
+
         //Example CreateExample(string title, string tag, string language, string codeSnippet)
         //{
         //    Example example = new Example();
