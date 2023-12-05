@@ -1,13 +1,8 @@
 <template>
-  <head>
-    <title> Welcome to Your Catalog</title>
-
-
-  </head>
-
-  <body>
     <div id="login">
       <div class="login-container">
+        <img src="../assets/techelevatorimage.png" alt="Logo" class="logo">
+        <img src="src\assets\image.png" alt="Logo-Text" class="logo-text">
         <form v-on:submit.prevent="login" class="login-form">
           <h1 class="login-heading">Please Sign In</h1>
           <div role="alert" v-if="invalidCredentials" class="error-message">
@@ -31,7 +26,6 @@
         </form>
       </div>
     </div>
-  </body>
 </template>
 
 <script>
@@ -77,11 +71,12 @@ export default {
   justify-content: center;
   align-items: center;
   height: 100vh;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  
+}
+.logo-text {
+  width: 200px;
+  height: auto;
+  margin-right: 5rem;
+
 }
 
 .login-container {
@@ -89,6 +84,13 @@ export default {
   justify-content: center;
   align-items: center;
   height: 100vh;
+ 
+}
+
+.logo {
+  width: 250px;
+  height: auto;
+  margin-right: 1rem;
 }
 
 .login-form {
@@ -96,10 +98,7 @@ export default {
   padding: 2rem;
   background-color: #f5f5f5;
   border-radius: 5px;
-  position: absolute;
-
 }
-
 .login-heading {
   text-align: center;
   margin-bottom: 1.5rem;
@@ -135,7 +134,7 @@ export default {
 .form-button {
   width: 100%;
   padding: 0.5rem;
-  background-color: #4267B2;
+  background-color: #00ADEE;
   color: white;
   border: none;
   border-radius: 3px;
