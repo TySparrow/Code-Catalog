@@ -6,7 +6,6 @@ export function createStore(currentToken, currentUser) {
     state: {
       token: currentToken || '',
       user: currentUser || {},
-
       examples: [],
     },
     mutations: {

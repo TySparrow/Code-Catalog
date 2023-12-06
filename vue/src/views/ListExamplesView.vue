@@ -4,9 +4,8 @@
     <section class="container">
       <example v-for="example in currentExamples" v-bind:key="example.id" v-bind:item="example" />
     </section>
-    
-  </div>
 
+  </div>
 </template>
 
 <script>
@@ -18,7 +17,9 @@ export default {
   data() {
     return {
       examples: [],
+      darkMode: false,
     };
+
   },
   computed: {
     currentExamples() {
@@ -52,6 +53,10 @@ export default {
             console.log("Error loading owners: make request");
           }
         });
+
+    },
+    toggleDarkMode() {
+      this.darkMode = !this.darkMode;
     },
   },
   created() {
@@ -62,8 +67,6 @@ export default {
 </script>
 
 
-<style scoped>
-
-</style>
+<style scoped></style>
 
 

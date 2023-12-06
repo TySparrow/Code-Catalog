@@ -143,8 +143,6 @@ export default {
   height: auto;
 
 }
-
-
 .code-input {
   width: 100%;
   height: 80vh;
