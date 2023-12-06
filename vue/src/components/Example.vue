@@ -1,47 +1,126 @@
 <template>
-  <section class="example">
-    <p class="example-title">ID:{{ item.title }}</p>
-    <p class="example-tag">Tag:{{ item.tag }}</p>
-    <p class="example-language">Language:{{ item.language }}</p>
-    <p class="code"> Code:{{ item.code }}</p>
-    <p class="source">Source: {{ item.source }}</p>
-
-  </section>
   <div>
-    <button @click="toggleDarkMode">Dark Mode</button>
-    <button @click="formatCode">Format Code</button>
+    <p class="code-title">Title:{{ item.title }}</p>
+    <p class="code-language">Language:{{ item.language }}</p>
+
+  </div>
+  <div class="example">
+    <p class="code-source">Source:{{ item.source }}</p>
+    <pre v-text="item.code" :class="['code', 'example', darkMode ? 'dark' : '']"></pre>
+    <p class="tag-bubble">#{{ item.tag }}</p>
+    <button @click="toggleDarkMode" class="button">Toggle Dark Mode</button>
   </div>
 </template>
 <script>
 export default {
   name: 'example',
-  props: ['item'],
-};
-
+  props: ["item"],
+  data() {
+    return {
+      darkMode: false,
+    };
+  },
+  methods: {
+    toggleDarkMode() {
+      this.darkMode = !this.darkMode;
+    },
+  },
+}
 </script>
+
 <style scoped>
-.example {
-  border: 1px solid black;
-  margin: 10px;
-  padding: 10px;
-  width: 3330px;
-  height: 400px;
+.button {
+  background-color: #585858;
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
   display: inline-block;
-  background-color: #f2f2f2;
+  font-size: 10px;
+  border-radius: 20px;
+  margin-bottom: 10px;
+  margin-top: 15px;
+  cursor: pointer;
+
+}
+
+.example {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  width: 50%;
+  padding: 20px;
+  border: 2px solid #ccc;
+  border-radius: 10px;
+  margin: 20px;
+  background-color: #f5f5f5;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.example.dark {
+  background-color: #333;
+  color: #fff;
+  border-color: #666;
+}
+
+.example p {
+  margin: 0;
+  font-size: 16px;
+}
+
+.example.dark p {
+  color: #ccc;
 }
 
 .code {
-  flex-grow: 1;
-  resize: none;
-  width: 50%;
+  white-space: pre-wrap;
+  margin: 10px 0;
+  font-size: 14px;
+  line-height: 1.5;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 10px;
+  width: 100%;
+  margin-bottom: 30px;
+}
+
+.tag-bubble {
+  display: inline-block;
+  padding: 5px 10px;
+  border-radius: 20px;
+  color: #fff;
+  font-size: 12px;
+  margin-top: 10px;
+  margin-bottom: 20px;
+  background-color: #00ADEE;
+  margin-right: 10px;
+  
+}
+
+.tag-bubble.dark {
+  background-color: #667;
+}
+
+.code-title {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 5px;
+  margin-top: 15px;
+
+}
+
+.code-language {
+  font-size: 14px;
+  margin-bottom: 5px;
+}
+
+.code-source {
+  font-size: 12px;
+  margin-top: 10px;
+  margin-bottom: 20px;
+
 }
 </style>
-
-
-
-
-
-
-
-
-
