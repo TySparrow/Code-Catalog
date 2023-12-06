@@ -1,6 +1,6 @@
 <template>
   <div class="body">
-    <form v-on:submit.prevent="createNewExample" class="example-form">
+    <form v-on:submit.prevent="createNewExample" v-on:keydown.enter.exact="handleEnterKey" class="example-form">
       <div>
         <label for="title">Title: </label>
         <input type="text" name="title" id="title" v-model="newExample.title" />
@@ -22,8 +22,8 @@
         <label for="source">Source </label>
         <input type="text" name="source" id="source" v-model="newExample.source" />
       </div>
-      <div>
-        <button @click="toggleDarkMode">Dark Mode</button> 
+      <div class="form-group">
+        <button @click="toggleDarkMode" class="dark-mode-btn">Dark Mode</button> 
         <button @click="formatCode">Format Code</button>
         <button type="submit">Save Example</button>
 
@@ -73,6 +73,11 @@ export default {
       });
       this.newExample.code = formattedCode;
     },
+    handleEnterKey(event) {
+      if (event.keyCode === 13) {
+        event.preventDefault();
+      }
+    },
   },
 }
 </script>
@@ -87,9 +92,12 @@ export default {
   flex-direction: column;
   width: 50%;
   margin: 0 auto;
-  height: auto;
-
-}
+ }
+ .form-group{
+  margin-bottom:15px;
+  display:flex;
+  align-items: center;
+ }
 .code-input {
   width: 100%;
   height: 80vh;

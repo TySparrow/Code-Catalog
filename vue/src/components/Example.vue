@@ -2,13 +2,12 @@
   <div>
     <p class="code-title">Title:{{ item.title }}</p>
     <p class="code-language">Language:{{ item.language }}</p>
-
   </div>
   <div class="example">
     <p class="code-source">Source:{{ item.source }}</p>
     <pre v-text="item.code" :class="['code', 'example', darkMode ? 'dark' : '']"></pre>
     <p class="tag-bubble">#{{ item.tag }}</p>
-    <button @click="toggleDarkMode" class="button">Toggle Dark Mode</button>
+    <button @click="toggleDarkMode()" class="button" type="button">Toggle Dark Mode</button>
   </div>
 </template>
 <script>
@@ -42,6 +41,7 @@ export default {
   margin-bottom: 10px;
   margin-top: 15px;
   cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
 
 }
 
@@ -50,13 +50,14 @@ export default {
   flex-direction: column;
   align-items: flex-start;
   justify-content: flex-start;
-  width: 50%;
+  width: 80%;
   padding: 20px;
   border: 2px solid #ccc;
   border-radius: 10px;
-  margin: 20px;
+  margin: 20px auto;
   background-color: #f5f5f5;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-left: 10px;
 }
 
 .example.dark {
@@ -76,8 +77,8 @@ export default {
 
 .code {
   white-space: pre-wrap;
-  margin: 10px 0;
-  font-size: 14px;
+  margin: 20px 0;
+  font-size: 16px;
   line-height: 1.5;
   background-color: #fff;
   border: 1px solid #ccc;
@@ -85,19 +86,20 @@ export default {
   padding: 10px;
   width: 100%;
   margin-bottom: 30px;
+  width: 100%;
 }
 
 .tag-bubble {
   display: inline-block;
-  padding: 5px 10px;
+  padding: 8px 12px;
   border-radius: 20px;
   color: #fff;
   font-size: 12px;
   margin-top: 10px;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
   background-color: #00ADEE;
   margin-right: 10px;
-  
+
 }
 
 .tag-bubble.dark {
@@ -107,20 +109,19 @@ export default {
 .code-title {
   font-size: 18px;
   font-weight: bold;
-  margin-bottom: 5px;
-  margin-top: 15px;
-
+  margin-top: 20px;
+  margin-bottom: 10px;
 }
 
 .code-language {
   font-size: 14px;
-  margin-bottom: 5px;
+  margin-bottom: 10px;
 }
 
 .code-source {
   font-size: 12px;
-  margin-top: 10px;
-  margin-bottom: 20px;
+  margin-top: 15px;
+  margin-bottom: 15px;
 
 }
 </style>
