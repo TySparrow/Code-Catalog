@@ -1,6 +1,5 @@
 <template>
     <div class="hello">
-      <h1>examples</h1>
       <section class="container">
         <Language v-for="example in currentLanguages" v-bind:key="example.id" v-bind:item="example" />
       </section>
@@ -21,6 +20,8 @@
         return this.$store.state.Languages;
       },
     },
+    
+    
   
   
   }
@@ -28,7 +29,7 @@
   
   
   <style scoped>
-  
+
   </style>
   
   

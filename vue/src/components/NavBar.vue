@@ -1,50 +1,40 @@
 <template>
-    <nav>
+    <nav class="nav-bar">
         <img src="src\assets\techelevatorimage.png" alt="Logo" class="logo" v-on:click="returnHome">
-        <ListLanguages class="menu-item"></ListLanguages>  
+        <ListLanguages class="menu-item"></ListLanguages>
+        <Dropdown/>
     </nav>
 </template>
 <script>
 import ListLanguages from "../components/ListLanguages.vue"
+import Dropdown from "./Dropdown.vue";
+
 export default {
-    components: {ListLanguages},
+    components: { ListLanguages, Dropdown },
     methods: {
         returnHome() {
             this.$router.push({ name: 'home' })
         }
     },
+    
 }
 </script>
 
 <style>
-nav {
+.nav-bar {
     display: flex;
     align-items: center;
-    justify-content: center;
     background-color: #f5f5f5;
-}
-
-nav .menu-item {
-    padding: 10px 20px;
-    position: relative;
-    text-align: center;
-    border-bottom: 3px solid transparent;
-    display: flex;
-    transition: 0.3s;
-}
-nav .menu-item:hover {
-    background-color: #c0c0c0;
-    border-bottom-color: #00ADEE;
 }
 
 .logo {
     width: 60px;
     height: auto;
-    margin-right: 1rem;
+    margin-left: 1rem;
+    margin-right: 2rem;
     cursor: pointer;
 
 }
-
 </style>
 
 
