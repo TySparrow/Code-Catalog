@@ -87,7 +87,7 @@ namespace Capstone.DAO
         }
 
 
-        public Example GetExample(int exampleId)
+        public Example GetExampleById(int exampleId)
         {
             string sql = "SELECT * FROM examples " +
             "WHERE example_id = @id;";
@@ -101,6 +101,32 @@ namespace Capstone.DAO
                 using (SqlCommand cmd = new SqlCommand(sql, conn))
                 {
                     cmd.Parameters.AddWithValue("@id", exampleId);
+
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            example = MapRowToExample(reader);
+                        }
+                    }
+                }
+            }
+            return example;
+        }
+        public Example GetExampleByTitle(string exampleTitle)
+        {
+            string sql = "SELECT * FROM examples " +
+            "WHERE example_title = @title;";
+
+            Example example = null;
+
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                conn.Open();
+
+                using (SqlCommand cmd = new SqlCommand(sql, conn))
+                {
+                    cmd.Parameters.AddWithValue("@title", exampleTitle);
 
                     using (SqlDataReader reader = cmd.ExecuteReader())
                     {
@@ -136,7 +162,7 @@ namespace Capstone.DAO
                 }
             }
 
-            return GetExample(newExample.Id);
+            return GetExampleById(newExample.Id);
         }
 
         private Example MapRowToExample(SqlDataReader reader)

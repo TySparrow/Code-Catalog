@@ -25,8 +25,7 @@
       <div>
         <button @click="toggleDarkMode">Dark Mode</button> 
         <button @click="formatCode">Format Code</button>
-        <button type="submit">Save Example</button>
-
+        <button type="submit" >Save Example</button>
       </div>
 
     </form>
@@ -44,6 +43,8 @@ export default {
     return {
       newExample: {},
       darkMode: false,
+      confirmation: {},
+      showPopup: false,
     };
   },
 
@@ -51,7 +52,7 @@ export default {
     createNewExample() {
       if (this.newExample.title) {
         this.newExample.id = this.nextExampleId();
-        this.$store.commit("ADD_EXAMPLE", this.newExample);
+        this.confirmation = this.$store.commit("ADD_EXAMPLE", this.newExample);
       }
       this.newExample = {};
     },
