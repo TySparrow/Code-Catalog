@@ -13,11 +13,8 @@
   import Language from "@/components/Language.vue";
   export default {
     components: { Language },
-    name: "home",
-    data() {
-      return {
-         Languages: [],
-      };
+    created() {
+        this.$store.commit("LOAD_LANGUAGES");
     },
     computed: {
       currentLanguages() {

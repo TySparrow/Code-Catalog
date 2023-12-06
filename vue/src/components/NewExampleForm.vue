@@ -34,7 +34,6 @@
 </template>
 
 <script>
-import ExampleService from "../services/ExampleService";
 import prettier from 'prettier';
 import Prism from 'prismjs';
 import 'prismjs/themes/prism.css';
@@ -48,66 +47,17 @@ export default {
     };
   },
 
-  methods: {
-      createNewExample() {
+   methods: {
+    createNewExample() {
       if (this.newExample.title) {
-        ExampleService
-          .addExample(this.newExample)
-          .then(() => {
-            this.newExample = {};
-            this.showForm = false;
-            this.loadExamples();
-          })
-          .catch((error) => {
-            if (error.response) {
-              // error.response exists
-              // Request was made, but response has error status (4xx or 5xx)
-              console.log("Error adding Example: ", error.response.status);
-            } else if (error.request) {
-              // There is no error.response, but error.request exists
-              // Request was made, but no response was received
-              console.log(
-                "Error adding Example: unable to communicate to server"
-              );
-            } else {
-              // Neither error.response and error.request exist
-              // Request was *not* made
-              console.log("Error adding Example: make request");
-            }
-          });
+        this.newExample.id = this.nextExampleId();
+        this.$store.commit("ADD_EXAMPLE", this.newExample);
       }
-
-    },
-    loadExamples() {
-      ExampleService
-        .getExamples()
-        .then((response) => {
-          console.log("Reached created in ListExamples.vue");
-          console.log(response);
-          this.owners = response.data;
-        })
-        .catch((error) => {
-          if (error.response) {
-            // error.response exists
-            // Request was made, but response has error status (4xx or 5xx)
-            console.log("Error loading owners: ", error.response.status);
-          } else if (error.request) {
-            // There is no error.response, but error.request exists
-            // Request was made, but no response was received
-            console.log(
-              "Error loading owners: unable to communicate to server"
-            );
-          } else {
-            // Neither error.response and error.request exist
-            // Request was *not* made
-            console.log("Error loading owners: make request");
-          }
-        });
+      this.newExample = {};
     },
     toggleDarkMode() {
       this.darkMode = !this.darkMode;
     },
-
     nextExampleId() {
       let result = 0;
       this.$store.state.examples.forEach((item) => {
@@ -122,9 +72,6 @@ export default {
         parser: 'babel',
       });
       this.newExample.code = formattedCode;
-    },
-    created() {
-      this.loadExamples();
     },
   },
 }

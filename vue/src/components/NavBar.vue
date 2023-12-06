@@ -1,17 +1,13 @@
 <template>
     <nav>
         <img src="src\assets\techelevatorimage.png" alt="Logo" class="logo" v-on:click="returnHome">
-        <ListLanguages class="menu-item"></ListLanguages>
-        
+        <ListLanguages class="menu-item"></ListLanguages>  
     </nav>
 </template>
 <script>
 import ListLanguages from "../components/ListLanguages.vue"
 export default {
     components: {ListLanguages},
-    created() {
-        this.$store.commit("LOAD_LANGUAGES");
-    },
     methods: {
         returnHome() {
             this.$router.push({ name: 'home' })

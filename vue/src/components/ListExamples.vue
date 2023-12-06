@@ -14,11 +14,8 @@
   
   export default {
     components: { example },
-    name: "home",
-    data() {
-      return {
-        examples: [],
-      };
+    created() {
+        this.$store.commit("LOAD_EXAMPLES");
     },
     computed: {
       currentExamples() {

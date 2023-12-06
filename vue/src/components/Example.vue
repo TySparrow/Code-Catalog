@@ -1,9 +1,9 @@
 <template>
     <div class = "example"> 
-          <p class="example-language">Language:{{ item.language }}</p>
-          <p class="example-language">title:{{ item.title }}</p>
-          <p class="example-language">code:{{ item.code }}</p>
-          <p class="example-language">id:{{ item.id }}</p>
+          <p >Language:{{ item.language }}</p>
+          <p >title:{{ item.title }}</p>
+          <p >code:{{ item.code }}</p>
+          <p >id:{{ item.id }}</p>
     </div>
   </template>
   <script>
