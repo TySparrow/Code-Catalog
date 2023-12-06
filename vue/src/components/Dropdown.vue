@@ -1,11 +1,88 @@
 <template>
-<h1>DROPDOWN</h1>
+    <div>
+        <button class="dropdown-menu" @click="toggleDropDown">
+            Hello {{ currentUser }} current user
+        </button>
+        <div v-if="showDropDown" class="dropdown-content" v-on:mouseleave="closeDropDown">
+            <li class="dropdown-item" v-on:click="createSnippet">Add New Code Snippet</li>
+            <router-link v-bind:to="{ name: 'logout' }" class="dropdown-item">Logout</router-link>
+
+            <!-- TODO-- Link to logout user. Link to username based on current user object. Continue styling -->
+
+        </div>
+    </div>
 </template>
 
 <script>
 
 export default {
-    name: 'dropdown'
+    data() {
+        return {
+            showDropDown: false
+        }
+    },
+    methods: {
+
+        toggleDropDown() {
+            this.showDropDown = !this.showDropDown;
+        },
+        closeDropDown() {
+            this.showDropDown = false;
+        },
+        createSnippet() {
+            this.$router.push({ name: 'newExample' })
+            this.closeDropDown();
+        }
+    }
 }
 
 </script>
+
+
+<style scoped>
+/* Style the button */
+.dropdown-menu {
+    padding: 10px 20px;
+    position: relative;
+    text-align: center;
+    border: none;
+    border-bottom: 3px solid transparent;
+    display: inline-block;
+    transition: 0.3s;
+    flex-wrap: wrap;
+}
+
+.dropdown-menu:hover {
+    background-color: #c0c0c0;
+    border-bottom-color: #00ADEE;
+    cursor: pointer;
+}
+
+.dropdown-content {
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 150px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+    padding: 10px;
+
+}
+
+.dropdown-item {
+    display: flex;
+    align-items:center;
+   padding: 5px 10px;
+    height: 40px;
+    justify-content: center;
+    color: #333;
+    cursor: pointer;
+   
+}
+
+.dropdown-item:hover {
+    cursor: pointer;
+    background-color: #c0c0c0;
+    border-bottom-color: #00ADEE;
+}
+</style>
+

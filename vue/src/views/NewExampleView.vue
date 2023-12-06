@@ -1,6 +1,6 @@
 <template>
-    <h1>New Code Snippet Form</h1>
-   <NavBar></NavBar>
+    <NavBar></NavBar>
+    <h1> Add A Snippet </h1>
 
     <NewExampleForm />
    
