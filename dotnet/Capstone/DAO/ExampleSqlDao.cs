@@ -52,7 +52,10 @@ namespace Capstone.DAO
         {
             IList<Example> examples = new List<Example>();
 
-            string sql = "Select distinct example_language, * from examples";
+            string sql = "WITH RankedExamples AS (SELECT example_language, example_id, example_title, example_tag, example_code, example_source, " +
+                "ROW_NUMBER() OVER (PARTITION BY example_language ORDER BY example_id) " +
+                "AS RowNum FROM examples) SELECT example_language, example_id, example_title, example_tag, example_code, example_source " +
+                "FROM RankedExamples WHERE RowNum = 1";
 
             try
             {
