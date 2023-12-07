@@ -26,17 +26,22 @@ namespace Capstone.Controllers
             return dao.GetExamples();
         }
         [HttpPost()]
-        public ActionResult<Example> AddExample(Example example)
+        public ActionResult<string> AddExample(Example example)
         {
+            if(dao.GetExampleByTitle(example.Title) != null)
+            {
+                return "This title has been taken";
+            }
             Example newExample =  dao.AddExample(example);
-
             if (newExample == null || newExample.Id == 0)
             {
-                return BadRequest();
+                BadRequest();
+                return "not ok";
             }
             else
             {
-                return Ok(newExample);
+                Ok(newExample);
+                 return "ok";
             }
         }
     }

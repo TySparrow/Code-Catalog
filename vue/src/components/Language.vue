@@ -1,12 +1,18 @@
 <template>
   <div class = "example"> 
-        <p class="example-language">Language:{{ item.language }}</p>
+        <button class="example-language" v-on:click="ListExamples()">Language:{{ item.language }}</button>
   </div>
 </template>
 <script>
 export default {
     name: 'language',
     props: ["item"],
+    methods: {
+        ListExamples() {
+        
+            this.$router.push({ name: 'listExamples', params: {language: this.item.language} })
+        }
+    },
     
 }
 </script>

@@ -1,29 +1,41 @@
 <template>
     <nav class="nav-bar">
-        <img src="src\assets\techelevatorimage.png" alt="Logo" class="logo" v-on:click="returnHome">
+        <img src="@/assets/techelevatorimage.png" alt="Logo" class="logo" v-on:click="returnHome">
         <ListLanguages class="menu-item"></ListLanguages>
-        <Dropdown/>
+        <input class="search-bar" type="text" v-model="search" placeholder="Search Examples">
+        <Dropdown class="dropdown"/>
     </nav>
 </template>
 <script>
 import ListLanguages from "../components/ListLanguages.vue"
-import Dropdown from "./Dropdown.vue";
+import Dropdown from "@/components/Dropdown.vue";
 
 export default {
     components: { ListLanguages, Dropdown },
     methods: {
         returnHome() {
             this.$router.push({ name: 'home' })
+        },
+    },
+    data() {
+        return {
+            examples: [],
+            search: ''
         }
     },
+    
     
 }
 </script>
 
 <style>
+
+
 .nav-bar {
-    display: flex;
+    display:grid;
     align-items: center;
+    grid-template-columns: 1fr, 1fr, 1fr, 1fr;
+    grid-template-areas: "logo menus search dropdown";
     background-color: #f5f5f5;
 }
 
@@ -33,7 +45,21 @@ export default {
     margin-left: 1rem;
     margin-right: 2rem;
     cursor: pointer;
+    grid-area: logo;
 
+}
+.dropdown {
+    grid-area: dropdown
+}
+
+.menu-item {
+    grid-area: menus;
+    position:static
+}
+.search-bar {
+    grid-area: search;
+    height: 30px;
+    
 }
 </style>
 

@@ -1,7 +1,7 @@
 <template>
   <div class="body-container">
     <div>
-      <p class="code-title">Title: {{ item.title }}</p>
+      <p class="code-title"> {{ item.title }}</p>
       <p class="code-language">Language: {{ item.language }}</p>
     </div>
 
@@ -13,7 +13,6 @@
         <button @click="toggleDarkMode()" class="dark-mode-button" type="button">Toggle Dark Mode</button>
         <button class="download-button" type="button" @click="downloadCode">Download</button>
         <button class="copy-button" type="button" :data-clipboard-text="item.code">Copy to Clipboard</button>
-
       </div>
     </div>
   </div>
@@ -59,10 +58,9 @@ export default {
             // Error occurred while copying code
             console.error('Failed to copy code:', error);
           });
-        }
-        window.alert('Copied to Clipboard')
+      }
+      window.alert('Copied to Clipboard')
     },
-
 
   },
 
@@ -83,6 +81,7 @@ export default {
       console.error('Trigger:', e.trigger);
     });
   }
+
 }
 </script>
 
@@ -229,11 +228,13 @@ export default {
   .button-container {
     flex-direction: column;
   }
-  .dark-mode-button{
+
+  .dark-mode-button {
     margin-bottom: 10px;
   }
-  .download-button{
+
+  .download-button {
     margin-bottom: 10px;
-  } 
+  }
 }
 </style>
