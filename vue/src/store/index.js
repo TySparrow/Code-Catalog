@@ -10,6 +10,7 @@ export function createStore(currentToken, currentUser) {
       user: currentUser || {},
       Languages: [],
       examples: [],
+      search: '',
     },
     mutations: {
       SET_AUTH_TOKEN(state, token) {
@@ -54,6 +55,7 @@ export function createStore(currentToken, currentUser) {
             }
           });
       },
+      
       LOAD_LANGUAGES(state) {
         LanguageService
           .getLanguages()
@@ -89,6 +91,7 @@ export function createStore(currentToken, currentUser) {
       },
       
     },
+    
   });
   return store;
 }

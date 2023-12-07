@@ -24,6 +24,7 @@ export default {
       this.darkMode = !this.darkMode;
     },
   },
+  
 }
 </script>
 
