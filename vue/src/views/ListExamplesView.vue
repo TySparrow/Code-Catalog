@@ -1,72 +1,57 @@
 <template>
-  <div class="hello">
-    <h1>examples</h1>
-    <section class="container">
-      <example v-for="example in currentExamples" v-bind:key="example.id" v-bind:item="example" />
-    </section>
-
-  </div>
-</template>
-
-<script>
-import example from "@/components/Example.vue";
-import ExampleService from "../services/ExampleService";
-export default {
-  components: { example },
-  name: "home",
-  data() {
-    return {
-      examples: [],
-      darkMode: false,
-    };
-
-  },
-  computed: {
-    currentExamples() {
-      return this.$store.state.examples;
+    <div class="hello">
+        <navBar></navBar>
+      <h1>examples</h1>
+      <section class="container">
+        <example v-for="example in filteredList" v-bind:key="example.id" v-bind:item ="example"> </example>
+      </section>
+      
+    </div>
+  
+  </template>
+  
+  <script>
+  import example from "@/components/Example.vue";
+  import navBar from '../components/NavBar.vue';
+  
+  export default {
+    data(){
+        return{
+            filteredExamples: [],
+        }
     },
-  },
-
-  methods: {
-    loadExamples() {
-      ExampleService
-        .getExamples()
-        .then((response) => {
-          console.log("Reached created in ListExamples.vue");
-          console.log(response);
-          this.owners = response.data;
-        })
-        .catch((error) => {
-          if (error.response) {
-            // error.response exists
-            // Request was made, but response has error status (4xx or 5xx)
-            console.log("Error loading owners: ", error.response.status);
-          } else if (error.request) {
-            // There is no error.response, but error.request exists
-            // Request was made, but no response was received
-            console.log(
-              "Error loading owners: unable to communicate to server"
-            );
-          } else {
-            // Neither error.response and error.request exist
-            // Request was *not* made
-            console.log("Error loading owners: make request");
-          }
-        });
-
+    components: { example, navBar },
+    created() {
+        console.log("reached created in vue method");
+        this.$store.commit("LOAD_EXAMPLES");
+        console.log(this.filteredList);
+        console.log(this.$store.state.examples)
     },
-    toggleDarkMode() {
-      this.darkMode = !this.darkMode;
+    computed: {
+      filteredList() {
+      let language = this.$route.params.language
+      console.log("in filtered list", language);
+      let filteredExamples = this.$store.state.examples;
+      console.log("in filtered list", filteredExamples);
+      if (language != "") {
+        filteredExamples = filteredExamples.filter((example) =>
+          example.language
+            .toLowerCase()
+            === (language.toLowerCase())
+        );
+      }
+      return filteredExamples;
+    }
     },
-  },
-  created() {
-    this.loadExamples();
-  },
-
-}
-</script>
-
-
-<style scoped></style>
-
-
+  
+  
+  }
+  </script>
+  
+  
+  <style scoped>
+  
+  </style>
+  
+  
+  
