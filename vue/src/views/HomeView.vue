@@ -1,7 +1,6 @@
 <template>
   <div class="home">
     <NavBar></NavBar>
-    <ListExamples></ListExamples>
 
   </div>
   
@@ -9,10 +8,9 @@
 
 <script>
 import NavBar from '../components/NavBar.vue';
-import ListExamples from '../components/ListExamples.vue'
 export default {
   name: 'home',
-  components: { NavBar, ListExamples },
+  components: { NavBar },
 }
 
 </script>

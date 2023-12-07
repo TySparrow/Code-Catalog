@@ -91,7 +91,8 @@ export function createStore(currentToken, currentUser) {
       },
       
     },
-    
+
+    strict: true,
   });
   return store;
 }

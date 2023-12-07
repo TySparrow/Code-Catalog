@@ -1,7 +1,7 @@
 <template>
     <div>
         <button class="dropdown-menu" @click="toggleDropDown">
-            Hello {{ currentUser }} current user
+            <!-- Hello {{ currentUser }} current user -->
         </button>
         <div v-if="showDropDown" class="dropdown-content" v-on:mouseleave="closeDropDown">
             <li class="dropdown-item" v-on:click="createSnippet">Add New Code Snippet</li>
