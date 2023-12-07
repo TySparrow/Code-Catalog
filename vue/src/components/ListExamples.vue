@@ -1,6 +1,6 @@
 <template>
     <div class="hello">
-      <h1>examples</h1>
+      <h1 class="head">HomePage</h1>
       <section class="container">
         <example v-for="example in currentExamples" v-bind:key="example.id" v-bind:item="example" />
       </section>
@@ -21,7 +21,9 @@
       currentExamples() {
         return this.$store.state.examples;
       },
+
     },
+    
   
   
   }
@@ -29,7 +31,10 @@
   
   
   <style scoped>
-  
+  .head{
+    margin-top: px;
+  }
+
   </style>
   
   

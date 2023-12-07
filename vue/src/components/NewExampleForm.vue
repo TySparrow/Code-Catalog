@@ -1,5 +1,5 @@
 <template>
-  <div class="body">
+   <div class="body">
     <form v-on:submit.prevent="createNewExample" v-on:keydown.enter.exact="handleEnterKey" class="example-form">
       <div>
         <label for="title">Title: </label>
@@ -39,11 +39,13 @@ import Prism from 'prismjs';
 import 'prismjs/themes/prism.css';
 
 
+
 export default {
   data() {
     return {
       newExample: {},
       darkMode: false,
+      Prism
     };
   },
 
@@ -57,6 +59,7 @@ export default {
     },
     toggleDarkMode() {
       this.darkMode = !this.darkMode;
+      this.highlightCode();
     },
     nextExampleId() {
       let result = 0;
@@ -78,11 +81,26 @@ export default {
         event.preventDefault();
       }
     },
+    highlightCode() {
+      Prism.highlightAll();
+    },
+  },
+  mounted() {
+    this.highlightCode();
+  },
+  watch: {
+    newExample: {
+      handler() {
+        this.highlightCode();
+      },
+      deep: true,
+    },
   },
 }
 </script>
 
 <style scoped>
+@import 'prismjs/themes/prism.css';
 
 .body{
   padding-top: 25px;

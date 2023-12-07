@@ -1,29 +1,88 @@
 <template>
-  <div>
-    <p class="code-title">Title:{{ item.title }}</p>
-    <p class="code-language">Language:{{ item.language }}</p>
-  </div>
-  <div class="example">
-    <p class="code-source">Source:{{ item.source }}</p>
-    <pre v-text="item.code" :class="['code', 'example', darkMode ? 'dark' : '']"></pre>
-    <p class="tag-bubble">#{{ item.tag }}</p>
-    <button @click="toggleDarkMode()" class="button" type="button">Toggle Dark Mode</button>
+  <div class="body-container">
+    <div>
+      <p class="code-title">Title: {{ item.title }}</p>
+      <p class="code-language">Language: {{ item.language }}</p>
+    </div>
+
+    <div class="example">
+      <p class="code-source">Source: {{ item.source }}</p>
+      <pre v-text="item.code" :class="['code', 'example', darkMode ? 'dark' : '']"></pre>
+      <p class="tag-bubble">#{{ item.tag }}</p>
+      <div class="button-container">
+        <button @click="toggleDarkMode()" class="dark-mode-button" type="button">Toggle Dark Mode</button>
+        <button class="download-button" type="button" @click="downloadCode">Download</button>
+        <button class="copy-button" type="button" :data-clipboard-text="item.code">Copy to Clipboard</button>
+
+      </div>
+    </div>
   </div>
 </template>
+
 <script>
+import Prism from 'prismjs';
+import 'C:/Users/Student/source/repos/pairs/final-capstone-charlie/vue/node_modules/prismjs/themes/prism.css';
+import { saveAs } from 'file-saver';
+import Clipboard from 'clipboard';
+
+
+
 export default {
   name: 'example',
   props: ["item"],
   data() {
     return {
       darkMode: false,
+      searchQuery: '',
+      filteredExample: [],
     };
   },
   methods: {
     toggleDarkMode() {
       this.darkMode = !this.darkMode;
     },
+    downloadCode() {
+      const blob = new Blob([this.item.code], { type: 'text/plain;charset=utf-8' });
+      saveAs(blob, `${this.item.title}.${this.item.language}`);
+      window.alert('Are you sure you want to download this code snippet?')
+    },
+    copyCode() {
+      const codeElement = document.querySelector('.code');
+      if (codeElement) {
+        const code = codeElement.innerText;
+        navigator.clipboard.writeText(code)
+          .then(() => {
+            // Code copied successfully
+            console.log('Code copied to clipboard');
+          })
+          .catch((error) => {
+            // Error occurred while copying code
+            console.error('Failed to copy code:', error);
+          });
+        }
+        window.alert('Copied to Clipboard')
+    },
+
+
   },
+
+  computed: {
+    filteredExamples() {
+      return this.$store.state.examples.filter((example) => {
+        return example.title.toLowerCase().includes(this.searchQuery.toLowerCase());
+      });
+    },
+  },
+  mounted() {
+    const clipboard = new Clipboard('.copy-button');
+    clipboard.on('success', (e) => {
+      e.clearSelection();
+    });
+    clipboard.on('error', (e) => {
+      console.error('Action:', e.action);
+      console.error('Trigger:', e.trigger);
+    });
+  }
 }
 </script>
 
@@ -57,7 +116,7 @@ export default {
   margin: 20px auto;
   background-color: #f5f5f5;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  margin-left: 10px;
+  margin-left: 13px;
 }
 
 .example.dark {
@@ -96,10 +155,9 @@ export default {
   color: #fff;
   font-size: 12px;
   margin-top: 10px;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
   background-color: #00ADEE;
   margin-right: 10px;
-
 }
 
 .tag-bubble.dark {
@@ -111,11 +169,13 @@ export default {
   font-weight: bold;
   margin-top: 20px;
   margin-bottom: 10px;
+  margin-left: 13px;
 }
 
 .code-language {
   font-size: 14px;
   margin-bottom: 10px;
+  margin-left: 13px;
 }
 
 .code-source {
@@ -123,5 +183,57 @@ export default {
   margin-top: 15px;
   margin-bottom: 15px;
 
+}
+
+.copy-button {
+  background-color: #343a40;
+  color: #fff;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.download-button {
+  background-color: #343a40;
+  color: #fff;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.dark-mode-button {
+  background-color: #343a40;
+  color: #fff;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.button-container {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.copy-button,
+.download-button,
+.dark-mode-button {
+  flex: 1;
+  margin-right: 10px;
+}
+
+@media (max-width: 321px) {
+  .button-container {
+    flex-direction: column;
+  }
+  .dark-mode-button{
+    margin-bottom: 10px;
+  }
+  .download-button{
+    margin-bottom: 10px;
+  } 
 }
 </style>
