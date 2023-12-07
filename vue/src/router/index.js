@@ -9,7 +9,6 @@ import RegisterView from '../views/RegisterView.vue';
 import NewExampleView from '../views/NewExampleView.vue';
 import ListExamplesView from '../views/ListExamplesView.vue';
 
-
 /**
  * The Vue Router is used to "direct" the browser to render a specific view component
  * inside of App.vue depending on the URL.
@@ -57,10 +56,10 @@ const routes = [
     component: NewExampleView
   },
   {
-    path:"/list-examples/:language",
+    path: "/list-examples/:language",
     name: "listExamples",
     component: ListExamplesView
-  }
+  },
 ];
 
 // Create the router
@@ -79,7 +78,7 @@ router.beforeEach((to) => {
 
   // If it does and they are not logged in, send the user to "/login"
   if (requiresAuth && store.state.token === '') {
-    return {name: "login"};
+    return { name: "login" };
   }
   // Otherwise, do nothing and they'll go to their next destination
 });

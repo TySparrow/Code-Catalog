@@ -7,7 +7,7 @@
     </nav>
 </template>
 <script>
-import ListLanguages from "../components/ListLanguages.vue"
+import ListLanguages from "@/components/ListLanguages.vue"
 import Dropdown from "@/components/Dropdown.vue";
 
 export default {

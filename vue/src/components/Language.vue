@@ -28,7 +28,7 @@ export default {
   background-color: tan;
   justify-content: center;
 } */
-.example {
+.example{
     padding: 10px 20px;
     position: relative;
     text-align: center;
