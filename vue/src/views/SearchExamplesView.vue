@@ -1,7 +1,7 @@
 <template>
     <div class="hello">
         <navBar></navBar>
-      <h1>Code Snippets</h1>
+      <h1>examples</h1>
       <section class="container">
         <example v-for="example in filteredList" v-bind:key="example.id" v-bind:item ="example"> </example>
       </section>
@@ -26,13 +26,21 @@
     },
     computed: {
       filteredList() {
-      let language = this.$route.params.language
+      let search = this.$route.params.search
       let filteredExamples = this.$store.state.examples;
-      if (language != "" || language != null) {
+    //   if (search != "" || search != null) {
+    //     filteredExamples = filteredExamples.filter((example) =>
+    //       example.language
+    //         .toLowerCase()
+    //         .includes(search.toLowerCase())
+    //     );
+    //   }
+      if (search != "" || search != null) {
         filteredExamples = filteredExamples.filter((example) =>
-          example.language
-            .toLowerCase()
-            === (language.toLowerCase())
+          example.title.toLowerCase().includes(search.toLowerCase()) ||
+            example.language.toLowerCase().includes(search.toLowerCase()) ||
+            example.tag.toLowerCase().includes(search.toLowerCase()) ||
+            example.source.toLowerCase().includes(search.toLowerCase())
         );
       }
       return filteredExamples;

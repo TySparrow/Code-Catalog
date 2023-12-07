@@ -2,7 +2,8 @@
     <nav class="nav-bar">
         <img src="@/assets/techelevatorimage.png" alt="Logo" class="logo" v-on:click="returnHome">
         <ListLanguages class="menu-item"></ListLanguages>
-        <input class="search-bar" type="text" v-model="search" placeholder="Search Examples">
+        <input id="myInput" class="search-bar" type="text" v-model="search" placeholder="Search Examples">
+    <button id="myBtn" @click="ListExamples">Button</button>
         <Dropdown class="dropdown"/>
     </nav>
 </template>
@@ -16,6 +17,16 @@ export default {
         returnHome() {
             this.$router.push({ name: 'home' })
         },
+        ListExamples() {
+        
+            this.$router.push({ name: 'searchExamples', params: {search: this.search} })
+        },
+        handleEnter(event) {
+      if (event.key === "Enter") {
+        event.preventDefault();
+        this.ListExamples();
+      }
+    },
     },
     data() {
         return {
@@ -23,6 +34,11 @@ export default {
             search: ''
         }
     },
+    mounted() {
+    // Attach event listener after the component is mounted
+    let input = document.getElementById("myInput");
+    input.addEventListener("keypress", this.handleEnter);
+  },
     
     
 }
