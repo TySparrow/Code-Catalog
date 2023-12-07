@@ -13,7 +13,7 @@
   <script>
   import example from "@/components/Example.vue";
   import navBar from '../components/NavBar.vue';
-  
+
   export default {
     data(){
         return{
