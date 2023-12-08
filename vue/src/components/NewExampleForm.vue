@@ -1,33 +1,33 @@
 <template>
   <div class="body">
     <form v-on:submit.prevent="createNewExample" v-on:keydown.enter.exact="handleEnterKey" class="example-form">
-      <div>
+      <div class="title">
         <label for="title">Title: </label>
         <input type="text" name="title" id="title" v-model="newExample.title" />
       </div>
-      <div>
+      <div class="tag">
         <label for="tag">Tag: </label>
         <input type="text" name="tag" id="tag" v-model="newExample.tag" />
       </div>
-      <div>
+      <div class="language">
         <label for="language">Language: </label>
         <input type="text" name="language" id="language" v-model="newExample.language" />
       </div>
       <div>
         <label for="code">Code: </label>
-        <textarea name="code" id="code" :class="{ 'code-input': true, 'dark-mode': darkMode }" v-model="newExample.code"
-          placeholder="Enter your code here"></textarea>
+        <pre class="code-area">
+          <textarea name="code" id="code" :class="{ 'code-input': true, 'dark-mode': darkMode }" v-model="newExample.code"
+            placeholder="Enter your code here"></textarea>
+        </pre>
       </div>
-      <div>
+      <div class="source">
         <label for="source">Source </label>
         <input type="text" name="source" id="source" v-model="newExample.source" />
       </div>
       <div class="form-group">
-        <button @click="toggleDarkMode" class="dark-mode-btn">Dark Mode</button> 
-        <button @click="formatCode">Format Code</button>
-        <button type="submit" >Save Example</button>
+        <button @click="toggleDarkMode" class="dark-mode-btn">Dark Mode</button>
+        <button type="submit">Save Example</button>
       </div>
-
     </form>
   </div>
 </template>
@@ -36,6 +36,7 @@
 import prettier from 'prettier';
 import Prism from 'prismjs';
 import 'prismjs/themes/prism.css';
+
 
 
 export default {
@@ -48,7 +49,7 @@ export default {
     };
   },
 
-   methods: {
+  methods: {
     createNewExample() {
       if (this.newExample.title) {
         this.newExample.id = this.nextExampleId();
@@ -58,6 +59,7 @@ export default {
     },
     toggleDarkMode() {
       this.darkMode = !this.darkMode;
+      this.highlightCode();
     },
     nextExampleId() {
       let result = 0;
@@ -68,37 +70,53 @@ export default {
       });
       return result + 1;
     },
-    formatCode() {
-      const formattedCode = prettier.format(this.newExample.code, {
-        parser: 'babel',
-      });
-      this.newExample.code = formattedCode;
-    },
     handleEnterKey(event) {
       if (event.keyCode === 13) {
         event.preventDefault();
       }
+    },
+    highlightCode() {
+      Prism.highlightAll();
+    },
+  },
+  mounted() {
+    this.highlightCode();
+  },
+  watch: {
+    newExample: {
+      handler() {
+        this.highlightCode();
+      },
+      deep: true,
     },
   },
 }
 </script>
 
 <style scoped>
+@import 'prismjs/themes/prism.css';
 
-.body{
+.body {
   padding-top: 25px;
 }
-.example-form{
-  display:flex;
+
+.example-form {
+  display: flex;
   flex-direction: column;
   width: 50%;
   margin: 0 auto;
- }
- .form-group{
-  margin-bottom:15px;
-  display:flex;
+}
+
+.form-group {
+  margin-bottom: 15px;
+  display: flex;
   align-items: center;
- }
+}
+
+.form-group label {
+  margin-left: 10px;
+}
+
 .code-input {
   width: 100%;
   height: 80vh;
@@ -113,5 +131,14 @@ export default {
 .code-input.dark-mode {
   background-color: #333;
   color: #fff;
+}
+
+.code-area {
+  display: flex;
+  align-items: center;
+}
+
+.code-area textarea {
+  flex: 1;
 }
 </style>

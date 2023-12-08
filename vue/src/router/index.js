@@ -8,6 +8,7 @@ import LogoutView from '../views/LogoutView.vue';
 import RegisterView from '../views/RegisterView.vue';
 import NewExampleView from '../views/NewExampleView.vue';
 import ListExamplesView from '../views/ListExamplesView.vue';
+import SearchExamplesView from '../views/SearchExamplesView.vue';
 
 /**
  * The Vue Router is used to "direct" the browser to render a specific view component
@@ -60,6 +61,13 @@ const routes = [
     name: "listExamples",
     component: ListExamplesView
   },
+
+  {
+    path:"/search-examples/:search",
+    name:"searchExamples",
+    component: SearchExamplesView
+  }
+
 ];
 
 // Create the router
