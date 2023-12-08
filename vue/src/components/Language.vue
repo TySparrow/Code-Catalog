@@ -3,31 +3,25 @@
         <button class="example-language" v-on:click="ListExamples()">{{ item.language }}</button>
     </div>
 </template>
-<script>
-export default {
-    name: 'language',
-    props: ["item"],
-    methods: {
-        ListExamples() {
 
+<script>
+
+export default {
+
+
+    props: ["item"],
+
+    methods: {
+        // This takes the user to the ListExamplesView 
+        ListExamples() {
             this.$router.push({ name: 'listExamples', params: { language: this.item.language } })
         }
     },
 
 }
+
 </script>
 <style scoped>
-/* .example {
-  flex-wrap: wrap;
-  display: inline-block;
-  height: 40px;
-  min-width: 20px;
-  border: 2px solid black;
-  border-radius: 5px;
-  margin: 20px;
-  background-color: tan;
-  justify-content: center;
-} */
 .example {
     text-align: center;
     display: inline-block;

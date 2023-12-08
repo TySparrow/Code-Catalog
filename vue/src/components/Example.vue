@@ -4,7 +4,6 @@
       <p class="code-title"> {{ item.title }}</p>
       <p class="code-language">Language: {{ item.language }}</p>
     </div>
-
     <div class="example">
       <p class="code-source">Source: {{ item.source }}</p>
       <pre v-text="item.code" :class="['code', 'example', darkMode ? 'dark' : '']"></pre>
@@ -25,22 +24,25 @@ import { saveAs } from 'file-saver';
 import Clipboard from 'clipboard';
 
 export default {
-  name: 'example',
+
   props: ["item"],
+
   data() {
     return {
-      darkMode: false,
-      searchQuery: '',
-      filteredExample: [],
+      darkMode: false, // Initialize dark mode as false
     };
   },
+
   methods: {
     toggleDarkMode() {
-      this.darkMode = !this.darkMode;
+      this.darkMode = !this.darkMode; // Toggle dark mode when the button is clicked
     },
     downloadCode() {
       const confirmed = window.confirm('Are you sure you want to download this code snippet?')
       if (confirmed) {
+        // Create a Blob with the code snippet and download it as a file
+        // The Blob object represents a file-like object of immutable, raw data
+        // It can be used to create a file from the code snippet and download it
         const blob = new Blob([this.item.code], { type: 'text/plain;charset=utf-8' });
         saveAs(blob, `${this.item.title}.${this.item.language}`);
       }
@@ -55,6 +57,7 @@ export default {
       const codeElement = document.querySelector('.code');
       if (codeElement) {
         const code = codeElement.innerText;
+        // Copy the code snippet to the clipboard
         navigator.clipboard.writeText(code)
           .then(() => {
             console.log('Code copied to clipboard');
@@ -66,16 +69,9 @@ export default {
       }
       window.alert('Copied to Clipboard')
     },
-
   },
 
-  computed: {
-    filteredExamples() {
-      return this.$store.state.examples.filter((example) => {
-        return example.title.toLowerCase().includes(this.searchQuery.toLowerCase());
-      });
-    },
-  },
+
   mounted() {
     const clipboard = new Clipboard('.copy-button');
     clipboard.on('success', (e) => {
@@ -85,29 +81,13 @@ export default {
       console.error('Action:', e.action);
       console.error('Trigger:', e.trigger);
     });
-  }
+    // The mounted hook is called after the component has been mounted to the DOM
 
+  }
 }
 </script>
 
 <style scoped>
-/* .button {
-  background-color: #585858;
-  border: none;
-  color: white;
-  padding: 10px 20px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 10px;
-  border-radius: 20px;
-  margin-bottom: 10px;
-  margin-top: 15px;
-  cursor: pointer;
-  transition: background-color 0.3s ease, color 0.3s ease;
-
-} */
-
 .example {
   display: flex;
   flex-direction: column;
