@@ -66,13 +66,10 @@ export default {
   },
 
   methods: {
-    //this method creates a new example and calls to the vueex to add the example to the server
     createNewExample() {
       console.log("create new example");
       if (this.newExample.title) {
         this.newExample.id = this.nextExampleId();
-        // this.$store.commit("ADD_EXAMPLE", this.newExample);
-        // this.confirmation = this.$store.state.confirmation;
         exampleService.addExample(this.newExample).then((response) =>{
           this.confirmation = response.data;
         })

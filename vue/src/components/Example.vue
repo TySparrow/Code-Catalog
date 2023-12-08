@@ -20,31 +20,29 @@
 <script>
 
 import Prism from 'prismjs';
-import 'C:/Users/Student/source/repos/final-capstone-charlie/vue/node_modules/prismjs/themes/prism.css';
 import { saveAs } from 'file-saver';
 import Clipboard from 'clipboard';
 
 export default {
 
-  name: 'example',
-
   props: ["item"],
 
   data() {
     return {
-      darkMode: false,
-      searchQuery: '',
-      filteredExample: [],
+      darkMode: false, // Initialize dark mode as false
     };
   },
 
   methods: {
     toggleDarkMode() {
-      this.darkMode = !this.darkMode;
+      this.darkMode = !this.darkMode; // Toggle dark mode when the button is clicked
     },
     downloadCode() {
       const confirmed = window.confirm('Are you sure you want to download this code snippet?')
       if (confirmed) {
+        // Create a Blob with the code snippet and download it as a file
+        // The Blob object represents a file-like object of immutable, raw data
+        // It can be used to create a file from the code snippet and download it
         const blob = new Blob([this.item.code], { type: 'text/plain;charset=utf-8' });
         saveAs(blob, `${this.item.title}.${this.item.language}`);
       }
@@ -59,9 +57,9 @@ export default {
       const codeElement = document.querySelector('.code');
       if (codeElement) {
         const code = codeElement.innerText;
+        // Copy the code snippet to the clipboard
         navigator.clipboard.writeText(code)
           .then(() => {
-            // Code copied successfully
             console.log('Code copied to clipboard');
           })
           .catch((error) => {
@@ -73,13 +71,6 @@ export default {
     },
   },
 
-  computed: {
-    filteredExamples() {
-      return this.$store.state.examples.filter((example) => {
-        return example.title.toLowerCase().includes(this.searchQuery.toLowerCase());
-      });
-    },
-  },
 
   mounted() {
     const clipboard = new Clipboard('.copy-button');
@@ -90,12 +81,13 @@ export default {
       console.error('Action:', e.action);
       console.error('Trigger:', e.trigger);
     });
+    // The mounted hook is called after the component has been mounted to the DOM
+
   }
 }
 </script>
 
 <style scoped>
-
 .example {
   display: flex;
   flex-direction: column;

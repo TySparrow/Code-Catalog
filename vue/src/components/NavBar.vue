@@ -38,12 +38,6 @@ export default {
         },
     },
 
-    data() {
-        return {
-            search: ''
-        }
-    },
-
     mounted() {
         // Attach event listener after the component is mounted
         let input = document.getElementById("myInput");
@@ -55,7 +49,7 @@ export default {
 <style scoped>
 
 .nav-bar {
-    display:grid;
+    display: grid;
     align-items: center;
     grid-template-columns: auto auto auto auto auto;
     grid-template-areas: "logo menus search button dropdown";
@@ -79,48 +73,60 @@ export default {
     grid-area: logo;
 
 }
+
 #myBtn {
-    width: 60px; 
-    height: 30px; 
+    width: 50px;
+    height: 30px;
     grid-area: button;
     margin-right: 5px;
-    justify-content: center;
+    margin-left: 10px;
+    border-radius: 10px;
+    background-color: white;
+    color: black;
 }
+
 .dropdown {
     grid-area: dropdown;
     margin-right: 20px;
-    position:fixed;
+    position: fixed;
     right: 0;
 }
 
 .menu-item {
     grid-area: menus;
 }
+
 .search-bar {
     grid-area: search;
-    height: 24px;
-    
+    height: 30px;
+    border-radius: 10px;
+
 }
+
 @media (max-width: 1024px) {
     .nav-bar {
         grid-template-columns: auto auto auto auto;
         grid-template-areas: "logo search button dropdown"
         
     }
+
     .menu-item {
         display: none;
     }
     
 }
+
 @media (max-width: 560px) {
-  
+
     .nav-bar {
         grid-template-columns: 0.25fr auto auto auto;
         grid-template-areas: "logo search button dropdown" 
         
     }
+
     .menu-item {
-        display: none; /* Hide menu items at this screen size */
+        display: none;
+        /* Hide menu items at this screen size */
     }
     .logo {
         margin: 0;
