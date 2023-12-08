@@ -37,10 +37,10 @@ export default {
 </script>
 
 
-<style scoped>
+<style>
 /* Style the button */
 .dropdown-menu {
-    padding: 10px 20px;
+    padding: 10px 10px;
     position:relative;
     text-align: center;
     border: none;
@@ -49,8 +49,8 @@ export default {
     display: inline-block;
     transition: 0.3s;
     flex-wrap: wrap;
-
 }
+
 
 .dropdown-menu:hover {
     background-color: #c0c0c0;
@@ -67,17 +67,17 @@ export default {
     right:0%;
     position: fixed;
     
+    
 }
 
 
 .dropdown-item {
     display: flex;
     padding: 5px 10px;
-    height: 40px;
     justify-content: center;
     color: #333;
     cursor: pointer;
-    text-align: center;
+    
 }
 
 .dropdown-item:hover {

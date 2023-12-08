@@ -17,17 +17,7 @@ export default {
 }
 </script>
 <style scoped>
-/* .example {
-  flex-wrap: wrap;
-  display: inline-block;
-  height: 40px;
-  min-width: 20px;
-  border: 2px solid black;
-  border-radius: 5px;
-  margin: 20px;
-  background-color: tan;
-  justify-content: center;
-} */
+
 .example {
     text-align: center;
     display: inline-block;

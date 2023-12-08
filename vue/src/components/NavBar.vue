@@ -1,11 +1,11 @@
 <template>
-    <nav class="nav-bar">
+    <header class="nav-bar">
         <img src="@/assets/techelevatorimage.png" alt="Logo" class="logo" v-on:click="returnHome">
         <ListLanguages class="menu-item"></ListLanguages>
         <input id="myInput" class="search-bar" type="text" v-model="search" placeholder="Search Examples">
     <button id="myBtn" @click="ListExamples">Search</button>
         <Dropdown class="dropdown"/>
-    </nav>
+    </header>
 </template>
 <script>
 import ListLanguages from "@/components/ListLanguages.vue"
@@ -44,24 +44,29 @@ export default {
 }
 </script>
 
-<style>
-
+<style scoped>
 
 .nav-bar {
     display:grid;
     align-items: center;
-    grid-template-columns: auto, auto, 1fr, auto, auto;
+    grid-template-columns: auto auto auto auto auto;
     grid-template-areas: "logo menus search button dropdown";
     background-color: #f5f5f5;
-    border-bottom: thin solid rgb(139, 139, 139)
-    
+    border-bottom: thin solid rgb(139, 139, 139);
+    position:fixed;
+    top: 0;
+    padding: 0 16px;
+    position: fixed;
+    left: 0;
+    right: 0;
+    border-radius: 0;
+
 }
 
 .logo {
     width: 60px;
     height: auto;
-    margin-left: 1rem;
-    margin-right: 2rem;
+    margin: 0;
     cursor: pointer;
     grid-area: logo;
 
@@ -89,23 +94,32 @@ export default {
 }
 @media (max-width: 1024px) {
     .nav-bar {
-        grid-template-columns: auto auto auto;
-        grid-template-areas: "logo search button dropdown" 
+        grid-template-columns: auto auto auto auto;
+        grid-template-areas: "logo search button dropdown"
         
     }
     .menu-item {
-        display: none; /* Hide menu items at this screen size */
+        display: none;
     }
+    
 }
 @media (max-width: 560px) {
   
     .nav-bar {
-        grid-template-columns: auto 0.25fr auto;
+        grid-template-columns: 0.25fr auto auto auto;
         grid-template-areas: "logo search button dropdown" 
         
     }
     .menu-item {
         display: none; /* Hide menu items at this screen size */
+    }
+    .logo {
+        margin: 0;
+        padding-right: 4px;
+    }
+    .dropdown { 
+        position: relative;
+        padding-right: 2px;
     }
   /*Need to fully finish max width and how it changes the navigation bar appearance*/
 }
