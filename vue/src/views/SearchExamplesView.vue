@@ -46,7 +46,8 @@
     }
     },
   }
-  </script>
+  //Would like to add the ability to the search bar if simply clicked, refreshes the page with all examples
+    </script>
   
   <style scoped>
   </style>

@@ -22,9 +22,12 @@ export default {
             this.$router.push({ name: 'home' })
         },
         //this routes the user to a searchexamplesview after a search was inputted
+        //Then clears the input search section to show just the placeholder text once submitted
         ListExamples() {
         
             this.$router.push({ name: 'searchExamples', params: {search: this.search} })
+            this.search = '';
+            
         },
         //this method bounds the click of the button to the enter key 
         handleEnter(event) {
@@ -77,10 +80,11 @@ export default {
 
 }
 #myBtn {
-    width: 50px; 
+    width: 60px; 
     height: 30px; 
     grid-area: button;
-    margin-right: 5px
+    margin-right: 5px;
+    justify-content: center;
 }
 .dropdown {
     grid-area: dropdown;
@@ -94,7 +98,7 @@ export default {
 }
 .search-bar {
     grid-area: search;
-    height: 30px;
+    height: 24px;
     
 }
 @media (max-width: 1024px) {
