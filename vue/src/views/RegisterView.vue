@@ -1,9 +1,8 @@
 <template>
   <div id="register" class="text-center">
 
-    <img src="../assets/techelevatorimage.png" alt="Logo" class="logo">
-    <img src="src\assets\image.png" alt="Logo-Text" class="logo-text">
-
+    <img src="../assets/TechElevator_fullLogo.png" alt="Logo" class="logo">
+   
     <form v-on:submit.prevent="register" class="register-form">
       <h1 class="register-heading">Create Account</h1>
       <p class="subheading"> It's quick and easy.</p>
@@ -16,8 +15,8 @@
       </div>
       <div class="form-input-group">
         <label for="password">Password</label>
-        <input type="password" id="password" v-model="user.password" required />
       </div>
+      <input class="form-input-group" type="password" id="password" v-model="user.password" required />
       <div class="form-input-group">
         <label for="confirmPassword">Confirm Password</label>
         <input type="password" id="confirmPassword" v-model="user.confirmPassword" required />
@@ -86,19 +85,11 @@ export default {
 }
 
 .logo {
-  width: 250px;
-  height: auto;
-  margin-right: 1rem;
-
-}
-
-.logo-text {
-  width: 200px;
+  width: 550px;
   height: auto;
   margin-right: 5rem;
 
 }
-
 .subheading {
   margin-bottom: 1.5rem;
   font-size: 11px;

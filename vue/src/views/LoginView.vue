@@ -1,8 +1,8 @@
 <template>
     <div id="login">
       <div class="login-container">
-        <img src="../assets/techelevatorimage.png" alt="Logo" class="logo">
-        <img src="src\assets\image.png" alt="Logo-Text" class="logo-text">
+        <img src="../assets/TechElevator_fullLogo.png" alt="Logo" class="logo">
+       
         <form v-on:submit.prevent="login" class="login-form">
           <h1 class="login-heading">Please Sign In</h1>
           <div role="alert" v-if="invalidCredentials" class="error-message">
@@ -26,13 +26,18 @@
         </form>
       </div>
     </div>
+    <Footer></Footer>
 </template>
 
 <script>
 import authService from "../services/AuthService";
+import Footer from "../components/Footer.vue";
 
 export default {
-  components: {},
+  name: 'home',
+  components: { Footer
+  },
+  
   data() {
     return {
       user: {
@@ -72,12 +77,6 @@ export default {
   align-items: center;
   height: 100vh;
 }
-.logo-text {
-  width: 200px;
-  height: auto;
-  margin-right: 5rem;
-
-}
 
 .login-container {
   display: flex;
@@ -88,9 +87,9 @@ export default {
 }
 
 .logo {
-  width: 250px;
+  width: 550px;
   height: auto;
-  margin-right: 1rem;
+  margin-right: 5rem;
 }
 
 .login-form {

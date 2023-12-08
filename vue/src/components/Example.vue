@@ -19,12 +19,10 @@
 </template>
 
 <script>
+
 import Prism from 'prismjs';
-import 'C:/Users/Student/source/repos/final-capstone-charlie/vue/node_modules/prismjs/themes/prism.css';
 import { saveAs } from 'file-saver';
 import Clipboard from 'clipboard';
-
-
 
 export default {
   name: 'example',
@@ -59,7 +57,6 @@ export default {
         const code = codeElement.innerText;
         navigator.clipboard.writeText(code)
           .then(() => {
-            // Code copied successfully
             console.log('Code copied to clipboard');
           })
           .catch((error) => {
