@@ -1,14 +1,17 @@
 <template>
     <NavBar></NavBar>
     <h1> Add A Snippet </h1>
+    <div class="body">
+        
+        <NewExampleForm />
+    </div>
 
-    <NewExampleForm />
    
 </template>
 
 <script>
-import NewExampleForm from '../components/NewExampleForm.vue';
-import NavBar from '../components/NavBar.vue';
+import NewExampleForm from '@/components/NewExampleForm.vue';
+import NavBar from '@/components/NavBar.vue';
 
 
 export default {
@@ -20,6 +23,7 @@ export default {
 </script>
 
 <style scoped>
+
 
 </style>
 

@@ -41,9 +41,17 @@ export default {
       this.darkMode = !this.darkMode;
     },
     downloadCode() {
-      const blob = new Blob([this.item.code], { type: 'text/plain;charset=utf-8' });
-      saveAs(blob, `${this.item.title}.${this.item.language}`);
-      window.alert('Are you sure you want to download this code snippet?')
+      const confirmed = window.confirm('Are you sure you want to download this code snippet?')
+      if (confirmed) {
+        const blob = new Blob([this.item.code], { type: 'text/plain;charset=utf-8' });
+        saveAs(blob, `${this.item.title}.${this.item.language}`);
+      }
+      else {
+        return;
+      }
+
+
+
     },
     copyCode() {
       const codeElement = document.querySelector('.code');
@@ -86,7 +94,7 @@ export default {
 </script>
 
 <style scoped>
-.button {
+/* .button {
   background-color: #585858;
   border: none;
   color: white;
@@ -101,7 +109,7 @@ export default {
   cursor: pointer;
   transition: background-color 0.3s ease, color 0.3s ease;
 
-}
+} */
 
 .example {
   display: flex;
