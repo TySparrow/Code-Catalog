@@ -1,5 +1,11 @@
 <template>
   <div class="body">
+    <modal @close="toggleModal" :modalActive="modalActive">
+          <div class="modal-content">
+            <h1>this is a modal header</h1>
+            <p>this is a modal message {{ this.confirmation }}</p>
+          </div>
+        </modal>
     <form v-on:submit.prevent="createNewExample" v-on:keydown.enter.exact="handleEnterKey" class="example-form">
       <div class="title">
         <label for="title">Title: </label>
@@ -26,7 +32,7 @@
       </div>
       <div class="form-group">
         <button @click="toggleDarkMode" class="dark-mode-btn">Dark Mode</button>
-        <button type="submit">Save Example</button>
+        <button @click="toggleModal" type="submit">Save Example</button>
       </div>
     </form>
   </div>
@@ -36,31 +42,47 @@
 import prettier from 'prettier';
 import Prism from 'prismjs';
 import 'prismjs/themes/prism.css';
-
-
+import modal from '../components/PopUp.vue'
+import{ref} from "vue";
+import exampleService from "../services/ExampleService.js";
 
 export default {
+
+  components: {modal},
+
   data() {
     return {
       newExample: {},
       darkMode: false,
-      confirmation: {},
-      showPopup: false,
+      confirmation: "",
     };
   },
 
+  setup(){
+    const modalActive = ref(false);
+
+    const toggleModal = () => {
+      modalActive.value = !modalActive.value;
+    };
+    return{modalActive, toggleModal};
+  },
+
   methods: {
+    //this method creates a new example and calls to the vueex to add the example to the server
     createNewExample() {
+      console.log("create new example");
       if (this.newExample.title) {
         this.newExample.id = this.nextExampleId();
-        this.confirmation = this.$store.commit("ADD_EXAMPLE", this.newExample);
+        // this.$store.commit("ADD_EXAMPLE", this.newExample);
+        // this.confirmation = this.$store.state.confirmation;
+        exampleService.addExample(this.newExample).then((response) =>{
+          this.confirmation = response.data;
+        })
+        console.log("create new example method ", this.confirmation);
       }
-      this.newExample = {};
+      this.newExample = "";
     },
-    toggleDarkMode() {
-      this.darkMode = !this.darkMode;
-      this.highlightCode();
-    },
+    //this method is called in the createnewexample method to create the id for the new example
     nextExampleId() {
       let result = 0;
       this.$store.state.examples.forEach((item) => {
@@ -69,6 +91,10 @@ export default {
         }
       });
       return result + 1;
+    },
+    toggleDarkMode() {
+      this.darkMode = !this.darkMode;
+      this.highlightCode();
     },
     handleEnterKey(event) {
       if (event.keyCode === 13) {
@@ -140,5 +166,23 @@ export default {
 
 .code-area textarea {
   flex: 1;
+}
+
+.modal-content{
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+
+}
+h1,p{
+  margin-bottom: 16px;
+
+}
+h1{
+  font-size: 32px;
+
+}
+p{
+  font-size: 18px;
 }
 </style>

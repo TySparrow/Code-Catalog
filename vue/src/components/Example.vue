@@ -4,7 +4,6 @@
       <p class="code-title"> {{ item.title }}</p>
       <p class="code-language">Language: {{ item.language }}</p>
     </div>
-
     <div class="example">
       <p class="code-source">Source: {{ item.source }}</p>
       <pre v-text="item.code" :class="['code', 'example', darkMode ? 'dark' : '']"></pre>
@@ -19,16 +18,18 @@
 </template>
 
 <script>
+
 import Prism from 'prismjs';
 import 'C:/Users/Student/source/repos/pairs/final-capstone-charlie/vue/node_modules/prismjs/themes/prism.css';
 import { saveAs } from 'file-saver';
 import Clipboard from 'clipboard';
 
-
-
 export default {
+
   name: 'example',
+
   props: ["item"],
+
   data() {
     return {
       darkMode: false,
@@ -36,6 +37,7 @@ export default {
       filteredExample: [],
     };
   },
+
   methods: {
     toggleDarkMode() {
       this.darkMode = !this.darkMode;
@@ -61,7 +63,6 @@ export default {
       }
       window.alert('Copied to Clipboard')
     },
-
   },
 
   computed: {
@@ -71,6 +72,7 @@ export default {
       });
     },
   },
+
   mounted() {
     const clipboard = new Clipboard('.copy-button');
     clipboard.on('success', (e) => {
@@ -81,7 +83,6 @@ export default {
       console.error('Trigger:', e.trigger);
     });
   }
-
 }
 </script>
 

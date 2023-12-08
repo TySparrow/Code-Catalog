@@ -3,49 +3,54 @@
         <img src="@/assets/techelevatorimage.png" alt="Logo" class="logo" v-on:click="returnHome">
         <ListLanguages class="menu-item"></ListLanguages>
         <input id="myInput" class="search-bar" type="text" v-model="search" placeholder="Search Examples">
-    <button id="myBtn" @click="ListExamples">Button</button>
+        <button id="myBtn" @click="ListExamples">Button</button>
         <Dropdown class="dropdown"/>
     </nav>
 </template>
+
 <script>
+
 import ListLanguages from "../components/ListLanguages.vue"
 import Dropdown from "@/components/Dropdown.vue";
 
 export default {
+
     components: { ListLanguages, Dropdown },
+
     methods: {
+        //this routes the home button to the home page
         returnHome() {
             this.$router.push({ name: 'home' })
         },
+        //this routes the user to a searchexamplesview after a search was inputted
         ListExamples() {
         
             this.$router.push({ name: 'searchExamples', params: {search: this.search} })
         },
+        //this method bounds the click of the button to the enter key 
         handleEnter(event) {
-      if (event.key === "Enter") {
-        event.preventDefault();
-        this.ListExamples();
-      }
+        if (event.key === "Enter") {
+            event.preventDefault();
+            this.ListExamples();
+        }
+        },
     },
-    },
+
     data() {
         return {
-            examples: [],
             search: ''
         }
     },
+
     mounted() {
-    // Attach event listener after the component is mounted
-    let input = document.getElementById("myInput");
-    input.addEventListener("keypress", this.handleEnter);
-  },
-    
-    
+        // Attach event listener after the component is mounted
+        let input = document.getElementById("myInput");
+        input.addEventListener("keypress", this.handleEnter);
+    },
 }
 </script>
 
 <style>
-
 
 .nav-bar {
     display:grid;
