@@ -35,12 +35,6 @@ export default {
         },
     },
 
-    data() {
-        return {
-            search: ''
-        }
-    },
-
     mounted() {
         // Attach event listener after the component is mounted
         let input = document.getElementById("myInput");

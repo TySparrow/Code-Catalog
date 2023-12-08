@@ -21,7 +21,6 @@ export default {
     },
 
     methods: {
-
         toggleDropDown() {
             this.showDropDown = !this.showDropDown;
         },

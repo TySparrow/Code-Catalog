@@ -8,14 +8,12 @@
 
 export default {
 
-    name: 'language',
 
     props: ["item"],
 
     methods: {
         // This takes the user to the ListExamplesView 
         ListExamples() {
-
             this.$router.push({ name: 'listExamples', params: { language: this.item.language } })
         }
     },
