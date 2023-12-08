@@ -1,7 +1,7 @@
 <template>
-  <div class = "example"> 
-        <button class="example-language" v-on:click="ListExamples()">Language:{{ item.language }}</button>
-  </div>
+    <div class="example">
+        <button class="example-language" v-on:click="ListExamples()">{{ item.language }}</button>
+    </div>
 </template>
 <script>
 export default {
@@ -9,15 +9,15 @@ export default {
     props: ["item"],
     methods: {
         ListExamples() {
-        
-            this.$router.push({ name: 'listExamples', params: {language: this.item.language} })
+
+            this.$router.push({ name: 'listExamples', params: { language: this.item.language } })
         }
     },
-    
+
 }
 </script>
 <style scoped>
- /* .example {
+/* .example {
   flex-wrap: wrap;
   display: inline-block;
   height: 40px;
@@ -28,15 +28,15 @@ export default {
   background-color: tan;
   justify-content: center;
 } */
- .example{
+.example {
     text-align: center;
     display: inline-block;
-}  
+}
+
 .example-language {
     border: none;
-    padding: 20px 40px; /* Increase padding for larger size */
-  
-  height: 60px; /* Adjust height as needed */
+    padding: 20px 40px;
+    height: 60px;
     position: relative;
     text-align: center;
     border-bottom: 3px solid transparent;
@@ -45,19 +45,19 @@ export default {
     flex-wrap: wrap;
     cursor: pointer;
     background-color: #f5f5f5;
-} 
+}
 
 .example:hover {
     background-color: #c0c0c0;
     border-bottom-color: #00ADEE;
     cursor: pointer;
 }
+
 .example-language:hover {
     background-color: #c0c0c0;
     border-bottom-color: #00ADEE;
     cursor: pointer;
 }
-
 </style>
 
 
