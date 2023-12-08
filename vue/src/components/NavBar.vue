@@ -3,12 +3,12 @@
         <img src="@/assets/techelevatorimage.png" alt="Logo" class="logo" v-on:click="returnHome">
         <ListLanguages class="menu-item"></ListLanguages>
         <input id="myInput" class="search-bar" type="text" v-model="search" placeholder="Search Examples">
-    <button id="myBtn" @click="ListExamples">Button</button>
+    <button id="myBtn" @click="ListExamples">Search</button>
         <Dropdown class="dropdown"/>
     </nav>
 </template>
 <script>
-import ListLanguages from "../components/ListLanguages.vue"
+import ListLanguages from "@/components/ListLanguages.vue"
 import Dropdown from "@/components/Dropdown.vue";
 
 export default {
@@ -50,8 +50,8 @@ export default {
 .nav-bar {
     display:grid;
     align-items: center;
-    grid-template-columns: 1fr, 1fr, 1fr, 1fr;
-    grid-template-areas: "logo menus search dropdown";
+    grid-template-columns: auto, auto, 1fr, auto, auto;
+    grid-template-areas: "logo menus search  button dropdown";
     background-color: #f5f5f5;
 }
 
@@ -64,8 +64,15 @@ export default {
     grid-area: logo;
 
 }
+#myBtn {
+    width: 50px; /* Adjust width as needed */
+    height: 30px; /* Adjust height as needed */
+    grid-area: button;
+    margin-right: 5px
+}
 .dropdown {
-    grid-area: dropdown
+    grid-area: dropdown;
+    margin-right: 20px;
 }
 
 .menu-item {
@@ -76,6 +83,11 @@ export default {
     grid-area: search;
     height: 30px;
     
+}
+@media (max-width: 1024px) {
+  .menu-item {
+    display: none;
+  }
 }
 </style>
 

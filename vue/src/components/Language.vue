@@ -28,17 +28,31 @@ export default {
   background-color: tan;
   justify-content: center;
 } */
-.example {
-    padding: 10px 20px;
+ .example{
+    text-align: center;
+    display: inline-block;
+}  
+.example-language {
+    border: none;
+    padding: 20px 40px; /* Increase padding for larger size */
+  
+  height: 60px; /* Adjust height as needed */
     position: relative;
     text-align: center;
     border-bottom: 3px solid transparent;
-    display: inline-block;
+    display: grid;
     transition: 0.3s;
     flex-wrap: wrap;
-}
+    cursor: pointer;
+    background-color: #f5f5f5;
+} 
 
 .example:hover {
+    background-color: #c0c0c0;
+    border-bottom-color: #00ADEE;
+    cursor: pointer;
+}
+.example-language:hover {
     background-color: #c0c0c0;
     border-bottom-color: #00ADEE;
     cursor: pointer;

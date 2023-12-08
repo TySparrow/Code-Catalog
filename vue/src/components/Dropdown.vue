@@ -1,7 +1,7 @@
 <template>
     <div>
         <button class="dropdown-menu" @click="toggleDropDown">
-            <!-- Hello {{ currentUser }} current user -->
+            Menu
         </button>
         <div v-if="showDropDown" class="dropdown-content" v-on:mouseleave="closeDropDown">
             <li class="dropdown-item" v-on:click="createSnippet">Add New Code Snippet</li>
@@ -46,6 +46,7 @@ export default {
     position: relative;
     text-align: center;
     border: none;
+    border-radius: 2px;
     border-bottom: 3px solid transparent;
     display: inline-block;
     transition: 0.3s;
@@ -59,7 +60,7 @@ export default {
 }
 
 .dropdown-content {
-    position: absolute;
+    position:absolute;
     background-color: #f9f9f9;
     min-width: 150px;
     box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
@@ -76,6 +77,7 @@ export default {
     justify-content: center;
     color: #333;
     cursor: pointer;
+    text-align: center;
    
 }
 

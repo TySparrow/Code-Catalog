@@ -20,7 +20,7 @@
 
 <script>
 import Prism from 'prismjs';
-import 'C:/Users/Student/source/repos/pairs/final-capstone-charlie/vue/node_modules/prismjs/themes/prism.css';
+import 'C:/Users/Student/source/repos/final-capstone-charlie/vue/node_modules/prismjs/themes/prism.css';
 import { saveAs } from 'file-saver';
 import Clipboard from 'clipboard';
 
