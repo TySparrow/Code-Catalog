@@ -3,14 +3,13 @@
         <img src="@/assets/techelevatorimage.png" alt="Logo" class="logo" v-on:click="returnHome">
         <ListLanguages class="menu-item"></ListLanguages>
         <input id="myInput" class="search-bar" type="text" v-model="search" placeholder="Search Examples">
-        <button id="myBtn" @click="ListExamples">Button</button>
+    <button id="myBtn" @click="ListExamples">Search</button>
         <Dropdown class="dropdown"/>
     </nav>
 </template>
 
 <script>
-
-import ListLanguages from "../components/ListLanguages.vue"
+import ListLanguages from "@/components/ListLanguages.vue"
 import Dropdown from "@/components/Dropdown.vue";
 
 export default {
@@ -55,9 +54,11 @@ export default {
 .nav-bar {
     display:grid;
     align-items: center;
-    grid-template-columns: 1fr, 1fr, 1fr, 1fr;
-    grid-template-areas: "logo menus search dropdown";
+    grid-template-columns: auto, auto, 1fr, auto, auto;
+    grid-template-areas: "logo menus search button dropdown";
     background-color: #f5f5f5;
+    border-bottom: thin solid rgb(139, 139, 139)
+    
 }
 
 .logo {
@@ -69,87 +70,47 @@ export default {
     grid-area: logo;
 
 }
+#myBtn {
+    width: 50px; 
+    height: 30px; 
+    grid-area: button;
+    margin-right: 5px
+}
 .dropdown {
-    grid-area: dropdown
+    grid-area: dropdown;
+    margin-right: 20px;
+    position:fixed;
+    right: 0;
 }
 
 .menu-item {
     grid-area: menus;
-    position:static
 }
 .search-bar {
     grid-area: search;
     height: 30px;
     
 }
+@media (max-width: 1024px) {
+    .nav-bar {
+        grid-template-columns: auto auto auto;
+        grid-template-areas: "logo search button dropdown" 
+        
+    }
+    .menu-item {
+        display: none; /* Hide menu items at this screen size */
+    }
+}
+@media (max-width: 560px) {
+  
+    .nav-bar {
+        grid-template-columns: auto 0.25fr auto;
+        grid-template-areas: "logo search button dropdown" 
+        
+    }
+    .menu-item {
+        display: none; /* Hide menu items at this screen size */
+    }
+  /*Need to fully finish max width and how it changes the navigation bar appearance*/
+}
 </style>
-
-
-
-
-
-
-
-
-
-
-
-
-<!-- <style scoped>
-* {
-    box-sizing: border-box;
-}
-
-
-.topnav {
-    overflow: hidden;
-    background-color: #f5f5f5;
-    position: fixed;
-    list-style-type: none;
-    top: 0;
-    width: 100%;
-    white-space: nowrap;
-    display: inline-flex;
-}
-
-#yes {
-    position: fixed;
-    padding-left: 70%;
-}
-
-.topnav li {
-
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
-    display: inline-flex;
-}
-
-#tab {
-    color: #00ADEE;
-    text-decoration: none;
-}
-
-.logo {
-    width: 60px;
-    height: auto;
-    margin-right: 1rem;
-    cursor: pointer;
-
-}
-</style> -->
-
-<!-- <aside class="topnav">
-            <li><img src="src\assets\techelevatorimage.png" alt="Logo" class="logo" v-on:click="returnHome"></li>
-
-            <div id="yes">
-
-                <li><router-link id="tab" v-bind:to="{ name: 'newExample' }" v-show="$store.state.token != ''">Add New
-                        Snippet</router-link> </li>
-                <li><router-link v-bind:to="{ name: 'listExamples' }" class="example">Show Examples</router-link></li>
-                <li><router-link id="tab" v-bind:to="{ name: 'logout' }"
-                        v-if="$store.state.token != ''">Logout</router-link></li>
-
-            </div>
-        </aside> -->
-

@@ -20,7 +20,7 @@
 <script>
 
 import Prism from 'prismjs';
-import 'C:/Users/Student/source/repos/pairs/final-capstone-charlie/vue/node_modules/prismjs/themes/prism.css';
+import 'C:/Users/Student/source/repos/final-capstone-charlie/vue/node_modules/prismjs/themes/prism.css';
 import { saveAs } from 'file-saver';
 import Clipboard from 'clipboard';
 
@@ -43,9 +43,17 @@ export default {
       this.darkMode = !this.darkMode;
     },
     downloadCode() {
-      const blob = new Blob([this.item.code], { type: 'text/plain;charset=utf-8' });
-      saveAs(blob, `${this.item.title}.${this.item.language}`);
-      window.alert('Are you sure you want to download this code snippet?')
+      const confirmed = window.confirm('Are you sure you want to download this code snippet?')
+      if (confirmed) {
+        const blob = new Blob([this.item.code], { type: 'text/plain;charset=utf-8' });
+        saveAs(blob, `${this.item.title}.${this.item.language}`);
+      }
+      else {
+        return;
+      }
+
+
+
     },
     copyCode() {
       const codeElement = document.querySelector('.code');
@@ -87,22 +95,6 @@ export default {
 </script>
 
 <style scoped>
-.button {
-  background-color: #585858;
-  border: none;
-  color: white;
-  padding: 10px 20px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 10px;
-  border-radius: 20px;
-  margin-bottom: 10px;
-  margin-top: 15px;
-  cursor: pointer;
-  transition: background-color 0.3s ease, color 0.3s ease;
-
-}
 
 .example {
   display: flex;
