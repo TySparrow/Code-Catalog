@@ -12,7 +12,7 @@
   
   <script>
   import example from "@/components/Example.vue";
-  import navBar from '../components/NavBar.vue';
+  import navBar from '@/components/NavBar.vue';
 
   export default {
     data(){
@@ -45,6 +45,21 @@
   
   
   <style scoped>
+  
+  .hello{
+    margin: 0;
+    padding: 0;
+    height: 100%;
+  }
+
+  h1{
+    font-size: 3rem;
+    margin: 0;
+    padding: 0;
+    margin-top: 10px;
+    margin-left: 10px;
+  }
+  
   
   </style>
   
