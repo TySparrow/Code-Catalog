@@ -1,40 +1,51 @@
 <template>
-    <div class="popup">
-        <div class="popup-inner">
-            <slot></slot>
-            <button class="popup-close" @click="closePopup">
-                Close Popup
-            </button>
+    <transition name="modal-animation">
+        <div v-show="modalActive" class="modal">
+            <transition name="modal-animation-inner">
+                <div v="modalActive" class="modal-inner">
+                    <i @click="close" class="far fa-times-circle"></i>
+                    <slot></slot>
+                    <button class="buttons" @click="close" type="button">close</button>
+                </div>
+            </transition>
         </div>
-    </div>
+    </transition>
+
 </template>
 
 <script>
 export default{
- method:{
-    closePopup(){
-        this.$emit('new-example');
+    props: ["modalActive"],
+    setup(props, {emit}){
+        const close = () => {
+            emit("close");
+        };
+        return {close};
     }
- }
-}
+};
 </script>
 
-<style Lang= "scss" scoped>
-.popup{
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    z-index: 99;
-    background-color: rgba(0,0,0,0.2);
+<style scoped>
+*{
+    border: thin solid ;
+    border-radius: 5px;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: "Karla", sans-serif;
 
-    display: flex;
-    align-items: center;
-    justify-content: center;
 }
-.popup-inner{
-    padding: 32px;
-    background: #fff;
+.buttons{
+    
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: red;
+    color: blue;
+    cursor: pointer;
+
+    
+
 }
 </style>
+
+
+

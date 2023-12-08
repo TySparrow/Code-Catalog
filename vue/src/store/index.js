@@ -11,6 +11,7 @@ export function createStore(currentToken, currentUser) {
       Languages: [],
       examples: [],
       search: '',
+      confirmation: '',
     },
     mutations: {
       SET_AUTH_TOKEN(state, token) {
@@ -29,6 +30,7 @@ export function createStore(currentToken, currentUser) {
         state.user = {};
         axios.defaults.headers.common = {};
       },
+      //this method calls the services to load all the examples 
       LOAD_EXAMPLES(state) {
         exampleService
           .getExamples()
@@ -55,7 +57,7 @@ export function createStore(currentToken, currentUser) {
             }
           });
       },
-      
+      //this calls to the services to load all of the individual languages
       LOAD_LANGUAGES(state) {
         LanguageService
           .getLanguages()
@@ -82,13 +84,11 @@ export function createStore(currentToken, currentUser) {
             }
           });
       },
-
-
-      ADD_EXAMPLE(state, payload) {
-        state.examples.push(payload);
-        exampleService
-          .addExample(payload);
-      },
+      // //this takes in a parameter that is a new example and sends it to the service to be added to the server
+      // ADD_EXAMPLE(state, payload) {
+      //   state.examples.push(payload);
+      //   this.confirmation = exampleService.addExample(payload);
+      // },
       
     },
 

@@ -13,8 +13,8 @@
 import NewExampleForm from '@/components/NewExampleForm.vue';
 import NavBar from '@/components/NavBar.vue';
 
-
 export default {
+
     components: {
         NewExampleForm,
         NavBar

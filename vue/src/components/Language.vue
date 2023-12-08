@@ -3,11 +3,17 @@
         <button class="example-language" v-on:click="ListExamples()">{{ item.language }}</button>
     </div>
 </template>
+
 <script>
+
 export default {
+
     name: 'language',
+
     props: ["item"],
+
     methods: {
+        // This takes the user to the ListExamplesView 
         ListExamples() {
 
             this.$router.push({ name: 'listExamples', params: { language: this.item.language } })
@@ -15,9 +21,9 @@ export default {
     },
 
 }
+
 </script>
 <style scoped>
-
 .example {
     text-align: center;
     display: inline-block;

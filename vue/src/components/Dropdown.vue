@@ -6,7 +6,6 @@
         <div v-if="showDropDown" class="dropdown-content" v-on:mouseleave="closeDropDown">
             <li class="dropdown-item" v-on:click="createSnippet">Add New Code Snippet</li>
             <router-link v-bind:to="{ name: 'logout' }" class="dropdown-item">Logout</router-link>
-
         </div>
     </div>
 </template>
@@ -14,11 +13,13 @@
 <script>
 
 export default {
+
     data() {
         return {
             showDropDown: false
         }
     },
+
     methods: {
 
         toggleDropDown() {
@@ -33,7 +34,6 @@ export default {
         }
     }
 }
-
 </script>
 
 

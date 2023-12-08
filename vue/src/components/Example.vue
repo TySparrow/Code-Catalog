@@ -4,7 +4,6 @@
       <p class="code-title"> {{ item.title }}</p>
       <p class="code-language">Language: {{ item.language }}</p>
     </div>
-
     <div class="example">
       <p class="code-source">Source: {{ item.source }}</p>
       <pre v-text="item.code" :class="['code', 'example', darkMode ? 'dark' : '']"></pre>
@@ -19,16 +18,18 @@
 </template>
 
 <script>
+
 import Prism from 'prismjs';
 import 'C:/Users/Student/source/repos/final-capstone-charlie/vue/node_modules/prismjs/themes/prism.css';
 import { saveAs } from 'file-saver';
 import Clipboard from 'clipboard';
 
-
-
 export default {
+
   name: 'example',
+
   props: ["item"],
+
   data() {
     return {
       darkMode: false,
@@ -36,6 +37,7 @@ export default {
       filteredExample: [],
     };
   },
+
   methods: {
     toggleDarkMode() {
       this.darkMode = !this.darkMode;
@@ -69,7 +71,6 @@ export default {
       }
       window.alert('Copied to Clipboard')
     },
-
   },
 
   computed: {
@@ -79,6 +80,7 @@ export default {
       });
     },
   },
+
   mounted() {
     const clipboard = new Clipboard('.copy-button');
     clipboard.on('success', (e) => {
@@ -89,27 +91,10 @@ export default {
       console.error('Trigger:', e.trigger);
     });
   }
-
 }
 </script>
 
 <style scoped>
-/* .button {
-  background-color: #585858;
-  border: none;
-  color: white;
-  padding: 10px 20px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 10px;
-  border-radius: 20px;
-  margin-bottom: 10px;
-  margin-top: 15px;
-  cursor: pointer;
-  transition: background-color 0.3s ease, color 0.3s ease;
-
-} */
 
 .example {
   display: flex;
