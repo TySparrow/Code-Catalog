@@ -14,5 +14,7 @@
 
         public string Source { get; set; }
 
+        public string Status { get; set; }
+
     }
 }

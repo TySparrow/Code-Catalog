@@ -39,8 +39,8 @@
 import prettier from 'prettier';
 import Prism from 'prismjs';
 import 'prismjs/themes/prism.css';
-import modal from '../components/PopUp.vue'
-import { ref } from "vue";
+import modal from '@/components/PopUp.vue'
+import{ref} from "vue";
 import exampleService from "../services/ExampleService.js";
 
 export default {
@@ -69,6 +69,7 @@ export default {
       console.log("create new example");
       if (this.newExample.title) {
         this.newExample.id = this.nextExampleId();
+        this.newExample.status = "private";
         exampleService.addExample(this.newExample).then((response) =>{
           this.confirmation = response.data;
         })

@@ -24,8 +24,9 @@
 
     components: { example, navBar },
     created() {
+      let exampleStatus = 'public';
         exampleService
-          .getExamples()
+          .getExamples(exampleStatus)
           .then((response) => {
             console.log("Reached LOAD_EXAMPLES in Vuex");
             console.log(response);
