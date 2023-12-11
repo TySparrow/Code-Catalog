@@ -1,7 +1,9 @@
 <template>
     <header class="nav-bar">
         <img src="@/assets/techelevatorimage.png" alt="Logo" class="logo" v-on:click="returnHome">
+
         <ListLanguages class="menu-item"></ListLanguages>
+        
         <input id="myInput" class="search-bar" type="text" v-model="search" placeholder="Search Examples">
     <button id="myBtn" @click="ListExamples">Search</button>
         <Dropdown class="dropdown"/>
@@ -22,14 +24,20 @@ export default {
             this.$router.push({ name: 'home' })
         },
         //this routes the user to a searchexamplesview after a search was inputted
+        
         ListExamples() {
-
-            this.$router.push({ name: 'searchExamples', params: { search: this.search } })
+        
+            this.$router.push({ name: 'searchExamples', params: {search: this.search} })
+            //This clears the input search section to show just the placeholder text once submitted.
+            //TO-DO: add back in data() return search: ""? currently this does nothing
+            this.search = '';
+            
         },
         //this method bounds the click of the button to the enter key 
         handleEnter(event) {
         if (event.key === "Enter") {
             event.preventDefault();
+            
             this.ListExamples();
         }
         },
@@ -59,6 +67,7 @@ export default {
     left: 0;
     right: 0;
     border-radius: 0;
+    
 
 }
 

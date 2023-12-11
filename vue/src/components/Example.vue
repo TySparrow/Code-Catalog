@@ -9,6 +9,7 @@
       <pre v-text="item.code" :class="['code', 'example', darkMode ? 'dark' : '']"></pre>
       <p class="tag-bubble">#{{ item.tag }}</p>
       <div class="button-container">
+        <button class="edit-button" v-show="$store.state.user.role =='admin'"> Edit</button>
         <button @click="toggleDarkMode()" class="dark-mode-button" type="button">Toggle Dark Mode</button>
         <button class="download-button" type="button" @click="downloadCode">Download</button>
         <button class="copy-button" type="button" :data-clipboard-text="item.code">Copy to Clipboard</button>
@@ -30,6 +31,7 @@ export default {
   data() {
     return {
       darkMode: false, // Initialize dark mode as false
+      updatedCode: '',
     };
   },
 
@@ -51,6 +53,13 @@ export default {
       }
 
 
+
+    },
+    editCode()  {
+      const selectedCode = this.item;
+      const codeContent = selectedCode.code;
+
+      this.$router.push({ name: 'EditExample', params: { codeContent } })
 
     },
     copyCode() {
@@ -88,6 +97,18 @@ export default {
 </script>
 
 <style scoped>
+
+.edit-button {
+  background-color: #343a40;
+  color: #fff;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-right: 10px;
+}
+
+
 .example {
   display: flex;
   flex-direction: column;
