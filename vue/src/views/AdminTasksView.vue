@@ -1,9 +1,14 @@
 <template>
+  <div v-if="$store.state.user.role =='admin'">
     <AdminTasks v-for="example in examples" v-bind:key="example.id" v-bind:item ="example"> </AdminTasks>/>
+  </div>
+  <div v-else>
+    <p> You are not authorized to view this page </p>
+  </div>  
 </template>
 
 <script>
-import AdminTasks from '../components/AdminTasks.vue';
+import AdminTasks from '@/components/AdminTasks.vue';
 import exampleService from '../services/ExampleService';
 export default {
     components: {

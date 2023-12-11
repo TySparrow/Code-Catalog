@@ -88,7 +88,6 @@
     border: 1px solid #CCC;
     border-radius: 5px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-
 }
 
 #social-icons {
@@ -122,8 +121,6 @@
     width: 50px;
     height: 50px;
 }
-
-
 
 /* Contact Info styles */
 .contact-info {
@@ -195,5 +192,24 @@
     text-align: center;
     color: #888;
     font-size: 14px;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+    .contact-info {
+        flex-direction: column;
+    }
+
+    .menu-item {
+        display: block;
+        margin-right: 0;
+        margin-bottom: 10px;
+    }
+
+    .sub-menu {
+        position: static;
+        display: block;
+        margin-top: 10px;
+    }
 }
 </style>

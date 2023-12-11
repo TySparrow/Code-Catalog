@@ -1,6 +1,8 @@
 <template>
-  <div class="body-container">
+  <div class="body-container" v-bind:>
     <div>
+
+
       <p class="code-title"> {{ item.title }}</p>
       <p class="code-language">Language: {{ item.language }}</p>
     </div>
@@ -8,6 +10,8 @@
       <p class="code-source">Source: {{ item.source }}</p>
       <pre v-text="item.code" :class="['code', 'example', darkMode ? 'dark' : '']"></pre>
       <p class="tag-bubble">#{{ item.tag }}</p>
+
+
       <div class="button-container">
         <button class="edit-button" v-show="$store.state.user.role =='admin'"> Edit</button>
         <button @click="toggleDarkMode()" class="dark-mode-button" type="button">Toggle Dark Mode</button>
