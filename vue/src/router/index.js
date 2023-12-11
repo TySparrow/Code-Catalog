@@ -9,6 +9,7 @@ import RegisterView from '../views/RegisterView.vue';
 import NewExampleView from '../views/NewExampleView.vue';
 import ListExamplesView from '../views/ListExamplesView.vue';
 import SearchExamplesView from '../views/SearchExamplesView.vue';
+import MyExamplesView from '../views/MyExamplesView.vue';
 
 /**
  * The Vue Router is used to "direct" the browser to render a specific view component
@@ -66,8 +67,12 @@ const routes = [
     path:"/search-examples/:search",
     name:"searchExamples",
     component: SearchExamplesView
-  }
-
+  },
+  {
+  path:"/my-examples",
+  name: "myExamples",
+  component: MyExamplesView
+  },
 ];
 
 // Create the router

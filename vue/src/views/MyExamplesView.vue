@@ -1,9 +1,9 @@
 <template>
     <div class="hello">
         <navBar></navBar>
-      <h1>examples</h1>
+      <h1>Code Snippets</h1>
       <section class="container">
-        <example v-for="example in filteredList" v-bind:key="example.id" v-bind:item ="example"> </example>
+        <example v-for="example in examples" v-bind:key="example.id" v-bind:item ="example"> </example>
       </section>
     </div>
   </template>
@@ -11,23 +11,24 @@
   <script>
 
   import example from "@/components/Example.vue";
-  import navBar from '../components/NavBar.vue';
-  import exampleService from '../services/ExampleService.js'
+  import navBar from '@/components/NavBar.vue';
+  import exampleService from "../services/ExampleService";
 
   export default {
 
     data(){
         return{
-            examples: [],
+            examples: []
         }
     },
 
     components: { example, navBar },
+
     created() {
         exampleService
           .getExamples()
           .then((response) => {
-            console.log("Reached LOAD_EXAMPLES in Vuex");
+            console.log("Reached LOAD_EXAMPLES in ListExamplesView.vue");
             console.log(response);
             this.examples = (response.data);
           })
@@ -51,26 +52,28 @@
     },
 
     computed: {
-      //takes in a search param from the Navbar.vue and filters it through a new list
-      filteredList() {
-      let search = this.$route.params.search
-      let filteredExamples 
-      if (search != "" || search != null) {
-        filteredExamples = this.examples.filter((example) =>
-          example.title.toLowerCase().includes(search.toLowerCase()) ||
-            example.language.toLowerCase().includes(search.toLowerCase()) ||
-            example.tag.toLowerCase().includes(search.toLowerCase()) ||
-            example.source.toLowerCase().includes(search.toLowerCase())
-        );
-      }
-      return filteredExamples;
-    }
+      
     },
   }
-  //Would like to add the ability to the search bar if simply clicked, refreshes the page with all examples
-    </script>
+  </script>
   
   <style scoped>
+  
+  .hello{
+    margin: 0;
+    padding: 0;
+    height: 100%;
+  }
+
+  h1{
+    font-size: 3rem;
+    margin: 0;
+    padding: 0;
+    margin-top: 10px;
+    margin-left: 10px;
+  }
+  
+  
   </style>
   
   
