@@ -1,8 +1,8 @@
 <template>
-    <AdminTasks v-for="example in examples" v-bind:key="example.id" v-bind:item ="example"> </AdminTasks>/>
+  <div></div>
 </template>
 
-<script>
+<!-- <script>
 import AdminTasks from '../components/AdminTasks.vue';
 import exampleService from '../services/ExampleService';
 export default {
@@ -52,4 +52,4 @@ export default {
 
 
 
-</style>
+</style>  -->
