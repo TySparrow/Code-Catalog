@@ -27,7 +27,6 @@ export default{
 
 <style scoped>
 *{
-    border: thin solid ;
     border-radius: 5px;
     margin: 0;
     box-sizing: border-box;
@@ -37,13 +36,26 @@ export default{
 .buttons{
     
     padding: 10px 20px;
+    margin-bottom:2px;
     font-size: 16px;
-    background-color: red;
+    background-color: #c0c0c0;
     color: blue;
     cursor: pointer;
+}
 
+.modal {
+    margin: auto;
+    position: fixed;
+    border: thin solid;
+    margin-left: 30%;
+    margin-right: 30%;
+    background-color: white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     
-
+}
+.modal-inner {
+    text-align: center;
+    
 }
 </style>
 

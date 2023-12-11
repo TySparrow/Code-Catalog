@@ -8,6 +8,6 @@ export default {
     },
     addExample(newExample) {
       return axios.post("/example", newExample)
-    }
+    },
   }
   
