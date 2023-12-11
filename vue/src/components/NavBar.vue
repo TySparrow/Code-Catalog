@@ -22,10 +22,12 @@ export default {
             this.$router.push({ name: 'home' })
         },
         //this routes the user to a searchexamplesview after a search was inputted
-        //Then clears the input search section to show just the placeholder text once submitted
+        
         ListExamples() {
         
             this.$router.push({ name: 'searchExamples', params: {search: this.search} })
+            //This clears the input search section to show just the placeholder text once submitted.
+            //TO-DO: add back in data() return search: ""? currently this does nothing
             this.search = '';
             
         },
@@ -33,6 +35,7 @@ export default {
         handleEnter(event) {
         if (event.key === "Enter") {
             event.preventDefault();
+            
             this.ListExamples();
         }
         },
