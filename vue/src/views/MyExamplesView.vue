@@ -26,9 +26,9 @@
 
     created() {
         exampleService
-          .getExamples()
+          .getExamplesByUserId(this.$store.state.user.userId)
           .then((response) => {
-            console.log("Reached LOAD_EXAMPLES in ListExamplesView.vue");
+            console.log("Reached LOAD_EXAMPLES in MyExamplesView.vue");
             console.log(response);
             this.examples = (response.data);
           })
@@ -49,10 +49,6 @@
               console.log("Error loading EXAMPLES: make request");
             }
           });
-    },
-
-    computed: {
-      
     },
   }
   </script>

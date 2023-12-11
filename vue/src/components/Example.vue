@@ -1,5 +1,5 @@
 <template>
-  <div class="body-container" v-bind:>
+  <div class="body-container">
     <div>
 
 
@@ -17,6 +17,7 @@
         <button @click="toggleDarkMode()" class="dark-mode-button" type="button">Toggle Dark Mode</button>
         <button class="download-button" type="button" @click="downloadCode">Download</button>
         <button class="copy-button" type="button" :data-clipboard-text="item.code">Copy to Clipboard</button>
+        <button class="copy-button" type="button" v-if="this.$route.name == 'myExamples'" @click="statusChange(item)">{{ item.status }}</button>
       </div>
     </div>
   </div>
@@ -27,6 +28,7 @@
 import Prism from 'prismjs';
 import { saveAs } from 'file-saver';
 import Clipboard from 'clipboard';
+import ExampleService from '../services/ExampleService';
 
 export default {
 
@@ -40,6 +42,16 @@ export default {
   },
 
   methods: {
+    statusChange(item){
+      if(item.status == 'private'){
+        item.status = 'pending';
+      }else if(item.status == 'pending'){
+        item.status = 'private';
+      }else{
+        item.status = 'private'
+      }
+      ExampleService.UpdateExample(item);
+    },
     toggleDarkMode() {
       this.darkMode = !this.darkMode; // Toggle dark mode when the button is clicked
     },

@@ -18,15 +18,16 @@
 
     data(){
         return{
-            examples: []
+            examples: [],
         }
     },
 
     components: { example, navBar },
 
     created() {
+        let exampleStatus = 'public';
         exampleService
-          .getExamples()
+          .getExamples(exampleStatus)
           .then((response) => {
             console.log("Reached LOAD_EXAMPLES in ListExamplesView.vue");
             console.log(response);
