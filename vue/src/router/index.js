@@ -73,6 +73,12 @@ const routes = [
   name: "myExamples",
   component: MyExamplesView
   },
+
+  {
+    path:"/edit-example/:id",
+    name:"editExample",
+    component: "EditExampleView"
+  }
 ];
 
 // Create the router

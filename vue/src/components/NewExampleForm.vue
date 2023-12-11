@@ -40,7 +40,7 @@
 import prettier from 'prettier';
 import Prism from 'prismjs';
 import 'prismjs/themes/prism.css';
-import modal from '../components/PopUp.vue'
+import modal from '@/components/PopUp.vue'
 import{ref} from "vue";
 import exampleService from "../services/ExampleService.js";
 
