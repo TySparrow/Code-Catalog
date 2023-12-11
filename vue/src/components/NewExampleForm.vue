@@ -30,7 +30,7 @@
       </div>
       <div class="form-group">
         <button @click="toggleDarkMode" class="dark-mode-btn">Dark Mode</button>
-        <button @click="toggleModal" type="submit">Save Example</button>
+        <button @click="toggleModal" type="submit" class="save-btn">Save Example</button>
       </div>
     </form>
   </div>

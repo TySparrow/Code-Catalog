@@ -11,8 +11,8 @@
       </div>
       <div class="form-input-group">
         <label for="username">Username</label>
-        <input type="text" id="username" v-model="user.username" required autofocus />
       </div>
+      <input type="text" id="username" v-model="user.username" required autofocus  class="form-input-group"/>
       <div class="form-input-group">
         <label for="password">Password</label>
       </div>
