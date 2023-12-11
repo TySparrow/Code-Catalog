@@ -30,7 +30,7 @@
       </div>
       <div class="form-group">
         <button @click="toggleDarkMode" class="dark-mode-btn">Dark Mode</button>
-        <button @click="toggleModal" type="submit">Save Example</button>
+        <button @click="toggleModal" class="save-btn" type="submit">Save Example</button>
       </div>
     </form>
   </div>
@@ -70,6 +70,7 @@ export default {
       console.log("create new example");
       if (this.newExample.title) {
         this.newExample.id = this.nextExampleId();
+        this.newExample.status = "private";
         exampleService.addExample(this.newExample).then((response) =>{
           this.confirmation = response.data;
         })
