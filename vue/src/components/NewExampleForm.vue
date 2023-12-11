@@ -1,11 +1,10 @@
 <template>
   <div class="body">
     <modal @close="toggleModal" :modalActive="modalActive">
-          <div class="modal-content">
-            <h1>this is a modal header</h1>
-            <p>this is a modal message {{ this.confirmation }}</p>
-          </div>
-        </modal>
+      <div class="modal-content">
+        <h2>{{ this.confirmation }}</h2>
+      </div>
+    </modal>
     <form v-on:submit.prevent="createNewExample" v-on:keydown.enter.exact="handleEnterKey" class="example-form">
       <div class="title">
         <label for="title" class="title-text">Title: </label>
@@ -30,7 +29,7 @@
       </div>
       <div class="form-group">
         <button @click="toggleDarkMode" class="dark-mode-btn">Dark Mode</button>
-        <button @click="toggleModal" type="submit">Save Example</button>
+        <button @click="toggleModal" type="submit" class="dark-mode-btn">Save Example</button>
       </div>
     </form>
   </div>
@@ -41,12 +40,12 @@ import prettier from 'prettier';
 import Prism from 'prismjs';
 import 'prismjs/themes/prism.css';
 import modal from '../components/PopUp.vue'
-import{ref} from "vue";
+import { ref } from "vue";
 import exampleService from "../services/ExampleService.js";
 
 export default {
 
-  components: {modal},
+  components: { modal },
 
   data() {
     return {
@@ -56,13 +55,13 @@ export default {
     };
   },
 
-  setup(){
+  setup() {
     const modalActive = ref(false);
 
     const toggleModal = () => {
       modalActive.value = !modalActive.value;
     };
-    return{modalActive, toggleModal};
+    return { modalActive, toggleModal };
   },
 
   methods: {
@@ -73,9 +72,10 @@ export default {
         exampleService.addExample(this.newExample).then((response) =>{
           this.confirmation = response.data;
         })
+        // Needs some work to catch different issues
         console.log("create new example method ", this.confirmation);
+        this.example= "";
       }
-      this.newExample = "";
     },
     //this method is called in the createnewexample method to create the id for the new example
     nextExampleId() {
@@ -116,6 +116,7 @@ export default {
 
 <style scoped>
 @import 'prismjs/themes/prism.css';
+
 .title {
   display: flex;
   align-items: center;
@@ -261,21 +262,22 @@ export default {
   flex: 1;
 }
 
-.modal-content{
-  display: flex;
-  flex-direction: column;
-  width: 50%;
+.modal-content {
+  justify-content: center;
 
 }
-h1,p{
+
+h1,
+p {
   margin-bottom: 16px;
 
 }
-h1{
+
+h1 {
   font-size: 32px;
 
 }
-p{
+
+p {
   font-size: 18px;
-}
-</style>
+}</style>

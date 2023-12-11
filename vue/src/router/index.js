@@ -10,6 +10,7 @@ import NewExampleView from '../views/NewExampleView.vue';
 import ListExamplesView from '../views/ListExamplesView.vue';
 import SearchExamplesView from '../views/SearchExamplesView.vue';
 import MyExamplesView from '../views/MyExamplesView.vue';
+import AdminTasksView from '../views/AdminTasksView.vue';
 
 /**
  * The Vue Router is used to "direct" the browser to render a specific view component
@@ -72,6 +73,14 @@ const routes = [
   path:"/my-examples",
   name: "myExamples",
   component: MyExamplesView
+  },
+  {
+    path:"/admin-tools",
+    name: "adminPage",
+    component: AdminTasksView,
+    meta: {
+      requiresAuth: true,
+    }
   },
 ];
 

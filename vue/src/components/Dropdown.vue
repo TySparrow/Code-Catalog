@@ -4,11 +4,13 @@
             Menu
         </button>
         <div v-if="showDropDown" class="dropdown-content" v-on:mouseleave="closeDropDown">
+            <router-link v-bind:to="{name: 'myExamples'}" class="dropdown-item">My Examples</router-link>
             <!-- Check if user role is admin to show extra dropdown item -->
-            <li v-show="$store.state.user.role == 'admin'" class="dropdown-item"> Edit/Delete Examples</li>
-            <a href="https://www.techelevator.com/about-us/tech-elevator/" target="_blank" class="dropdown-item">About Us</a>
+            <router-link v-bind:to="{name:'adminPage'}" v-show="$store.state.user.role == 'admin'" class="dropdown-item"> Edit/Delete Examples</router-link>
             <li class="dropdown-item" v-on:click="createSnippet">Add New Code Snippet</li>
+            <a href="https://www.techelevator.com/about-us/tech-elevator/" target="_blank" class="dropdown-item">About Us</a>
             <router-link v-bind:to="{ name: 'logout' }" class="dropdown-item">Logout</router-link>
+            
         </div>
     </div>
 </template>
@@ -80,6 +82,7 @@ export default {
     justify-content: center;
     color: #333;
     cursor: pointer;
+    text-decoration: none;
     
 }
 
@@ -87,7 +90,6 @@ export default {
     cursor: pointer;
     transition: 0.3s;
     background-color: #c0c0c0;
-    border-bottom-color: #00ADEE;
 }
 </style>
 
