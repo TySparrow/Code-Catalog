@@ -23,9 +23,9 @@ namespace Capstone.Controllers
         }
 
         [HttpGet]
-        public IList<Example> GetExamples(string status)
+        public IList<Example> GetExamples(string status = "")
         {
-            if(status.Length > 0)
+            if(status != null)
             {
                 return dao.GetExamplesByStatus(status);
             }
