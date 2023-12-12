@@ -1,55 +1,85 @@
 <template>
+    <navBar></navBar>
+    <h1 class="title">Admin Tools</h1>
     <div v-if="$store.state.user.role == 'admin'" class="container">
-        <navBar></navBar>
-        <table class="admin-table">
-            <thead>
-                <tr class="table-header">
-                    <th>Title</th>
-                    <th>Tag</th>
-                    <th>Language</th>
-                    <th>Source</th>
-                    <th>Code</th>
-                    <th>Toggle Status</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr v-for="example in examples" v-bind:key="example.id">
-                    <td>
-                        <input type="text" v-model="example.title">
+        <p>Total examples: {{ examples.length }}</p>
+        <div class="table-wrapper">
+            <table class="admin-table">
+                <thead>
+                    <tr id="header">
+                        <th>Title</th>
+                        <th>Tag</th>
+                        <th>Language</th>
+                        <th>Source</th>
+                        <th>Code</th>
+                        <th>Status</th>
+                        <th>Toggle Status</th>
+                        <th>Edit/Save Changes</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="filters">
+                        <td id="titleFilter">
+                            <input type="text" v-model="filter.title" />
+                        </td>
+                        <td id="tagFilter">
+                            <input type="text" v-model="filter.tag" />
+                        </td>
+                        <td id="languageFilter">
+                            <input type="text" v-model="filter.language" />
+                        </td>
+                        <td id="sourceFilter">
+                            <input type="text" v-model="filter.source" />
+                        </td>
+
+                        <td>&nbsp;</td>
+                        <td>
+
+                            <select id="statusFilter" v-model="filter.status">
+                                <option value>Show All</option>
+                                <option value="public">Public</option>
+                                <option value="private">Private</option>
+                                <option value="pending">Pending</option>
+                            </select>
+                        </td>
+                        <td>&nbsp;</td>
+                    </tr>
+                    <tr v-for="example in filteredList" v-bind:key="example.id">
+                        <td>
+                            <input type="text" v-model="example.title" :disabled="!example.editMode">
+                        </td>
+                        <td>
+                            <input type="text" v-model="example.tag" :disabled="!example.editMode">
+                        </td>
+                        <td>
+                            <input type="text" v-model="example.language" :disabled="!example.editMode">
+                        </td>
+                        <td>
+                            <input type="text" v-model="example.source" :disabled="!example.editMode">
+                        </td>
+                        <td>
+                            <input type="text" v-model="example.code" :disabled="!example.editMode">
+                        </td>
+                        <td>
+                    <tr v-bind:class="{ pending: example.status === 'pending' }">{{ example.status }}</tr>
                     </td>
                     <td>
-                        <input type="text" v-model="example.tag">
-                    </td>
-                    <td>
-                        <input type="text" v-model="example.language">
-                    </td>
-                    <td>
-                        <input type="text" v-model="example.source">
-                    </td>
-                    <td>
-                        <input type="text" v-model="example.code">
-                    </td> 
-                    <td>
-                        <!-- v-bind:class="{ pending: example.status === 'pending' }" -->
                         <!-- This will bind to a class in styling to have a different color if there is a pending request to change to public -->
-                        <button v-on:click="toggleStatus(example.id)">{{ example.status }}</button>
+                        <button v-bind:class="{ pending: example.status === 'pending' }"
+                            v-on:click="toggleStatus(example.id)">{{ example.status }}</button>
+
                     </td>
-                    <td><button v-on:click="confirmChanges(example)"></button></td>
+                    <td>
+                        <button v-if="!example.editMode" @click="toggleEditMode(example)">Edit</button>
+                        <button v-else v-on:click="confirmChanges(example)">Save</button>
+                    </td>
                     <!-- V-if for if pending to show a notification alert icon -->
                     <!-- Need a save button. Save single/save all? -->
-                </tr>
-                <!-- <tr>
-                    <td>
-                        <select id="statusFilter">
-                            Needs options to show public, or private, or all (v-model?)
-                            <option value>Show All</option>
-                            <option value="Public">Public</option>
-                            <option value="Private">Private</option>
-                        </select>
-                    </td>
-                </tr> -->
-            </tbody>
-        </table>
+                    </tr>
+
+                </tbody>
+            </table>
+        </div>
     </div>
     <div v-else>You are not authorized to view this page</div>
 </template>
@@ -63,12 +93,21 @@ export default {
     data() {
         return {
             examples: [],
-            exampleStatus: ''
+            exampleStatus: '',
+            filter: {
+                title: "",
+                tag: "",
+                language: "",
+                source: "",
+                code: "",
+                status: "",
+            }
         }
     },
     methods: {
-        confirmChanges(example){
+        confirmChanges(example) {
             exampleService.UpdateExample(example);
+            example.editMode = false;
         },
         toggleStatus(exampleId) {
             const example = this.examples.find((example) => example.id === exampleId);
@@ -76,13 +115,16 @@ export default {
             if (example) {
                 if (example.status.toLowerCase().includes('public')) {
                     example.status = 'private';
-                } else{
+                } else {
                     example.status = 'public'
                 }
                 exampleService.UpdateExample(example)
                 console.log(example)
             }
-        }
+        },
+        toggleEditMode(example) {
+            example.editMode = !example.editMode;
+        },
     },
     created() {
         exampleService
@@ -109,25 +151,130 @@ export default {
                     console.log("Error loading EXAMPLES: make request");
                 }
             });
+    },
+    computed: {
+        filteredList() {
+            let filteredExamples = this.examples;
+            if (this.filter.title != "") {
+                filteredExamples = filteredExamples.filter((example) =>
+                    example.title
+                        .toLowerCase()
+                        .includes(this.filter.title.toLowerCase())
+                );
+            }
+            if (this.filter.tag != "") {
+                filteredExamples = filteredExamples.filter((example) =>
+                    example.tag
+                        .toLowerCase()
+                        .includes(this.filter.tag.toLowerCase())
+                );
+            }
+            if (this.filter.language != "") {
+                filteredExamples = filteredExamples.filter((example) =>
+                    example.language
+                        .toLowerCase()
+                        .includes(this.filter.language.toLowerCase())
+                );
+            }
+            if (this.filter.source != "") {
+                filteredExamples = filteredExamples.filter((example) =>
+                    example.source
+                        .toLowerCase()
+                        .includes(this.filter.source.toLowerCase())
+                );
+            }
+            if (this.filter.status != "") {
+                filteredExamples = filteredExamples.filter((example) =>
+                    example.status === this.filter.status
+                );
+            }
+            return filteredExamples;
+        }
     }
 }
 </script>
 <style scoped>
-table {
-    margin-top: 20px;
+/* Whole page font changed */
+* {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
         Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-    margin-bottom: 20px;
-    border-style: solid;
 }
+.title {
+    text-align: center;
+}
+
+/* Example counter text p element */
+p {
+    margin-top: 40px;
+    font-size: 1.5rem;
+}
+
+/* Input boxes for editing */
+input {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+
+/* Bound classes that change color if there is a pending request for public from user */
+button.pending {
+    color: red;
+}
+
+tr.pending {
+    color: red;
+}
+
+/* Table header display text for each column */
 th {
     text-transform: uppercase;
-    border-bottom: solid;
+    height: 50px;
 }
+
 td {
-    padding: 20px;
+    padding: 10px;
+    text-align: center;
 }
-button.public {
-    color: red;
+
+.admin-table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.admin-table th,
+.admin-table td {
+    /* Adding a border to all table cells */
+    padding: 20px;
+
+}
+
+.admin-table thead th {
+    text-align: center;
+    padding-top: 5px;
+    background-color: darkgray;
+    /* border-bottom: 2px solid #000; */
+    /* Solid border underneath the table header */
+}
+
+.admin-table .filters input[type="text"],
+.admin-table .filters select {
+    width: 100%;
+    box-sizing: border-box;
+    /* Include padding and border in the width */
+}
+
+.admin-table tbody .filters {
+    border-bottom: 2px solid #000;
+    /* Solid border below the filter row */
+}
+
+.admin-table tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+    
+}
+
+/* Status filter dropdown size*/
+#statusFilter {
+    width:5.3rem;
 }
 </style>
