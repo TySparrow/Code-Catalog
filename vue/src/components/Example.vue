@@ -1,23 +1,51 @@
 <template>
   <div class="body-container">
     <div>
+      <div v-if="!editButton">
+        <p class="code-title"> {{ item.title }}</p>
+        <p class="code-language">Language: {{ item.language }}</p>
 
+        <div class="example">
+          <p class="code-source">Source: {{ item.source }}</p>
+          <pre v-text="item.code" :class="['code', 'example', darkMode ? 'dark' : '']"></pre>
+          <p class="tag-bubble">#{{ item.tag }}</p>
 
-      <p class="code-title"> {{ item.title }}</p>
-      <p class="code-language">Language: {{ item.language }}</p>
-    </div>
-    <div class="example">
-      <p class="code-source">Source: {{ item.source }}</p>
-      <pre v-text="item.code" :class="['code', 'example', darkMode ? 'dark' : '']"></pre>
-      <p class="tag-bubble">#{{ item.tag }}</p>
+        </div>
+      </div>
+      <div v-if="editButton">
+        <input class="code-title" type:="text" v-model="example.title">Title
+        <input class="code-language" type:="text" v-model="example.language">Language
 
+        <div class="textEx">
+          <input class="code-source" type:="text" v-model="example.source">Source
+          <div class="text-area">
+            <pre>
+              <textarea  rows="25"  cols="0"  v-model="example.code" :class="['code', 'example', darkMode ? 'dark' : '']" 
+              placeholder="Enter your code here"></textarea>
+            </pre>
+          </div>
+          <input class="tag-bubble" type:="text" v-model="example.tag">
+        </div>
+        <button class="save-button" type="submit" v-on:click="saveExample(example)">Save</button>
 
+        <button class="save-button" type="submit" v-on:click="cancelChanges()">Cancel</button>
+      </div>
       <div class="button-container">
-        <button class="edit-button" v-show="$store.state.user.role =='admin'"> Edit</button>
+
+        <button class="edit-button"
+          v-if="($store.state.user.role == 'admin' || $route.name == 'myExamples') && this.editButton === false"
+          v-on:click="this.editButton = true">
+          Edit </button>
+
         <button @click="toggleDarkMode()" class="dark-mode-button" type="button">Toggle Dark Mode</button>
         <button class="download-button" type="button" @click="downloadCode">Download</button>
+
         <button class="copy-button" type="button" :data-clipboard-text="item.code">Copy to Clipboard</button>
-        <button class="copy-button" type="button" v-if="this.$route.name == 'myExamples'" @click="statusChange(item)">{{ item.status }}</button>
+
+        <button class="public-button" type="button" v-if="this.$route.name == 'myExamples'" @click="statusChange(item)">{{
+          item.status }}
+        </button>
+
       </div>
     </div>
   </div>
@@ -37,17 +65,28 @@ export default {
   data() {
     return {
       darkMode: false, // Initialize dark mode as false
-      updatedCode: '',
+      updatedItem: {},
+      editButton: false,
+      example: this.item,
     };
   },
 
   methods: {
-    statusChange(item){
-      if(item.status == 'private'){
+    saveExample(example) {
+      ExampleService.updateExample(example);
+      this.editButton = false;
+    },
+    cancelChanges() {
+
+      this.$router.go();
+    },
+
+    statusChange(item) {
+      if (item.status == 'private') {
         item.status = 'pending';
-      }else if(item.status == 'pending'){
+      } else if (item.status == 'pending') {
         item.status = 'private';
-      }else{
+      } else {
         item.status = 'private'
       }
       ExampleService.UpdateExample(item);
@@ -67,17 +106,8 @@ export default {
       else {
         return;
       }
-
-
-
     },
-    editCode()  {
-      const selectedCode = this.item;
-      const codeContent = selectedCode.code;
 
-      this.$router.push({ name: 'EditExample', params: { codeContent } })
-
-    },
     copyCode() {
       const codeElement = document.querySelector('.code');
       if (codeElement) {
@@ -113,8 +143,30 @@ export default {
 </script>
 
 <style scoped>
+.text-area {
+  width: 80%;
+  height: 100%;
+  resize: none;
+}
 
-.edit-button {
+.textEx {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  width: 60vw;
+  padding: 35px;
+  border: 2px solid #ccc;
+  border-radius: 10px;
+  margin: 20px auto;
+  background-color: #f5f5f5;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin: 20px 13px 20px 14px;
+}
+
+.public-button,
+.edit-button,
+.save-button {
   background-color: #343a40;
   color: #fff;
   border: none;
@@ -124,19 +176,23 @@ export default {
   margin-right: 10px;
 }
 
+.save-button:hover {
+  background-color: #0056b3;
+}
 
-.example {
+.example,
+.example.dark {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   justify-content: flex-start;
-  width: 80%;
-  padding: 20px;
-  border: 2px solid #ccc;
+  width: 50vw;
+  padding: 35px;
+  border: 1px solid #ccc;
   border-radius: 10px;
   margin: 20px auto;
   background-color: #f5f5f5;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
   margin-left: 13px;
 }
 
@@ -146,13 +202,10 @@ export default {
   border-color: #666;
 }
 
-.example p {
+.example p,
+.example.dark p {
   margin: 0;
   font-size: 16px;
-}
-
-.example.dark p {
-  color: #ccc;
 }
 
 .code {
@@ -166,10 +219,10 @@ export default {
   padding: 10px;
   width: 100%;
   margin-bottom: 30px;
-  width: 100%;
 }
 
-.tag-bubble {
+.tag-bubble,
+.tag-bubble.dark {
   display: inline-block;
   padding: 8px 12px;
   border-radius: 20px;
@@ -177,8 +230,8 @@ export default {
   font-size: 12px;
   margin-top: 10px;
   margin-bottom: 20px;
-  background-color: #00ADEE;
   margin-right: 10px;
+  background-color: #00ADEE;
 }
 
 .tag-bubble.dark {
@@ -193,7 +246,8 @@ export default {
   margin-left: 13px;
 }
 
-.code-language {
+.code-language,
+.code-source {
   font-size: 14px;
   margin-bottom: 10px;
   margin-left: 13px;
@@ -203,27 +257,10 @@ export default {
   font-size: 12px;
   margin-top: 15px;
   margin-bottom: 15px;
-
 }
 
-.copy-button {
-  background-color: #343a40;
-  color: #fff;
-  border: none;
-  padding: 8px 16px;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-.download-button {
-  background-color: #343a40;
-  color: #fff;
-  border: none;
-  padding: 8px 16px;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
+.copy-button,
+.download-button,
 .dark-mode-button {
   background-color: #343a40;
   color: #fff;
@@ -231,12 +268,15 @@ export default {
   padding: 8px 16px;
   border-radius: 4px;
   cursor: pointer;
+  margin-right: 10px;
 }
 
 .button-container {
   display: flex;
   justify-content: space-between;
   margin-top: 20px;
+  height: 60px;
+  width: 40vw;
 }
 
 .copy-button,
@@ -251,10 +291,7 @@ export default {
     flex-direction: column;
   }
 
-  .dark-mode-button {
-    margin-bottom: 10px;
-  }
-
+  .dark-mode-button,
   .download-button {
     margin-bottom: 10px;
   }
