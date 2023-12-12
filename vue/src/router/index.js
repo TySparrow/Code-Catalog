@@ -65,24 +65,24 @@ const routes = [
   },
 
   {
-    path:"/search-examples/:search",
-    name:"searchExamples",
+    path: "/search-examples/:search",
+    name: "searchExamples",
     component: SearchExamplesView
   },
   {
-  path:"/my-examples",
-  name: "myExamples",
-  component: MyExamplesView
+    path: "/my-examples",
+    name: "myExamples",
+    component: MyExamplesView
   },
   {
-    path:"/admin-tools",
+    path: "/admin-tools",
     name: "adminPage",
     component: AdminTasksView,
     meta: {
       requiresAuth: true,
     }
   },
-];
+ ];
 
 // Create the router
 const router = createRouter({
