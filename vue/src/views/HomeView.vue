@@ -3,7 +3,7 @@
   <div class="home">
 
     <div class="content">
-      <h1>Welcome to Your Catalog</h1>
+      <h1>Welcome to Your Code Catalog</h1>
       <p></p>
       <router-link to="/new-example">
         <button class="button">Get Started</button>
