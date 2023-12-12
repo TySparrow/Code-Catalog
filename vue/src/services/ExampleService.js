@@ -7,7 +7,7 @@ export default {
       return axios.get('/example?status=' + exampleStatus);
     },
     getExamplesByUserId(userId){
-      return axios.get('/example' + userId);
+      return axios.get('/example/' + userId);
     },
     addExample(newExample) {
       return axios.post("/example", newExample)
