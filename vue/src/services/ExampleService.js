@@ -12,8 +12,8 @@ export default {
     addExample(newExample) {
       return axios.post("/example", newExample)
     },
-    UpdateExample(updatedExample){
-      return axios.put('/example', updatedExample);
+    updateExample(updatedExample){
+      return axios.put('/example' , updatedExample);
     }
   }
   
