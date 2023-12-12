@@ -1,7 +1,44 @@
 <template>
   <NavBar></NavBar>
   <div class="home">
-
+    <modal @close="toggleModal" :modalActive="modalActive" v-if:="this.$store.state.user.role == 'admin' ">
+      <div class="modal-content">
+        <table class="admin-table">
+            <thead>
+                <tr class="table-header">
+                    <th>Title</th>
+                    <th>Tag</th>
+                    <th>Language</th>
+                    <th>Source</th>
+                    <th>Code</th>
+                    <th>Toggle Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr v-for="example in pendingExamples" v-bind:key="example.id">
+                    <td>
+                        <p>{{ example.title }}</p>
+                    </td>
+                    <td>
+                      <p>{{ example.tag }}</p>
+                    </td>
+                    <td>
+                      <p>{{ example.language }}</p>
+                    </td>
+                    <td>
+                      <p>{{ example.source }}</p>
+                    </td>
+                    <td>
+                      <p>{{ example.code }}</p>
+                    </td> 
+                    <td>
+                      <p>{{ example.status }}</p>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+      </div>
+    </modal>
     <div class="content">
       <h1>Welcome to Your Code Catalog</h1>
       <p></p>
@@ -16,10 +53,54 @@
 <script>
 import NavBar from '../components/NavBar.vue';
 import Footer from '../components/Footer.vue';
+import modal from '../components/PopUp.vue'
+import exampleService from '../services/ExampleService';
+import{ref} from "vue";
 export default {
   name: 'home',
-  components: { NavBar, Footer
+  components: { NavBar, Footer, modal
   },
+  data(){
+    return{
+      pendingExamples: [],
+    }
+  },
+  setup() {
+    const modalActive = ref(true);
+
+    const toggleModal = () => {
+      modalActive.value = !modalActive.value;
+    };
+    return { modalActive, toggleModal };
+  },
+  created(){
+    let exampleStatus = 'pending';
+        exampleService
+          .getExamples(exampleStatus)
+          .then((response) => {
+            console.log("Reached LOAD_EXAMPLES in homeview.vue");
+            console.log(response);
+            this.pendingExamples = (response.data);
+          })
+          .catch((error) => {
+            if (error.response) {
+              // error.response exists
+              // Request was made, but response has error status (4xx or 5xx)
+              console.log("Error loading EXAMPLES: ", error.response.status);
+            } else if (error.request) {
+              // There is no error.response, but error.request exists
+              // Request was made, but no response was received
+              console.log(
+                "Error loading EXAMPLES: unable to communicate to server"
+              );
+            } else {
+              // Neither error.response and error.request exist
+              // Request was *not* made
+              console.log("Error loading EXAMPLES: make request");
+            }
+          });
+
+  }
 }
 
 </script>
