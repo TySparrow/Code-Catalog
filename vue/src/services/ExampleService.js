@@ -13,7 +13,7 @@ export default {
       return axios.post("/example", newExample)
     },
     UpdateExample(updatedExample){
-      return axios.put('/example' + updatedExample);
+      return axios.put('/example', updatedExample);
     }
   }
   
