@@ -25,7 +25,7 @@
     components: { example, navBar },
 
     created() {
-        let exampleStatus = 'public';
+        let exampleStatus = 'Public';
         exampleService
           .getExamples(exampleStatus)
           .then((response) => {

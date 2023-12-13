@@ -1,7 +1,8 @@
 <template>
   <NavBar></NavBar>
+  <h1>Welcome to Your Code Catalog</h1>
   <div class="home">
-    <modal @close="toggleModal" :modalActive="modalActive" v-if:="this.$store.state.user.role == 'admin' ">
+    <modal @close="toggleModal" :modalActive="modalActive" v-if:="this.$store.state.user.role == 'admin' " class="modal">
       <div class="modal-content">
         <table class="admin-table">
             <thead>
@@ -40,10 +41,13 @@
       </div>
     </modal>
     <div class="content">
-      <h1>Welcome to Your Code Catalog</h1>
+      <div class="space"></div>
       <TransitionGroup>
-        <language v-for="example in Languages" v-bind:key="example.id" v-bind:item="example" 
-        class = "diceDiv" :style="{backgroundColor: 'hsl('+x.dieNmbr*60+',85%,85%)'}" />
+        <div v-for="example in examples" v-bind:key="example.id" v-bind:item="example" class="diceDiv" >
+      <p class="diceP">
+        {{ example.title }}
+      </p>
+    </div>
   </TransitionGroup>
       <p></p>
       <router-link to="/new-example">
@@ -59,17 +63,17 @@ import NavBar from '../components/NavBar.vue';
 import Footer from '../components/Footer.vue';
 import modal from '../components/PopUp.vue'
 import exampleService from '../services/ExampleService';
-import language from '../components/Language.vue';
 import LanguageService from '../services/LanguageService';
 import{ref} from "vue";
 export default {
   name: 'home',
-  components: { NavBar, Footer, modal, language
+  components: { NavBar, Footer, modal,
   },
   data(){
     return{
       pendingExamples: [],
-      Languages: {}
+      Languages: {},
+      examples: []
     }
   },
   setup() {
@@ -80,6 +84,15 @@ export default {
     };
     return { modalActive, toggleModal };
   },
+  methods:{
+    shuffleFunc(a,b){
+        return Math.random()-.3;
+      },
+    timerFunc(){
+      return this.examples.sort(this.shuffleFunc);
+    }
+  },
+
   created(){
     let exampleStatus = 'pending';
         exampleService
@@ -106,31 +119,32 @@ export default {
               console.log("Error loading EXAMPLES: make request");
             }
           });
-          LanguageService
-          .getLanguages()
+          let examplesStatus = 'public';
+        exampleService
+          .getExamples(examplesStatus)
           .then((response) => {
-            console.log("Reached LOAD_LANGUAGES in HomeView.vue");
+            console.log("Reached LOAD_EXAMPLES in homeview.vue");
             console.log(response);
-            this.Languages = (response.data);
+            this.examples = (response.data);
           })
           .catch((error) => {
             if (error.response) {
               // error.response exists
               // Request was made, but response has error status (4xx or 5xx)
-              console.log("Error loading LANGUAGES: ", error.response.status);
+              console.log("Error loading EXAMPLES: ", error.response.status);
             } else if (error.request) {
               // There is no error.response, but error.request exists
               // Request was made, but no response was received
               console.log(
-                "Error loading LANGUAGES: unable to communicate to server"
+                "Error loading EXAMPLES: unable to communicate to server"
               );
             } else {
               // Neither error.response and error.request exist
               // Request was *not* made
-              console.log("Error loading LANGUAGES: make request");
+              console.log("Error loading EXAMPLES: make request");
             }
           });
-
+          setInterval(this.timerFunc, 15000);
   }
 }
 
@@ -138,8 +152,8 @@ export default {
 
 <style scoped>
 .home {
-  min-height: 100vh;
-  display: flex;
+  min-height: 69vh;
+  display: inline-flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
@@ -148,6 +162,7 @@ export default {
 .content {
   text-align: center;
   padding: 20px;
+  margin-top: 50px;
 
 }
 
@@ -162,9 +177,20 @@ export default {
 }
 
 h1 {
+  z-index: 1;
+  padding-top: 2%;
+  padding-bottom: 2%;
   font-size: 48px;
-  color: #333;
-  margin-bottom: 20px;
+  color: #007bff;
+  margin: auto;
+    position: fixed;
+    border: thin solid;
+    margin-left: 32.7%;
+    margin-right: 27%;
+    margin-top: 12.35%;
+    margin-bottom:15%;
+    background-color:white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 p {
@@ -187,6 +213,48 @@ p {
 .cta-button:hover {
   background-color: #0056b3;
 }
+.v-enter-from {
+  opacity: 0;
+  scale: 0;
+  rotate: 360deg;
+}
+.v-enter-to {
+  opacity: 1;
+  scale: 1;
+  rotate: 0deg;
+}
+.v-enter-active,
+.v-leave-active,
+.v-move {
+  transition: all 1s;
+}
+.v-leave-active { position: absolute; }
+.v-leave-from { opacity: 1; }
+.v-leave-to { opacity: 0; }
+.diceDiv {
+  margin: 10px;
+  width: 30rem;
+  height: 30px;
+  line-height: 30px;
+  vertical-align: middle;
+  display: inline-block;
+} 
+.diceDiv:hover {
+  cursor: pointer;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.diceP{
+  text-align: center;
+  border: solid black 1px;
+  border-radius: 5px;
+}
+#app {
+  position: relative;
+}
+.modal{
+  z-index: 2;
+}
+
 </style>
 
 

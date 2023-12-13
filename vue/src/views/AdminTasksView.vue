@@ -37,9 +37,9 @@
 
                             <select id="statusFilter" v-model="filter.status">
                                 <option value>Show All</option>
-                                <option value="public">Public</option>
-                                <option value="private">Private</option>
-                                <option value="pending">Pending</option>
+                                <option value="Public">Public</option>
+                                <option value="Private">Private</option>
+                                <option value="Pending">Pending</option>
                             </select>
                         </td>
                         <td>&nbsp;</td>
@@ -61,11 +61,11 @@
                             <input type="text" v-model="example.code" :disabled="!example.editMode">
                         </td>
                         <td>
-                    <tr v-bind:class="{ pending: example.status === 'pending' }">{{ example.status }}</tr>
+                    <tr v-bind:class="{ pending: example.status === 'Pending' }">{{ example.status }}</tr>
                     </td>
                     <td>
                         <!-- This will bind to a class in styling to have a different color if there is a pending request to change to public -->
-                        <button v-bind:class="{ pending: example.status === 'pending' }"
+                        <button v-bind:class="{ pending: example.status === 'Pending' }"
                             v-on:click="toggleStatus(example.id)">{{ example.status }}</button>
 
                     </td>
@@ -113,12 +113,12 @@ export default {
             const example = this.examples.find((example) => example.id === exampleId);
             console.log(example.id)
             if (example) {
-                if (example.status.toLowerCase().includes('public')) {
-                    example.status = 'private';
+                if (example.status == 'Public') {
+                    example.status = 'Private';
                 } else {
-                    example.status = 'public'
+                    example.status = 'Public'
                 }
-                exampleService.UpdateExample(example)
+                exampleService.updateExample(example)
                 console.log(example)
             }
         },

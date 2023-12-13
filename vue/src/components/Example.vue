@@ -82,14 +82,14 @@ export default {
     },
 
     statusChange(item) {
-      if (item.status == 'private') {
-        item.status = 'pending';
-      } else if (item.status == 'pending') {
-        item.status = 'private';
+      if (item.status == 'Private') {
+        item.status = 'Pending';
+      } else if (item.status == 'Pending') {
+        item.status = 'Private';
       } else {
-        item.status = 'private'
+        item.status = 'Private'
       }
-      ExampleService.UpdateExample(item);
+      ExampleService.updateExample(item);
     },
     toggleDarkMode() {
       this.darkMode = !this.darkMode; // Toggle dark mode when the button is clicked
