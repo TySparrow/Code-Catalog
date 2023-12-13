@@ -41,6 +41,10 @@
     </modal>
     <div class="content">
       <h1>Welcome to Your Code Catalog</h1>
+      <TransitionGroup>
+        <language v-for="example in Languages" v-bind:key="example.id" v-bind:item="example" 
+        class = "diceDiv" :style="{backgroundColor: 'hsl('+x.dieNmbr*60+',85%,85%)'}" />
+  </TransitionGroup>
       <p></p>
       <router-link to="/new-example">
         <button class="button">Get Started</button>
@@ -55,14 +59,17 @@ import NavBar from '../components/NavBar.vue';
 import Footer from '../components/Footer.vue';
 import modal from '../components/PopUp.vue'
 import exampleService from '../services/ExampleService';
+import language from '../components/Language.vue';
+import LanguageService from '../services/LanguageService';
 import{ref} from "vue";
 export default {
   name: 'home',
-  components: { NavBar, Footer, modal
+  components: { NavBar, Footer, modal, language
   },
   data(){
     return{
       pendingExamples: [],
+      Languages: {}
     }
   },
   setup() {
@@ -97,6 +104,30 @@ export default {
               // Neither error.response and error.request exist
               // Request was *not* made
               console.log("Error loading EXAMPLES: make request");
+            }
+          });
+          LanguageService
+          .getLanguages()
+          .then((response) => {
+            console.log("Reached LOAD_LANGUAGES in HomeView.vue");
+            console.log(response);
+            this.Languages = (response.data);
+          })
+          .catch((error) => {
+            if (error.response) {
+              // error.response exists
+              // Request was made, but response has error status (4xx or 5xx)
+              console.log("Error loading LANGUAGES: ", error.response.status);
+            } else if (error.request) {
+              // There is no error.response, but error.request exists
+              // Request was made, but no response was received
+              console.log(
+                "Error loading LANGUAGES: unable to communicate to server"
+              );
+            } else {
+              // Neither error.response and error.request exist
+              // Request was *not* made
+              console.log("Error loading LANGUAGES: make request");
             }
           });
 

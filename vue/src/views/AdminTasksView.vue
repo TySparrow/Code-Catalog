@@ -106,7 +106,7 @@ export default {
     },
     methods: {
         confirmChanges(example) {
-            exampleService.UpdateExample(example);
+            exampleService.updateExample(example);
             example.editMode = false;
         },
         toggleStatus(exampleId) {
