@@ -89,7 +89,7 @@ export default {
       } else {
         item.status = 'private'
       }
-      ExampleService.UpdateExample(item);
+      ExampleService.updateExample(item);
     },
     toggleDarkMode() {
       this.darkMode = !this.darkMode; // Toggle dark mode when the button is clicked
