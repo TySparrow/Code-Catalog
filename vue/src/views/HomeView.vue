@@ -1,7 +1,8 @@
 <template>
+  <NavBar></NavBar>
+  <h1>Welcome to Your Code Catalog</h1>
   <div class="home">
-    <NavBar></NavBar>
-    <modal @close="toggleModal" :modalActive="modalActive" v-if:="this.$store.state.user.role == 'admin'">
+    <modal @close="toggleModal" :modalActive="modalActive" v-if:="this.$store.state.user.role == 'admin'" class="modal">
       <div class="modal-content">
         <table class="admin-table">
           <thead>
@@ -37,15 +38,21 @@
       </div>
     </modal>
     <div class="content">
-      <h1>Welcome to Your Code Catalog</h1>
+      <div class="space"></div>
+      <TransitionGroup>
+        <div v-for="example in examples" v-bind:key="example.id" v-bind:item="example" class="diceDiv">
+          <p class="diceP">
+            {{ example.title }}
+          </p>
+        </div>
+      </TransitionGroup>
       <p></p>
       <router-link to="/new-example">
         <button class="button">Get Started</button>
       </router-link>
     </div>
   </div>
-  <Footer class="footer" ></Footer>
-
+  <Footer class="footer"></Footer>
 </template>
 
 <script>
@@ -62,6 +69,8 @@ export default {
   data() {
     return {
       pendingExamples: [],
+      Languages: {},
+      examples: []
     }
   },
   setup() {
@@ -72,6 +81,15 @@ export default {
     };
     return { modalActive, toggleModal };
   },
+  methods: {
+    shuffleFunc(a, b) {
+      return Math.random() - .3;
+    },
+    timerFunc() {
+      return this.examples.sort(this.shuffleFunc);
+    }
+  },
+
   created() {
     let exampleStatus = 'pending';
     exampleService
@@ -98,7 +116,32 @@ export default {
           console.log("Error loading EXAMPLES: make request");
         }
       });
-
+    let examplesStatus = 'public';
+    exampleService
+      .getExamples(examplesStatus)
+      .then((response) => {
+        console.log("Reached LOAD_EXAMPLES in homeview.vue");
+        console.log(response);
+        this.examples = (response.data);
+      })
+      .catch((error) => {
+        if (error.response) {
+          // error.response exists
+          // Request was made, but response has error status (4xx or 5xx)
+          console.log("Error loading EXAMPLES: ", error.response.status);
+        } else if (error.request) {
+          // There is no error.response, but error.request exists
+          // Request was made, but no response was received
+          console.log(
+            "Error loading EXAMPLES: unable to communicate to server"
+          );
+        } else {
+          // Neither error.response and error.request exist
+          // Request was *not* made
+          console.log("Error loading EXAMPLES: make request");
+        }
+      });
+    setInterval(this.timerFunc, 15000);
   }
 }
 
@@ -111,6 +154,9 @@ export default {
   background-position: center;
   min-height: 100vh;
   min-width: 100vw;
+  min-height: 69vh;
+  display: inline-flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   display: flex;
@@ -127,6 +173,7 @@ export default {
 .content {
   text-align: center;
   padding: 20px;
+  margin-top: 50px;
 
 }
 
@@ -139,14 +186,24 @@ export default {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   z-index: 999;
 }
-.footer{
-  
-}
+
+
 
 h1 {
+  z-index: 1;
+  padding-top: 2%;
+  padding-bottom: 2%;
   font-size: 48px;
-  color: #333;
-  margin-bottom: 20px;
+  color: #007bff;
+  margin: auto;
+  position: fixed;
+  border: thin solid;
+  margin-left: 32.7%;
+  margin-right: 27%;
+  margin-top: 12.35%;
+  margin-bottom: 15%;
+  background-color: white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 p {
@@ -169,6 +226,63 @@ p {
 .cta-button:hover {
   background-color: #0056b3;
 }
-</style>
+
+.v-enter-from {
+  opacity: 0;
+  scale: 0;
+  rotate: 360deg;
+}
+
+.v-enter-to {
+  opacity: 1;
+  scale: 1;
+  rotate: 0deg;
+}
+
+.v-enter-active,
+.v-leave-active,
+.v-move {
+  transition: all 1s;
+}
+
+.v-leave-active {
+  position: absolute;
+}
+
+.v-leave-from {
+  opacity: 1;
+}
+
+.v-leave-to {
+  opacity: 0;
+}
+
+.diceDiv {
+  margin: 10px;
+  width: 30rem;
+  height: 30px;
+  line-height: 30px;
+  vertical-align: middle;
+  display: inline-block;
+}
+
+.diceDiv:hover {
+  cursor: pointer;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.diceP {
+  text-align: center;
+  border: solid black 1px;
+  border-radius: 5px;
+}
+
+#app {
+  position: relative;
+}
+
+.modal {
+  z-index: 2;
+}</style>
 
 

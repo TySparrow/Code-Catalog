@@ -69,7 +69,7 @@ export default {
       console.log("create new example");
       if (this.newExample.title) {
         this.newExample.id = this.nextExampleId();
-        this.newExample.status = "private";
+        this.newExample.status = "Private";
         exampleService.addExample(this.newExample).then((response) =>{
           this.confirmation = response.data;
         })
