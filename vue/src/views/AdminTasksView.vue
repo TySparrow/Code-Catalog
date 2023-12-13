@@ -106,7 +106,7 @@ export default {
     },
     methods: {
         confirmChanges(example) {
-            exampleService.UpdateExample(example);
+            exampleService.updateExample(example);
             example.editMode = false;
         },
         toggleStatus(exampleId) {
@@ -118,7 +118,7 @@ export default {
                 } else {
                     example.status = 'public'
                 }
-                exampleService.UpdateExample(example)
+                exampleService.updateExample(example)
                 console.log(example)
             }
         },

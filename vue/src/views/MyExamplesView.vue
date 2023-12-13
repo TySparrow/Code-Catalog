@@ -6,7 +6,7 @@
         <example v-for="example in examples" v-bind:key="example.id" v-bind:item ="example"> </example>
       </section>
       
-     <Footer class="footer"></Footer>
+  
     </div>
   </template>
   
@@ -15,7 +15,6 @@
   import example from "@/components/Example.vue";
   import navBar from '@/components/NavBar.vue';
   import exampleService from "../services/ExampleService";
-  import Footer from "../components/Footer.vue";
 
   export default {
 
@@ -25,7 +24,7 @@
         }
     },
 
-    components: { example, navBar, Footer},
+    components: { example, navBar},
 
     created() {
         exampleService

@@ -82,12 +82,13 @@
 </template>
 <style scoped>
 .footer {
-    margin-top: 20px;
+    margin-top: 1px;
     background-color: #F8FCFE;
     padding: 20px;
-    border: 1px solid #CCC;
+    
     border-radius: 5px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    width: 106.5rem;
 }
 
 #social-icons {

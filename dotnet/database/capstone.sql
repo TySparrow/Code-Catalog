@@ -30,29 +30,15 @@ CREATE TABLE examples (
 	example_status varchar (30) NOT NULL
 	CONSTRAINT FK_examples_user FOREIGN KEY (user_id) REFERENCES users (user_id)
 );
-<<<<<<< HEAD
---populate default data
-INSERT INTO users (username, password_hash, salt, user_role) VALUES ('user','Jg45HuwT7PZkfuKTz6IB90CtWY4=','LHxP4Xh7bN0=','user');
-INSERT INTO users (username, password_hash, salt, user_role) VALUES ('admin','YhyGVQ+Ch69n4JMBncM4lNF/i9s=', 'Ar/aB2thQTI=','admin');
-=======
-
 
 --populate default data
 INSERT INTO users (username, password_hash, salt, user_role) VALUES ('user','Jg45HuwT7PZkfuKTz6IB90CtWY4=','LHxP4Xh7bN0=','user');
 INSERT INTO users (username, password_hash, salt, user_role) VALUES ('admin','YhyGVQ+Ch69n4JMBncM4lNF/i9s=', 'Ar/aB2thQTI=','admin');
 
->>>>>>> 76aa9ac0b2991ced43972c0b8792269bc441e1c8
 INSERT INTO examples(example_title, example_tag, example_language, example_code, example_source, example_status) VALUES ('string concatination', 'strings', 'C#', '"Welcome to " + "C# snippet"', 'self-derived', 'public')
 INSERT INTO examples(example_title, example_tag, example_language, example_code, example_source, example_status) VALUES ('let', 'variables', 'Javascript', 'let example = "example"', 'self-derived', 'public')
 INSERT INTO examples(example_title, example_tag, example_language, example_code, example_source, example_status) VALUES ('colors', 'styling', 'css', '"color: #fff"', 'self derived', 'public')
 INSERT INTO examples(example_title, example_tag, example_language, example_code, example_source, example_status) VALUES ('background color', 'styling', 'css', 'background-color: #fff', 'self-derived', 'public')
 INSERT INTO examples(example_title, example_tag, example_language, example_code, example_source, example_status) VALUES ('divs', 'formatting', 'html', '<div></div>', 'self-derived', 'public')
-<<<<<<< HEAD
-=======
 
-
-
-
-
->>>>>>> 76aa9ac0b2991ced43972c0b8792269bc441e1c8
 GO

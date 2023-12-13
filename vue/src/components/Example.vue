@@ -186,7 +186,7 @@ export default {
   flex-direction: column;
   align-items: flex-start;
   justify-content: flex-start;
-  width: 50vw;
+  width: 50%;
   padding: 35px;
   border: 1px solid #ccc;
   border-radius: 10px;
