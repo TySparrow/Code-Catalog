@@ -66,17 +66,15 @@ export default {
     left: 0;
     right: 0;
     border-radius: 0;
-
-
+    height: 5rem;
 }
 
 .logo {
-    width: 3rem;
+    width: 4rem;
     height: auto;
     margin: 0;
     cursor: pointer;
     grid-area: logo;
-
 }
 
 #myBtn {

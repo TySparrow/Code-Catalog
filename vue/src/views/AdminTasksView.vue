@@ -112,10 +112,10 @@ export default {
             const example = this.examples.find((example) => example.id === exampleId);
             console.log(example.id)
             if (example) {
-                if (example.status.toLowerCase().includes('public')) {
-                    example.status = 'private';
+                if (example.status == 'Public') {
+                    example.status = 'Private';
                 } else {
-                    example.status = 'public'
+                    example.status = 'Public'
                 }
                 exampleService.updateExample(example)
                 console.log(example)

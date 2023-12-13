@@ -82,12 +82,12 @@ export default {
     },
 
     statusChange(item) {
-      if (item.status == 'private') {
-        item.status = 'pending';
-      } else if (item.status == 'pending') {
-        item.status = 'private';
+      if (item.status == 'Private') {
+        item.status = 'Pending';
+      } else if (item.status == 'Pending') {
+        item.status = 'Private';
       } else {
-        item.status = 'private'
+        item.status = 'Private'
       }
       ExampleService.updateExample(item);
     },
@@ -186,7 +186,7 @@ export default {
   flex-direction: column;
   align-items: flex-start;
   justify-content: flex-start;
-  width: 50vw;
+  width: 50%;
   padding: 35px;
   border: 1px solid #ccc;
   border-radius: 10px;

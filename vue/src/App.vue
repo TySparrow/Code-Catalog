@@ -1,8 +1,8 @@
 <template>
   <div id="app">
     <header>
-      <router-view/>
     </header>
+    <router-view/>
 
   </div>
 </template>
@@ -23,6 +23,10 @@ export default {
   padding-top: 20px;
   box-sizing: border-box;
 }
-
+body{
+  margin:0px;
+  border: 0px;
+  padding: 0px;
+}
 
 </style>

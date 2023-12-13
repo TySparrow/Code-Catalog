@@ -1,16 +1,20 @@
 <template>
     <div>
         <button class="dropdown-menu" @click="toggleDropDown">
-            Menu
+            Hello,
+            {{ this.$store.state.user.username }}
         </button>
         <div v-if="showDropDown" class="dropdown-content" v-on:mouseleave="closeDropDown">
-            <router-link v-bind:to="{name: 'myExamples'}" class="dropdown-item">My Examples</router-link>
+            <p class="user-role" v-if="this.$store.state.user.role == 'admin'">Role: {{ this.$store.state.user.role }}</p>
+            <router-link v-bind:to="{ name: 'myExamples' }" class="dropdown-item">My Examples</router-link>
             <!-- Check if user role is admin to show extra dropdown item -->
-            <router-link v-bind:to="{name:'adminPage'}" v-show="$store.state.user.role == 'admin'" class="dropdown-item"> Edit Examples</router-link>
+            <router-link v-bind:to="{ name: 'adminPage' }" v-show="$store.state.user.role == 'admin'" class="dropdown-item">
+                Edit Examples</router-link>
             <li class="dropdown-item" v-on:click="createSnippet">Add New Code Snippet</li>
-            <a href="https://www.techelevator.com/about-us/tech-elevator/" target="_blank" class="dropdown-item">About Us</a>
+            <a href="https://www.techelevator.com/about-us/tech-elevator/" target="_blank" class="dropdown-item">About
+                Us</a>
             <router-link v-bind:to="{ name: 'logout' }" class="dropdown-item">Logout</router-link>
-            
+
         </div>
     </div>
 </template>
@@ -46,7 +50,7 @@ export default {
 /* Style the button */
 .dropdown-menu {
     padding: 10px 10px;
-    position:relative;
+    position: relative;
     text-align: center;
     border: none;
     border-radius: 2px;
@@ -54,6 +58,16 @@ export default {
     display: inline-block;
     transition: 0.3s;
     flex-wrap: wrap;
+    background-color: #f5f5f5;
+}
+
+.user-role {
+    display: flex;
+    padding: 5px 10px;
+    justify-content: center;
+    color: #333;
+    text-decoration: none;
+
 }
 
 
@@ -69,10 +83,10 @@ export default {
     box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
     border-radius: 5px;
     padding: 5px;
-    right:0%;
+    right: 0%;
     position: fixed;
-    
-    
+
+
 }
 
 
@@ -83,13 +97,15 @@ export default {
     color: #333;
     cursor: pointer;
     text-decoration: none;
-    
+
+
 }
 
 .dropdown-item:hover {
     cursor: pointer;
     transition: 0.3s;
     background-color: #c0c0c0;
+    border-bottom-color: #00ADEE;
 }
 </style>
 

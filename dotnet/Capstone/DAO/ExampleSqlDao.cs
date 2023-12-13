@@ -126,7 +126,7 @@ namespace Capstone.DAO
             string sql = "WITH RankedExamples AS (SELECT example_language, example_id, example_title, example_tag, example_code, example_source, example_status, " +
                 "ROW_NUMBER() OVER (PARTITION BY example_language ORDER BY example_id) " +
                 "AS RowNum FROM examples) SELECT example_language, example_id, example_title, example_tag, example_code, example_source, example_status  " +
-                "FROM RankedExamples WHERE RowNum = 1 AND example_status = 'public' ";
+                "FROM RankedExamples WHERE RowNum = 1 AND example_status = 'Public' ";
 
             try
             {

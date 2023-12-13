@@ -31,8 +31,6 @@ CREATE TABLE examples (
 	CONSTRAINT FK_examples_user FOREIGN KEY (user_id) REFERENCES users (user_id)
 );
 
-
-
 --populate default data
 INSERT INTO users (username, password_hash, salt, user_role) VALUES ('user','Jg45HuwT7PZkfuKTz6IB90CtWY4=','LHxP4Xh7bN0=','user');
 INSERT INTO users (username, password_hash, salt, user_role) VALUES ('admin','YhyGVQ+Ch69n4JMBncM4lNF/i9s=', 'Ar/aB2thQTI=','admin');
@@ -43,6 +41,7 @@ INSERT INTO examples(example_title, example_tag, example_language, example_code,
 INSERT INTO examples(example_title, example_tag, example_language, example_code, example_source, example_status) VALUES ('colors', 'styling', 'css', '"color: #fff"', 'self derived', 'public')
 INSERT INTO examples(example_title, example_tag, example_language, example_code, example_source, example_status) VALUES ('background color', 'styling', 'css', 'background-color: #fff', 'self-derived', 'public')
 INSERT INTO examples(example_title, example_tag, example_language, example_code, example_source, example_status) VALUES ('divs', 'formatting', 'html', '<div></div>', 'self-derived', 'public')
+
 
 INSERT INTO examples(example_title, example_tag, example_language, example_code, example_source, example_status) VALUES ('Initilizing An Array', 'Arrays', 'C#', 'int newArray[] = new int[10]', 'Self-derived', 'public')
 
