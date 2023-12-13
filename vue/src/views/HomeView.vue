@@ -52,7 +52,7 @@
       </router-link>
     </div>
   </div>
-  <Footer class="footer"></Footer>
+  <Footer ></Footer>
 </template>
 
 <script>
@@ -180,10 +180,6 @@ export default {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   z-index: 999;
 }
-
-
-
-
 
 p {
   font-size: 24px;
