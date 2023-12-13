@@ -38,15 +38,17 @@
       </div>
     </modal>
     <div class="content">
-      <div class="space"></div>
+
       <TransitionGroup>
-        <div v-for="example in examples" v-bind:key="example.id" v-bind:item="example" class="diceDiv">
-          <p class="diceP">
-            {{ example.title }}
-          </p>
+        <div v-for="example in examples" v-bind:key="example.id" v-bind:item="example" class="diceDiv" >
+          <div class="diceP" :style="{ backgroundColor: 'hsl('+example.id*1.98+',100%,60%)' }">
+            <p>{{ example.title }}</p>
+
+            <p>{{ example.language }}</p>
+          </div>
+          
         </div>
       </TransitionGroup>
-      <p></p>
       <router-link to="/new-example">
         <button class="button">Get Started</button>
       </router-link>
@@ -148,9 +150,11 @@ export default {
 </script>
 
 <style scoped>
-
-.head{}
- 
+/* 
+button{
+  z-index: 1;
+}
+  */
  
 .home  {
   background: url("../assets/home-page.jpg") no-repeat fixed;
@@ -198,25 +202,29 @@ h1 {
   padding-top: 2%;
   padding-bottom: 2%;
   font-size: 48px;
-  color: #007bff;
+  color: black;
   margin: auto;
   position: fixed;
-  border: thin solid;
+
   margin-left: 32.7%;
   margin-right: 27%;
   margin-top: 12.35%;
   margin-bottom: 15%;
-  background-color: white;
+  background-color: #fff;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
 }
 
 p {
   font-size: 24px;
-  color: #666;
+  color: black;
   margin-bottom: 30px;
 }
 
 .button {
+  z-index: 1;
+  position: fixed;
+  left: 46%;
   padding: 12px 24px;
   font-size: 20px;
   background-color: #007bff;
@@ -277,8 +285,9 @@ p {
 
 .diceP {
   text-align: center;
-  border: solid black 1px;
-  border-radius: 5px;
+  height: 8rem;
+  border-radius: 10px;
+  color: black;
 }
 
 #app {
