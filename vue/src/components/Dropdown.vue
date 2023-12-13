@@ -67,12 +67,7 @@ export default {
     justify-content: center;
     color: #333;
     text-decoration: none;
-    border-radius: 5px;
-    background-color: #00ADEE;
-
-
 }
-
 
 .dropdown-menu:hover {
     background-color: #c0c0c0;
@@ -88,10 +83,7 @@ export default {
     padding: 5px;
     right: 0%;
     position: fixed;
-
-
 }
-
 
 .dropdown-item {
     display: flex;
@@ -100,8 +92,6 @@ export default {
     color: #333;
     cursor: pointer;
     text-decoration: none;
-
-
 }
 
 .dropdown-item:hover {

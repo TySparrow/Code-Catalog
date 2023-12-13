@@ -13,11 +13,11 @@
         </div>
       </div>
       <div v-if="editButton">
-        <input class="code-title" type:="text" v-model="example.title">Title
-        <input class="code-language" type:="text" v-model="example.language">Language
+        Title:<input class="code-title" type:="text" v-model="example.title">
+        Language:<input class="code-language" type:="text" v-model="example.language">
 
         <div class="textEx">
-          <input class="code-source" type:="text" v-model="example.source">Source
+          Source:<input class="code-source" type:="text" v-model="example.source">
           <div class="text-area">
             <pre>
               <textarea  rows="25"  cols="0"  v-model="example.code" :class="['code', 'example', darkMode ? 'dark' : '']" 
@@ -142,7 +142,12 @@ export default {
 }
 </script>
 
+
 <style scoped>
+.button-container{
+  margin-left: 5rem;
+  margin-bottom: 5rem;
+}
 .text-area {
   width: 80%;
   height: 100%;

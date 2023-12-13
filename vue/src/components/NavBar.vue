@@ -66,11 +66,11 @@ export default {
     left: 0;
     right: 0;
     border-radius: 0;
-    height: 5rem;
+    height: 4rem;
 }
 
 .logo {
-    width: 4rem;
+    width: 3rem;
     height: auto;
     margin: 0;
     cursor: pointer;

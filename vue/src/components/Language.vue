@@ -25,6 +25,7 @@ export default {
 .example {
     text-align: center;
     display: inline-block;
+    
 }
 
 .example-language {
@@ -51,6 +52,9 @@ export default {
     background-color: #c0c0c0;
     border-bottom-color: #00ADEE;
     cursor: pointer;
+}
+button{
+    font-size: 100%;
 }
 </style>
 
