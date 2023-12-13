@@ -1,6 +1,6 @@
 <template>
   <NavBar></NavBar>
-  <h1 class="head">Welcome to Your Code Catalog</h1>
+  <h1>Welcome to Your Code Catalog</h1>
   <div class="home">
     <modal @close="toggleModal" :modalActive="modalActive" v-if:="this.$store.state.user.role == 'admin'" class="modal">
       <div class="modal-content">
@@ -148,24 +148,14 @@ export default {
 </script>
 
 <style scoped>
-
-.head{}
- 
- 
-.home  {
-  background: url("../assets/home-page.jpg") no-repeat fixed;
-  background-size: cover;
-  background-position: center;
-  min-height: 100vh;
-  min-width: 100vw;
-  min-height: 69vh;
+.home {
   display: inline-flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   display: flex;
   flex-direction: column;
-
+  margin-top: 15rem;
 }
 
 .modal-title {
@@ -193,22 +183,7 @@ export default {
 
 
 
-h1 {
-  z-index: 1;
-  padding-top: 2%;
-  padding-bottom: 2%;
-  font-size: 48px;
-  color: #007bff;
-  margin: auto;
-  position: fixed;
-  border: thin solid;
-  margin-left: 32.7%;
-  margin-right: 27%;
-  margin-top: 12.35%;
-  margin-bottom: 15%;
-  background-color: white;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
+
 
 p {
   font-size: 24px;
@@ -225,6 +200,7 @@ p {
   border-radius: 4px;
   cursor: pointer;
   transition: background-color 0.3s ease;
+  margin-top: 12rem;
 }
 
 .cta-button:hover {
@@ -270,10 +246,6 @@ p {
   display: inline-block;
 }
 
-.diceDiv:hover {
-  cursor: pointer;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-}
 
 .diceP {
   text-align: center;
@@ -288,7 +260,6 @@ p {
 .modal {
   z-index: 2;
 }
-
 </style>
 
 

@@ -2,7 +2,7 @@
   <div id="app">
     <header>
     </header>
-    <router-view/>
+    <router-view />
 
   </div>
 </template>
@@ -18,15 +18,14 @@ export default {
 
 
 <style>
-#app {
-  margin: 0;
-  padding-top: 20px;
-  box-sizing: border-box;
-}
-body{
-  margin:0px;
+
+body {
+  margin: 0px;
   border: 0px;
   padding: 0px;
+  background: url("@/assets/other-page.jpg") no-repeat fixed;
+  background-size: cover;
+  background-position: center;
+ 
 }
-
 </style>
