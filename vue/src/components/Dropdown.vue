@@ -67,6 +67,9 @@ export default {
     justify-content: center;
     color: #333;
     text-decoration: none;
+    border-radius: 5px;
+    background-color: #00ADEE;
+
 
 }
 
