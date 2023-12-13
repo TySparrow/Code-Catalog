@@ -1,28 +1,31 @@
 <template>
+  <div class="body">
+
     <div class="hello">
-        <navBar></navBar>
+      <navBar></navBar>
       <h1>Code Snippets</h1>
       <section class="container">
-        <example v-for="example in filteredList" v-bind:key="example.id" v-bind:item ="example"> </example>
+        <example v-for="example in filteredList" v-bind:key="example.id" v-bind:item="example"> </example>
       </section>
     </div>
-  </template>
+  </div>
+</template>
   
-  <script>
+<script>
 
-  import example from "@/components/Example.vue";
-  import navBar from '@/components/NavBar.vue';
-  import exampleService from "../services/ExampleService";
+import example from "@/components/Example.vue";
+import navBar from '@/components/NavBar.vue';
+import exampleService from "../services/ExampleService";
 
-  export default {
+export default {
 
-    data(){
-        return{
-            examples: [],
-        }
-    },
+  data() {
+    return {
+      examples: [],
+    }
+  },
 
-    components: { example, navBar },
+  components: { example, navBar },
 
     created() {
         let exampleStatus = 'Public';
@@ -52,42 +55,48 @@
           });
     },
 
-    computed: {
-      //grabs the param from the language.vue and sorts it into a new array
-      filteredList() {
+  computed: {
+    //grabs the param from the language.vue and sorts it into a new array
+    filteredList() {
       let language = this.$route.params.language
       let filteredExamples
       if (language != "" || language != null) {
         filteredExamples = this.examples.filter((example) =>
           example.language
             .toLowerCase()
-            === (language.toLowerCase())
+          === (language.toLowerCase())
         );
       }
       return filteredExamples;
     }
-    },
-  }
-  </script>
+  },
+}
+</script>
   
-  <style scoped>
-  
-  .hello{
-    margin: 0;
-    padding: 0;
-    height: 100%;
-  }
+<style scoped>
+/* .body {
+  background: url("../assets/other-page.jpg") no-repeat center center fixed;
+  background-size: cover;
+  background-position: center;
+  min-height: 100vh;
+  min-width: 100vw;
 
-  h1{
-    font-size: 3rem;
-    margin: 0;
-    padding: 0;
-    margin-top: 10px;
-    margin-left: 10px;
-  }
+
+} */
+
+.hello {
+ 
+  padding: 0;
+  height: 100%;
+}
+
+h1 {
+  font-size: 3rem;
   
+  padding: 0;
   
-  </style>
+}
+</style>
   
   
   

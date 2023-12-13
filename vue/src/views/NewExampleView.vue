@@ -1,6 +1,6 @@
 <template>
     <NavBar></NavBar>
-    <h1> Add A Snippet </h1>
+    <h1 class="head"> Add A Snippet </h1>
     <div class="body">
         
         <NewExampleForm />
@@ -25,7 +25,10 @@ export default {
 </script>
 
 <style scoped>
-
+.head{
+    justify-content: center;
+    text-align: center;
+}
 
 </style>
 

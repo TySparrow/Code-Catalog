@@ -66,8 +66,7 @@ export default {
     left: 0;
     right: 0;
     border-radius: 0;
-
-
+    height: 4rem;
 }
 
 .logo {
@@ -76,7 +75,6 @@ export default {
     margin: 0;
     cursor: pointer;
     grid-area: logo;
-
 }
 
 #myBtn {

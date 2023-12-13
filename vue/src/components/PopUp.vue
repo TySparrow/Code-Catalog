@@ -5,7 +5,7 @@
                 <div v="modalActive" class="modal-inner">
                     <i @click="close" class="far fa-times-circle"></i>
                     <slot></slot>
-                    <button class="buttons" @click="close" type="button">close</button>
+                    <button class="buttons" @click="close" type="button">Close</button>
                 </div>
             </transition>
         </div>
@@ -26,36 +26,50 @@ export default{
 </script>
 
 <style scoped>
-*{
-    border-radius: 5px;
-    margin: 0;
-    box-sizing: border-box;
-    font-family: "Karla", sans-serif;
-
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(0, 0, 0, .5);
+    z-index: 9999;
 }
-.buttons{
-    
-    padding: 10px 20px;
-    margin-bottom:2px;
-    font-size: 16px;
-    background-color: #c0c0c0;
-    color: blue;
+
+.modal-inner {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.far.fa-times-circle {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 24px;
+    color: #333;
     cursor: pointer;
 }
 
-.modal {
-    margin: auto;
-    position: fixed;
-    border: thin solid;
-    margin-left: 30%;
-    margin-right: 30%;
-    background-color: white;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    
+.buttons {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: .4rem 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    margin-top: 1rem;
+    margin-left: 3.5rem;
+
 }
-.modal-inner {
-    text-align: center;
-    
+
+.buttons:hover {
+    background-color: #0056b3;
 }
 </style>
 
