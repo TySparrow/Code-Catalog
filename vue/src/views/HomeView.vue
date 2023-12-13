@@ -1,6 +1,6 @@
 <template>
   <NavBar></NavBar>
-  <h1>Welcome to Your Code Catalog</h1>
+  <h1 class="head">Welcome to Your Code Catalog</h1>
   <div class="home">
     <modal @close="toggleModal" :modalActive="modalActive" v-if:="this.$store.state.user.role == 'admin'" class="modal">
       <div class="modal-content">
@@ -141,14 +141,18 @@ export default {
           console.log("Error loading EXAMPLES: make request");
         }
       });
-    setInterval(this.timerFunc, 15000);
+    setInterval(this.timerFunc, 1500);
   }
 }
 
 </script>
 
 <style scoped>
-.home {
+
+.head{}
+ 
+ 
+.home  {
   background: url("../assets/home-page.jpg") no-repeat fixed;
   background-size: cover;
   background-position: center;
@@ -283,6 +287,8 @@ p {
 
 .modal {
   z-index: 2;
-}</style>
+}
+
+</style>
 
 
