@@ -142,7 +142,12 @@ export default {
 }
 </script>
 
+
 <style scoped>
+.button-container{
+  margin-left: 5rem;
+  margin-bottom: 5rem;
+}
 .text-area {
   width: 80%;
   height: 100%;

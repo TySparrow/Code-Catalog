@@ -74,15 +74,6 @@ export default {
 </script>
   
 <style scoped>
-/* .body {
-  background: url("../assets/other-page.jpg") no-repeat center center fixed;
-  background-size: cover;
-  background-position: center;
-  min-height: 100vh;
-  min-width: 100vw;
-
-
-} */
 
 .hello {
  

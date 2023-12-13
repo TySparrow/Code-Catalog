@@ -1,6 +1,6 @@
 <template>
   <NavBar></NavBar>
-  <h1 class="head">Welcome to Your Code Catalog</h1>
+  <h1>Welcome to Your Code Catalog</h1>
   <div class="home">
     <modal @close="toggleModal" :modalActive="modalActive" v-if:="this.$store.state.user.role == 'admin'" class="modal">
       <div class="modal-content">
@@ -169,7 +169,7 @@ button{
   justify-content: center;
   display: flex;
   flex-direction: column;
-
+  margin-top: 15rem;
 }
 
 .modal-title {
@@ -233,6 +233,7 @@ p {
   border-radius: 4px;
   cursor: pointer;
   transition: background-color 0.3s ease;
+  margin-top: 12rem;
 }
 
 .cta-button:hover {
@@ -278,10 +279,6 @@ p {
   display: inline-block;
 }
 
-.diceDiv:hover {
-  cursor: pointer;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-}
 
 .diceP {
   text-align: center;
@@ -297,7 +294,6 @@ p {
 .modal {
   z-index: 2;
 }
-
 </style>
 
 
