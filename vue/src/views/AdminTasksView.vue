@@ -1,84 +1,80 @@
 <template>
-    <navBar></navBar>
-    <h1 class="title">Admin Tools</h1>
-    <div v-if="$store.state.user.role == 'admin'" class="container">
-        <p>Total examples: {{ examples.length }}</p>
-        <div class="table-wrapper">
-            <table class="admin-table">
-                <thead>
-                    <tr id="header">
-                        <th>Title</th>
-                        <th>Tag</th>
-                        <th>Language</th>
-                        <th>Source</th>
-                        <th>Code</th>
-                        <th>Status</th>
-                        <th>Toggle Status</th>
-                        <th>Edit/Save Changes</th>
-                    </tr>
-                    <tr class="filters">
-                        <td id="titleFilter">
-                            <input type="text" v-model="filter.title" />
-                        </td>
-                        <td id="tagFilter">
-                            <input type="text" v-model="filter.tag" />
-                        </td>
-                        <td id="languageFilter">
-                            <input type="text" v-model="filter.language" />
-                        </td>
-                        <td id="sourceFilter">
-                            <input type="text" v-model="filter.source" />
-                        </td>
-                        <td>&nbsp;</td>
-                        <td>
-                            <select id="statusFilter" v-model="filter.status">
-                                <option value>Show All</option>
-                                <option value="Public">Public</option>
-                                <option value="Private">Private</option>
-                                <option value="Pending">Pending</option>
-                            </select>
-                        </td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr v-for="example in filteredList" v-bind:key="example.id">
-                        <td>
-                            <input type="text" v-model="example.title" :disabled="!example.editMode">
-                        </td>
-                        <td>
-                            <input type="text" v-model="example.tag" :disabled="!example.editMode">
-                        </td>
-                        <td>
-                            <input type="text" v-model="example.language" :disabled="!example.editMode">
-                        </td>
-                        <td>
-                            <input type="text" v-model="example.source" :disabled="!example.editMode">
-                        </td>
-                        <td>
-                            <input type="text" v-model="example.code" :disabled="!example.editMode">
-                        </td>
-                        <td>
-                    <tr v-bind:class="{ pending: example.status === 'Pending' }">{{ example.status }}</tr>
-                    </td>
-                    <td>
-                        <!-- This will bind to a class in styling to have a different color if there is a pending request to change to public -->
-                        <button v-bind:class="{ pending: example.status === 'Pending' }"
-                            v-on:click="toggleStatus(example.id)">{{ example.status }}</button>
-                    </td>
-                    <td>
-                        <button v-if="!example.editMode" @click="toggleEditMode(example)">Edit</button>
-                        <button v-else v-on:click="confirmChanges(example)">Save</button>
-                    </td>
-                    <!-- V-if for if pending to show a notification alert icon -->
-                    <!-- Need a save button. Save single/save all? -->
-                    </tr>
-                </tbody>
-            </table>
-        </div>
+  <navBar></navBar>
+  <h1 class="title">Admin Tools</h1>
+  <div v-if="$store.state.user.role == 'admin'" class="container">
+    <p>Total examples: {{ examples.length }}</p>
+    <div class="table-wrapper">
+      <table class="admin-table">
+        <thead>
+          <tr id="header">
+            <th id="head-elements">Title</th>
+            <th id="head-elements">Tag</th>
+            <th id="head-elements">Language</th>
+            <th id="head-elements">Source</th>
+            <th id="head-elements">Code</th>
+            <th id="head-elements">Status</th>
+            <th id="head-elements">Toggle Status</th>
+            <th id="head-elements">Edit/Save Changes</th>
+          </tr>
+          <tr class="filters">
+            <td>
+              <input type="text" v-model="filter.title" placeholder="search" />
+            </td>
+            <td>
+              <input type="text" v-model="filter.tag" placeholder="search"/>
+            </td>
+            <td>
+              <input type="text" v-model="filter.language" placeholder="search"/>
+            </td>
+            <td>
+              <input type="text" v-model="filter.source" placeholder="search"/>
+            </td>
+            <td>&nbsp;</td>
+            <td>
+              <select id="statusFilter" v-model="filter.status">
+                <option value>Show All</option>
+                <option value="Public">Public</option>
+                <option value="Private">Private</option>
+                <option value="Pending">Pending</option>
+              </select>
+            </td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="example in filteredList" :key="example.id">
+            <td>
+              <input type="text" v-model="example.title" :disabled="!example.editMode">
+            </td>
+            <td>
+              <input type="text" v-model="example.tag" :disabled="!example.editMode">
+            </td>
+            <td>
+              <input type="text" v-model="example.language" :disabled="!example.editMode">
+            </td>
+            <td>
+              <input type="text" v-model="example.source" :disabled="!example.editMode">
+            </td>
+            <td>
+              <input type="text" v-model="example.code" :disabled="!example.editMode">
+            </td>
+            <td>
+              <span :class="{ pending: example.status === 'Pending' }">{{ example.status }}</span>
+            </td>
+            <td>
+              <button :class="{ pending: example.status === 'Pending' }" @click="toggleStatus(example.id)">{{ example.status }}</button>
+            </td>
+            <td>
+              <button v-if="!example.editMode" @click="toggleEditMode(example)">Edit</button>
+              <button v-else @click="confirmChanges(example)">Save</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
-    <div v-else>You are not authorized to view this page</div>
+  </div>
+  <div v-else>You are not authorized to view this page</div>
 </template>
 
 
@@ -217,6 +213,7 @@ export default {
     text-align: center;
     margin: 3rem;
     font-size: 2rem;
+    padding-top: 2rem;
 }
 
 /* Example counter text p element */
@@ -256,16 +253,19 @@ td {
     text-align: center;
 }
 
-.admin-table th,
+
 .admin-table td {
     /* Adding a border to all table cells */
     padding: 20px;
 }
 
+
 thead {
     text-align: center;
     padding-top: 5px;
     background-color: #2c3e50;
+	display:table;
+	width:100%;
 }
 
 .admin-table .filters input[type="text"],
@@ -284,17 +284,13 @@ thead {
 #statusFilter {
     width: 5.3rem;
 }
+
 table {
     max-width: 95%;
 	margin:auto;
 }
 th, td {
 	padding:5px 10px;
-}
-thead {
-	background:#f9f9f9;
-	display:table;
-	width:100%;
 }
 tbody {
 	height:38rem;
@@ -307,6 +303,9 @@ tbody tr {
 	display:table;
 	width:100%;
 	table-layout:fixed;
+}
+#head-elements {
+    width:9.5%;
 }
 
 </style>
