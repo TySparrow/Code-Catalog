@@ -5,7 +5,7 @@
         <h2>{{ this.confirmation }}</h2>
       </div>
     </modal>
-    <form v-on:submit.prevent="createNewExample" v-on:keydown.enter.exact="handleEnterKey" class="example-form">
+    <form v-on:submit.prevent="createNewExample" class="example-form">
       <div class="title">
         <label for="title" class="title-text">Title: </label>
         <input class="lng-input" type="text" name="title" id="title" v-model="newExample.title" />
@@ -40,7 +40,7 @@ import prettier from 'prettier';
 import Prism from 'prismjs';
 import 'prismjs/themes/prism.css';
 import modal from '@/components/PopUp.vue'
-import{ref} from "vue";
+import { ref } from "vue";
 import exampleService from "../services/ExampleService.js";
 
 export default {
@@ -70,19 +70,19 @@ export default {
       if (this.newExample.title) {
         this.newExample.id = this.nextExampleId();
         this.newExample.status = "Private";
-        exampleService.addExample(this.newExample).then((response) =>{
+        exampleService.addExample(this.newExample).then((response) => {
           this.confirmation = response.data;
-          if(response.data ==='This title has been taken'|| response.data ==='Error Saving Snippet. Please Try Again' ){
+          if (response.data === 'This title has been taken' || response.data === 'Error Saving Snippet. Please Try Again') {
             return;
           }
-          else{
+          else {
 
             this.newExample = {};
           }
         })
         // Needs some work to catch different issues
         console.log("create new example method ", this.confirmation);
-        this.example= "";
+        this.example = "";
       }
     },
     //this method is called in the createnewexample method to create the id for the new example
@@ -97,28 +97,18 @@ export default {
     },
     toggleDarkMode() {
       this.darkMode = !this.darkMode;
-      this.highlightCode();
+
     },
-    handleEnterKey(event) {
-      if (event.keyCode === 13) {
-        event.preventDefault();
-      }
-    },
-    highlightCode() {
-      Prism.highlightAll();
-    },
-  },
-  mounted() {
-    this.highlightCode();
-  },
-  watch: {
-    newExample: {
-      handler() {
-        this.highlightCode();
+
+    watch: {
+      newExample: {
+        handler() {
+          this.highlightCode();
+        },
+        deep: true,
       },
-      deep: true,
-    },
-  },
+    }
+  }
 }
 </script>
 
@@ -288,4 +278,5 @@ h1 {
 
 p {
   font-size: 18px;
-}</style>
+}
+</style>

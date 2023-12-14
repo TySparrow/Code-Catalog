@@ -30,7 +30,7 @@ export default {
 
 .example-language {
     border: none;
-    padding: 20px 40px;
+    padding: 20px 30px;
     height: 60px;
     position: relative;
     text-align: center;
