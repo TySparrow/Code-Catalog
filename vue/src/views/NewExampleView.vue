@@ -26,8 +26,11 @@ export default {
 
 <style scoped>
 .head{
-    justify-content: center;
     text-align: center;
+    font-size: 2rem;
+    margin-top: 7rem;
+    margin-bottom: 2rem;
+   
 }
 
 </style>

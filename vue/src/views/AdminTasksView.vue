@@ -194,119 +194,108 @@ export default {
 </script>
 
 <style scoped>
-* {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
-        Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-}
-
 .table-wrapper {
-    max-height: auto;
-    /* Set a maximum height for the tbody */
-    overflow-y: auto;
-    /* Enable vertical scrollbar when content exceeds the height */
+  max-height: auto;
+  overflow-y: auto;
 }
-
 
 .admin-table {
-    border-collapse: collapse;
-    width: 100%;
-    border:1px solid grey;
+  border-collapse: collapse;
+  width: 100%;
+  border: 1px solid grey;
 }
 
 .title {
-    text-align: center;
-    margin: 3rem;
-    font-size: 2rem;
+  text-align: center;
+  margin: 3rem;
+  font-size: 2rem;
+  margin-top: 5rem;
 }
 
-/* Example counter text p element */
 p {
-    margin: 0;
-    font-size: 1.5rem;
+  margin: 0;
+  font-size: 1.5rem;
 }
 
-/* Input boxes for editing */
 input {
-    width: 100%;
-    box-sizing: border-box;
-    padding: 8px;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 8px;
 }
 
-/* Bound classes that change color if there is a pending request for public from user */
 button.pending {
-    color: red;
+  color: red;
 }
 
 tr.pending {
-    color: red;
+  color: red;
 }
 
-/* Table header display text for each column */
 th {
-    text-transform: uppercase;
-    height: 50px;
-    background-color: #2c3e50;
-    /* Dark blue for table headers */
-    color: white;
-    /* White text for better contrast */
+  text-transform: uppercase;
+  height: 50px;
+  background-color: #2c3e50;
+  color: white;
 }
 
 td {
-    padding: 10px;
-    text-align: center;
+  padding: 10px;
+  text-align: center;
 }
 
 .admin-table th,
 .admin-table td {
-    /* Adding a border to all table cells */
-    padding: 20px;
+  padding: 20px;
 }
 
 thead {
-    text-align: center;
-    padding-top: 5px;
-    background-color: #2c3e50;
+  text-align: center;
+  padding-top: 5px;
+  background-color: #2c3e50;
 }
 
 .admin-table .filters input[type="text"],
 .admin-table .filters select {
-    width: 100%;
-    box-sizing: border-box;
-    /* Include padding and border in the width */
+  width: 100%;
+  box-sizing: border-box;
 }
-
 
 .admin-table tbody tr:nth-child(even) {
-    background-color: #f5f5f5;
+  background-color: #f5f5f5;
 }
 
-/* Status filter dropdown size*/
 #statusFilter {
-    width: 5.3rem;
-}
-table {
-    max-width: 95%;
-	margin:auto;
-}
-th, td {
-	padding:5px 10px;
-}
-thead {
-	background:#f9f9f9;
-	display:table;
-	width:100%;
-}
-tbody {
-	height:38rem;
-	overflow:auto;
-	overflow-x:hidden;
-	display:block;
-	width:100%;
-}
-tbody tr {
-	display:table;
-	width:100%;
-	table-layout:fixed;
+  width: 5.3rem;
+  margin-left: 14.5rem;
 }
 
+table {
+  max-width: 95%;
+  margin: auto;
+}
+
+th,
+td {
+  padding: 10px;
+}
+
+thead {
+  background: #f9f9f9;
+  display: table;
+  width: 100%;
+}
+
+tbody {
+  height: 38rem;
+  overflow: auto;
+  overflow-x: hidden;
+  display: block;
+  width: 100%;
+}
+
+tbody tr {
+  display: table;
+  width: 100%;
+  table-layout: fixed;
+}
 </style>

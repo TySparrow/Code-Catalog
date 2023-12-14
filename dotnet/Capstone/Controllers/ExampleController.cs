@@ -53,12 +53,12 @@ namespace Capstone.Controllers
             if (newExample == null || newExample.Id == 0)
             {
                 BadRequest();
-                return "not ok";
+                return "Error Saving Snippet. Please Try Again";
             }
             else
             {
                 Ok(newExample);
-                 return "ok";
+                 return "Snippet Saved!";
             }
         }
         [HttpPut()]

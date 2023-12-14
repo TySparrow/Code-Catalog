@@ -72,6 +72,13 @@ export default {
         this.newExample.status = "Private";
         exampleService.addExample(this.newExample).then((response) =>{
           this.confirmation = response.data;
+          if(response.data ==='This title has been taken'|| response.data ==='Error Saving Snippet. Please Try Again' ){
+            return;
+          }
+          else{
+
+            this.newExample = {};
+          }
         })
         // Needs some work to catch different issues
         console.log("create new example method ", this.confirmation);

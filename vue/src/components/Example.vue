@@ -185,8 +185,8 @@ export default {
   background-color: #0056b3;
 }
 
-.example,
-.example.dark {
+.example
+ {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -249,6 +249,11 @@ export default {
   margin-top: 20px;
   margin-bottom: 10px;
   margin-left: 13px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 5px;
+  display: inline-block;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .code-language,
@@ -262,7 +267,13 @@ export default {
   font-size: 12px;
   margin-top: 15px;
   margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 5px;
+  display: inline-block;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
+
 
 .copy-button,
 .download-button,
