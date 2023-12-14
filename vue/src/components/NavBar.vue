@@ -1,9 +1,7 @@
 <template>
     <header class="nav-bar">
         <img src="@/assets/techelevatorimage.png" alt="Logo" class="logo" v-on:click="returnHome">
-
         <ListLanguages class="menu-item"></ListLanguages>
-
         <input id="myInput" class="search-bar" type="text" v-model="search" placeholder="Search Examples">
         <button id="myBtn" @click="ListExamples">Search</button>
         <Dropdown class="dropdown" />
