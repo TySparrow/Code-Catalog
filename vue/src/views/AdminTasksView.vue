@@ -30,7 +30,6 @@
                             <input type="text" v-model="filter.source" />
                         </td>
                         <td>&nbsp;</td>
-                        <td>&nbsp;</td>
                         <td>
                             <select id="statusFilter" v-model="filter.status">
                                 <option value>Show All</option>
@@ -39,6 +38,7 @@
                                 <option value="Pending">Pending</option>
                             </select>
                         </td>
+                        <td>&nbsp;</td>
                         <td>&nbsp;</td>
                     </tr>
                 </thead>
@@ -193,183 +193,120 @@ export default {
 }
 </script>
 
-<!-- <style scoped>
-/* Whole page font changed */
-
-* {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
-        Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-}
-#code-header {
-    padding-left: 5rem;
-}
-/* Wrapper on body of table to create a scroll bar */
-.table-wrapper {
-    max-height: 30rem;
-    /* Set the maximum height for the scrollable container */
-    overflow-y: auto;
-    /* Enable vertical scrollbar when content exceeds the height */
-}
-.container {
-    border-bottom: 1px solid #ccc;
-
-}
-
-.title {
-    text-align: center;
-}
-
-/* Example counter text p element */
-p {
-    margin-top: 40px;
-    font-size: 1.5rem;
-}
-
-/* Input boxes for editing */
-input {
-    width: 100%;
-    box-sizing: border-box;
-}
-
-
-/* Bound classes that change color if there is a pending request for public from user */
-button.pending {
-    color: red;
-}
-
-tr.pending {
-    color: red;
-}
-
-/* Table header display text for each column */
-th {
-    text-transform: uppercase;
-    height: 40px;
-    font-size: 1rem;
-    margin:0;
-}
-/* All td styling */
-td {
-    padding: 10px;
-    text-align: center;
-    font-size: 14px;
-    margin:0;
-}
-/* Table header styling */
-.table-header  {
-    text-align: center;
-    padding-top: 5px;
-    background-color: #255f5f;
-    border-collapse: collapse;
-    width: 100%;
-    border-top-left-radius: .5rem;
-    border-top-right-radius: .5rem;
-}
-
-.table-header .filters input[type="text"],
-.table-header .filters select {
-    width: 100%;
-    box-sizing: border-box;
-    /* Include padding and border in the width */
-}
-/* Table body styling */
-.table-body {
-    width: 100%;
-    border-collapse: collapse;
-}
-.table-body th,
-.table-body td {
-    /* Adding a border to all table cells */
-    padding: 1rem;
-
-}
-
-.table-body tr:nth-child(even) {
-    background-color: #c0c2c2
-
-}
-
-/* Status filter dropdown size*/
-#statusFilter {
-    width: 5.3rem;
-}
-
-</style> -->
 <style scoped>
 * {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
         Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
 }
-tbody thead {
-    display:block;
-}
-tbody {
-    max-height: 30rem;
-    /* Set the maximum height for the scrollable container */
+
+.table-wrapper {
+    max-height: auto;
+    /* Set a maximum height for the tbody */
     overflow-y: auto;
     /* Enable vertical scrollbar when content exceeds the height */
-
 }
+
+
+.admin-table {
+    border-collapse: collapse;
+    width: 100%;
+    border:1px solid grey;
+}
+
 .title {
     text-align: center;
+    margin: 3rem;
+    font-size: 2rem;
 }
+
 /* Example counter text p element */
 p {
-    margin-top: 40px;
+    margin: 0;
     font-size: 1.5rem;
 }
+
 /* Input boxes for editing */
 input {
     width: 100%;
     box-sizing: border-box;
+    padding: 8px;
 }
+
 /* Bound classes that change color if there is a pending request for public from user */
 button.pending {
     color: red;
 }
+
 tr.pending {
     color: red;
 }
+
 /* Table header display text for each column */
 th {
     text-transform: uppercase;
     height: 50px;
+    background-color: #2c3e50;
+    /* Dark blue for table headers */
+    color: white;
+    /* White text for better contrast */
 }
+
 td {
     padding: 10px;
     text-align: center;
 }
-.admin-table {
-    border-collapse: collapse;
-    width: 100%;
-}
+
 .admin-table th,
 .admin-table td {
     /* Adding a border to all table cells */
     padding: 20px;
 }
+
 thead {
     text-align: center;
     padding-top: 5px;
-    background-color: darkgray;
-    /* border-bottom: 2px solid #000; */
-    /* Solid border underneath the table header */
+    background-color: #2c3e50;
 }
+
 .admin-table .filters input[type="text"],
 .admin-table .filters select {
     width: 100%;
     box-sizing: border-box;
     /* Include padding and border in the width */
 }
-.admin-table tbody .filters {
-    border-bottom: 2px solid #000;
-    /* Solid border below the filter row */
-}
+
+
 .admin-table tbody tr:nth-child(even) {
-    background-color: #F9F9F9;
+    background-color: #f5f5f5;
 }
+
 /* Status filter dropdown size*/
 #statusFilter {
-    width:5.3rem;
+    width: 5.3rem;
 }
+table {
+    max-width: 95%;
+	margin:auto;
+}
+th, td {
+	padding:5px 10px;
+}
+thead {
+	background:#f9f9f9;
+	display:table;
+	width:100%;
+}
+tbody {
+	height:38rem;
+	overflow:auto;
+	overflow-x:hidden;
+	display:block;
+	width:100%;
+}
+tbody tr {
+	display:table;
+	width:100%;
+	table-layout:fixed;
+}
+
 </style>
