@@ -54,7 +54,7 @@
       </router-link>
     </div>
   </div>
-  <Footer class="footer"></Footer>
+  <Footer ></Footer>
 </template>
 
 <script>
@@ -150,39 +150,24 @@ export default {
 </script>
 
 <style scoped>
-/* 
-button{
-  z-index: 1;
-}
-  */
- 
-.home  {
-  background: url("../assets/home-page.jpg") no-repeat fixed;
-  background-size: cover;
-  background-position: center;
-  min-height: 100vh;
-  min-width: 100vw;
-  min-height: 69vh;
-  display: inline-flex;
+.home {
   flex-direction: column;
   align-items: center;
   justify-content: center;
   display: flex;
-  flex-direction: column;
-  margin-top: 15rem;
+  height: 100vh;
 }
 
 .modal-title {
   font-size: 24px;
   color: #333;
-  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 
 .content {
   text-align: center;
   padding: 20px;
-  margin-top: 50px;
-
+  margin-top: 20rem;
 }
 
 .navbar {
@@ -195,36 +180,28 @@ button{
   z-index: 999;
 }
 
-
-
 h1 {
   z-index: 1;
   padding-top: 2%;
   padding-bottom: 2%;
   font-size: 48px;
   color: black;
-  margin: auto;
   position: fixed;
-
-  margin-left: 32.7%;
-  margin-right: 27%;
-  margin-top: 12.35%;
-  margin-bottom: 15%;
+  top: 50px;
+  left: 50%;
+  transform: translateX(-50%);
   background-color: #fff;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   border-radius: 10px;
-}
-
-p {
-  font-size: 24px;
-  color: black;
-  margin-bottom: 30px;
+  opacity: 0.9;
 }
 
 .button {
   z-index: 1;
   position: fixed;
-  left: 46%;
+  top: calc(50px + 2% + 2% + 48px + 15%);
+  left: 50%;
+  transform: translateX(-50%);
   padding: 12px 24px;
   font-size: 20px;
   background-color: #007bff;
@@ -233,7 +210,6 @@ p {
   border-radius: 4px;
   cursor: pointer;
   transition: background-color 0.3s ease;
-  margin-top: 12rem;
 }
 
 .cta-button:hover {
@@ -271,20 +247,18 @@ p {
 }
 
 .diceDiv {
-  margin: 10px;
-  width: 30rem;
-  height: 30px;
+  margin: 1rem;
+  width: 20rem;
+  height: 1px;
   line-height: 30px;
   vertical-align: middle;
   display: inline-block;
 }
 
-
 .diceP {
   text-align: center;
-  height: 8rem;
   border-radius: 10px;
-  color: black;
+  color: white;
 }
 
 #app {
@@ -293,6 +267,34 @@ p {
 
 .modal {
   z-index: 2;
+}
+
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 0.9;
+  }
+}
+
+@keyframes slide-up {
+  0% {
+    transform: translateX(-50%) translateY(100%);
+  }
+  100% {
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
+@media (max-width: 768px) {
+  h1 {
+    font-size: 36px;
+  }
+
+  .button {
+    font-size: 16px;
+  }
 }
 </style>
 
