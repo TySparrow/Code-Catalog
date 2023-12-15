@@ -190,24 +190,27 @@ export default {
 </script>
 
 <style scoped>
+/* Wraps whole table */
 .table-wrapper {
   max-height: auto;
+  /* Set a maximum height for the tbody */
   overflow-y: auto;
+  /* Enable vertical scrollbar when content exceeds the height */
 }
-
+/* Class styling for whole table tag */
 .admin-table {
   border-collapse: collapse;
   width: 100%;
   border: 1px solid grey;
 }
-
+/* Page title */
 .title {
     text-align: center;
     margin: 3rem;
     font-size: 2rem;
     padding-top: 2rem;
 }
-
+/* Counter styling */
 p {
   margin: 0;
   font-size: 1.5rem;
@@ -219,39 +222,32 @@ p {
   margin-bottom: 1rem;
   margin-left: 3rem;
 }
-
+/* Input text sections */
 input {
   width: 100%;
   box-sizing: border-box;
   padding: 8px;
 }
-
-button.pending {
+/* Bound classes that change color if there is a pending request for public from user */
+button.pending, tr.pending {
   color: red;
 }
-
-tr.pending {
-  color: red;
-}
-
+/* Table header data elements */
 th {
   text-transform: uppercase;
   height: 50px;
   background-color: #2c3e50;
+  /* Dark blue for table headers */
   color: white;
+  /* White text for better contrast */
 }
-
-td {
-  padding: 10px;
+/* Table body data elements */
+.admin-table td {
+  padding: 20px;
   text-align: center;
 }
 
-
-.admin-table td {
-  padding: 20px;
-}
-
-
+/* Thead styling */
 thead {
     text-align: center;
     padding-top: 5px;
@@ -259,31 +255,31 @@ thead {
 	display:table;
 	width:100%;
 }
-
+/* Filter box styling */
 .admin-table .filters input[type="text"],
 .admin-table .filters select {
   width: 100%;
   box-sizing: border-box;
 }
-
+/* Style for every other row in table background color */
 .admin-table tbody tr:nth-child(even) {
   background-color: #f5f5f5;
 }
-
+/* Slight changes to width of dropdown filter */
 #statusFilter {
   width: 5.3rem;
-  margin-left: 14.5rem;
 }
-
+/* Table spacing */
 table {
   max-width: 95%;
   margin: auto;
 }
-
+/* th and td styling */
 th,
 td {
   padding: 10px;
 }
+/* Styling for tbody element */
 tbody {
   height: 38rem;
   overflow: auto;
@@ -291,12 +287,13 @@ tbody {
   display: block;
   width: 100%;
 }
-
+/* rows in tbody */
 tbody tr {
   display: table;
   width: 100%;
   table-layout: fixed;
 }
+/* styling for header th elements for spacing and alignment */
 #head-elements {
     width:9.5%;
 }

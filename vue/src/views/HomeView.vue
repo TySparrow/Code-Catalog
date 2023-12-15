@@ -143,7 +143,7 @@ export default {
           console.log("Error loading EXAMPLES: make request");
         }
       });
-    setInterval(this.timerFunc, 1500);
+    setInterval(this.timerFunc, 3000);
   }
 }
 
@@ -231,7 +231,7 @@ h1 {
 .v-enter-active,
 .v-leave-active,
 .v-move {
-  transition: all 1s;
+  transition: all 1.5s;
 }
 
 .v-leave-active {

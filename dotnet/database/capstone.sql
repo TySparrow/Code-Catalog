@@ -42,7 +42,7 @@ SET IDENTITY_INSERT [dbo].[examples] ON
 GO
 INSERT [dbo].[examples] ([example_id], [user_id], [example_title], [example_tag], [example_language], [example_code], [example_source], [example_status]) VALUES (1001, NULL, N'string concatination', N'strings', N'C#', N'"Welcome to " + "C# snippet"', N'Self-derived', N'Public')
 GO
-INSERT [dbo].[examples] ([example_id], [user_id], [example_title], [example_tag], [example_language], [example_code], [example_source], [example_status]) VALUES (1002, NULL, N'let', N'variables', N'Javascript', N'let example = "example"', N'Self-derived', N'Public')
+INSERT [dbo].[examples] ([example_id], [user_id], [example_title], [example_tag], [example_language], [example_code], [example_source], [example_status]) VALUES (1002, NULL, N'let', N'variables', N'JavaScript', N'let example = "example"', N'Self-derived', N'Public')
 GO
 INSERT [dbo].[examples] ([example_id], [user_id], [example_title], [example_tag], [example_language], [example_code], [example_source], [example_status]) VALUES (1003, NULL, N'Colors', N'styling', N'CSS', N'/* Changing text color */
 .label {
@@ -262,7 +262,7 @@ INSERT [dbo].[examples] ([example_id], [user_id], [example_title], [example_tag]
 <p>My first paragraph.</p>
 
 </body>
-</html>', N'W3 Schools', N'Private')
+</html>', N'W3 Schools', N'Public')
 GO
 INSERT [dbo].[examples] ([example_id], [user_id], [example_title], [example_tag], [example_language], [example_code], [example_source], [example_status]) VALUES (1024, 2, N'Anchor Tag', N'tags', N'HTML', N'<!-- Anchor -->
 
@@ -338,8 +338,97 @@ INSERT [dbo].[examples] ([example_id], [user_id], [example_title], [example_tag]
 <h3>Heading 3</h3>
 <h4>Heading 4</h4>
 <h5>Heading 5</h5>
-<h6>Heading 6</h6>', N'Self-derived', N'Private')
+<h6>Heading 6</h6>', N'Self-derived', N'Public')
+GO
+INSERT [dbo].[examples] ([example_id], [user_id], [example_title], [example_tag], [example_language], [example_code], [example_source], [example_status]) VALUES (1032, 2, N'INSERT INTO', N'tables', N'SQL', N'INSERT INTO person (person_name, birthday)
+OUTPUT Inserted.person_id
+VALUES (''Tyler Sparrow'', ''1994-03-14'')', N'Exercises', N'Public')
+GO
+INSERT [dbo].[examples] ([example_id], [user_id], [example_title], [example_tag], [example_language], [example_code], [example_source], [example_status]) VALUES (1033, 2, N'UPDATE', N'tables', N'SQL', N'UPDATE movie 
+SET title = ''Star Wars: A New Hope'' WHERE movie.title = ''Star Wars''', N'Exercises', N'Public')
+GO
+INSERT [dbo].[examples] ([example_id], [user_id], [example_title], [example_tag], [example_language], [example_code], [example_source], [example_status]) VALUES (1034, 2, N'Nested SELECT in UPDATE', N'tables', N'SQL', N'UPDATE movie
+SET overview = ''This is a long movie. '' + (SELECT CAST(length_minutes AS varchar)) + '' minutes long.''
+WHERE length_minutes > 210
+', N'Exercises', N'Public')
+GO
+INSERT [dbo].[examples] ([example_id], [user_id], [example_title], [example_tag], [example_language], [example_code], [example_source], [example_status]) VALUES (1035, 2, N'SELECT *', N'tables', N'SQL', N'SELECT * FROM users;', N'Self-derived', N'Public')
+GO
+INSERT [dbo].[examples] ([example_id], [user_id], [example_title], [example_tag], [example_language], [example_code], [example_source], [example_status]) VALUES (1036, 2, N'WHERE Clause', N'tables', N'SQL', N'SELECT * FROM products WHERE price > 50;', N'Self-derived', N'Public')
+GO
+INSERT [dbo].[examples] ([example_id], [user_id], [example_title], [example_tag], [example_language], [example_code], [example_source], [example_status]) VALUES (1037, 2, N'ORDER BY', N'tables', N'SQL', N'SELECT * FROM employees ORDER BY salary DESC;', N'Self-derived', N'Public')
+GO
+INSERT [dbo].[examples] ([example_id], [user_id], [example_title], [example_tag], [example_language], [example_code], [example_source], [example_status]) VALUES (1038, 2, N'JOIN', N'tables', N'SQL', N'SELECT orders.order_id, customers.customer_name
+FROM orders
+JOIN customers ON orders.customer_id = customers.customer_id;', N'ChatGPT', N'Public')
+GO
+INSERT [dbo].[examples] ([example_id], [user_id], [example_title], [example_tag], [example_language], [example_code], [example_source], [example_status]) VALUES (1039, 2, N'Multiple Joins', N'tables', N'SQL', N'SELECT person_name, title FROM person
+JOIN movie_actor ON actor_id = person_id
+JOIN movie ON movie.movie_id = movie_actor.movie_id
+WHERE person_name LIKE ''% Jones''
+ORDER BY person_name, title', N'Exercises', N'Public')
+GO
+INSERT [dbo].[examples] ([example_id], [user_id], [example_title], [example_tag], [example_language], [example_code], [example_source], [example_status]) VALUES (1040, 2, N'COUNT()', N'tables', N'SQL', N'SELECT COUNT(*) AS total_users FROM users;', N'ChatGPT', N'Public')
+GO
+INSERT [dbo].[examples] ([example_id], [user_id], [example_title], [example_tag], [example_language], [example_code], [example_source], [example_status]) VALUES (1041, 2, N'SUM()', N'tables', N'SQL', N'SELECT SUM(sales_amount) AS total_sales FROM transactions;', N'ChatGPT', N'Public')
+GO
+INSERT [dbo].[examples] ([example_id], [user_id], [example_title], [example_tag], [example_language], [example_code], [example_source], [example_status]) VALUES (1042, 2, N'AVG()', N'tables', N'SQL', N'SELECT AVG(age) AS average_age FROM employees;', N'ChatGPT', N'Public')
+GO
+INSERT [dbo].[examples] ([example_id], [user_id], [example_title], [example_tag], [example_language], [example_code], [example_source], [example_status]) VALUES (1043, 2, N'MIN() / MAX()', N'tables', N'SQL', N'SELECT MIN(product_price) AS lowest_price FROM products;
+
+SELECT MAX(order_total) AS highest_order_total FROM orders;', N'ChatGPT', N'Public')
+GO
+INSERT [dbo].[examples] ([example_id], [user_id], [example_title], [example_tag], [example_language], [example_code], [example_source], [example_status]) VALUES (1044, 2, N'GROUP BY', N'tables', N'SQL', N'SELECT department, AVG(salary) AS avg_salary, COUNT(*) AS num_employees
+FROM employees
+GROUP BY department;', N'ChatGPT', N'Public')
+GO
+INSERT [dbo].[examples] ([example_id], [user_id], [example_title], [example_tag], [example_language], [example_code], [example_source], [example_status]) VALUES (1045, 2, N'Declaring Variables', N'variables', N'JavaScript', N'let name = ''Tyler'';
+const age = 29;
+var favoriteFood = ''Pizza'';', N'Self-derived', N'Public')
+GO
+INSERT [dbo].[examples] ([example_id], [user_id], [example_title], [example_tag], [example_language], [example_code], [example_source], [example_status]) VALUES (1046, 2, N'Variable Type Conversion', N'parsing', N'JavaScript', N'let numString = ''10'';
+let num = parseInt(numString); // Convert string to integer', N'Self-derived', N'Public')
+GO
+INSERT [dbo].[examples] ([example_id], [user_id], [example_title], [example_tag], [example_language], [example_code], [example_source], [example_status]) VALUES (1047, 2, N'String Concatenation', N'strings', N'JavaScript', N'let greeting = ''Hello'';
+let name = ''John'';
+let message = `${greeting}, ${name}!`; // String interpolation', N'Self-derived', N'Public')
+GO
+INSERT [dbo].[examples] ([example_id], [user_id], [example_title], [example_tag], [example_language], [example_code], [example_source], [example_status]) VALUES (1048, 2, N'Anonymous Function', N'functions', N'JavaScript', N'let add = function (a, b) {
+    return a + b;
+};', N'ChatGPT', N'Public')
+GO
+INSERT [dbo].[examples] ([example_id], [user_id], [example_title], [example_tag], [example_language], [example_code], [example_source], [example_status]) VALUES (1049, 2, N'Fat Arrow Notation', N'functions', N'JavaScript', N'let multiply = (a, b) => a * b;', N'ChatGPT', N'Public')
+GO
+INSERT [dbo].[examples] ([example_id], [user_id], [example_title], [example_tag], [example_language], [example_code], [example_source], [example_status]) VALUES (1050, 2, N'forEach', N'Arrays', N'JavaScript', N'const numbers = [1, 2, 3, 4];
+
+numbers.forEach( (number) => {
+    console.log(`This number is ${number}`);
+});', N'Bootcamp-OS', N'Public')
+GO
+INSERT [dbo].[examples] ([example_id], [user_id], [example_title], [example_tag], [example_language], [example_code], [example_source], [example_status]) VALUES (1051, 2, N'Map', N'Arrays', N'JavaScript', N'const numbersToSquare = [1, 2, 3, 4];
+
+const squaredNumbers = numbersToSquare.map( (number) => {
+    return number * number;
+});
+
+console.log(squaredNumbers);  // displays [1, 4, 9, 16]', N'Bootcamp-OS', N'Public')
+GO
+INSERT [dbo].[examples] ([example_id], [user_id], [example_title], [example_tag], [example_language], [example_code], [example_source], [example_status]) VALUES (1052, 2, N'Filter', N'Arrays', N'JavaScript', N'const numbersToFilter = [1, 2, 3, 4, 5, 6];
+
+const filteredNumbers = numbersToFilter.filter( (number) => {
+    // Only keep numbers divisible by 3
+    return number % 3 === 0;
+});
+
+console.log(filteredNumbers);  // displays [3, 6]', N'Bootcamp-OS', N'Public')
+GO
+INSERT [dbo].[examples] ([example_id], [user_id], [example_title], [example_tag], [example_language], [example_code], [example_source], [example_status]) VALUES (1053, 2, N'Reduce', N'Arrays', N'JavaScript', N'const pointsArray = [21, 11, 32, 24, 21];
+
+const totalPoints = pointsArray.reduce( (previousPointsTotal, currentPoints) => {
+    return previousPointsTotal + currentPoints;
+}, 0);
+
+console.log("Total points: " + totalPoints);  // displays 109', N'Bootcamp-OS', N'Public')
 GO
 SET IDENTITY_INSERT [dbo].[examples] OFF
-GO
 GO
