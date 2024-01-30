@@ -1,5 +1,8 @@
-# Final Capstone
+# Code Catalog Application Overview
 
-This directory contains all of the starter projects for the final capstone. The Vue starter project works with both the Java and .NET backend projects with a single configuration update that you can read about in the README.
+This project was created alongside two other talented classmates Triston Yontz and Bismark Akomeah as our final capstone project during our time at Tech Elevator in Columbus, Ohio.
 
-Each project contains instructions that provides information about the starting code and explains how to get started with the final capstone project.
+This project is a robust and user-friendly full-stack web application utilizing Vue.js for a dynamic UI, .NET Core MVC
+framework, and SQL database for a structured back-end. The application offers a comprehensive platform for managing code snippets in a
+variety of programming languages. Users can view predefined code snippets curated by the website administrator
+and create their own personalized code snippet examples that are saved and viewable in their own user page.
